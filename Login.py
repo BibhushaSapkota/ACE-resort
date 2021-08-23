@@ -3,8 +3,7 @@ from tkinter.tix import *
 from PIL import ImageTk, Image
 from tkinter import messagebox
 import mysql.connector
-import main_page
-import registration_page
+
 
 
 class Login:
@@ -139,3 +138,5 @@ class Login:
         self.my_canvas.create_line(x + c, y + h, x + w - c, y + h, fill="black", width=10)
         self.my_canvas.create_line(x, y + c, x, y + h - c, fill="black", width=10)
         self.my_canvas.create_line(x + w, y + c, x + w, y + h - c, fill="black", width=10)
+
+
