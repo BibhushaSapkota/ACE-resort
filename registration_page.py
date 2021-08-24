@@ -148,6 +148,7 @@ class Register:
                 print('error')
                 pass
 
+
     def login_window(self):
         self.root2.destroy()
         login_page.Login(Toplevel())
