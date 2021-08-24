@@ -115,8 +115,6 @@ class Login:
         if self.password_entry.get()=="":
             self.password_entry.config(show="")
             self.password_entry.insert(0,"Enter Password Here")
-
-
     def change(self,e):
         self.login_btn_img1=PhotoImage(file='out.png',master=self.root1)
         self.login_btn.config(image=self.login_btn_img1,borderwidth=0)
