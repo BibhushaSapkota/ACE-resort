@@ -3,9 +3,7 @@ from tkinter.tix import *
 from PIL import ImageTk, Image
 from tkinter import messagebox
 import mysql.connector
-
-
-
+import main_page
 class Login:
     def __init__(self,master):
         self.root1 = master
