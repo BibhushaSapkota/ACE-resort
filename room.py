@@ -1,8 +1,6 @@
 from tkinter import *
 from PIL import ImageTk, Image
 
-
-
 class Roompage:
     def __init__(self ,master):
         self.root4 = master
@@ -16,7 +14,6 @@ class Roompage:
         self.ace_images()
         self.buttons()
         self.main_frame()
-
 
     def ace_images(self):
         # now set an image for moving
@@ -56,10 +53,10 @@ class Roompage:
         self.roooom_img = ImageTk.PhotoImage(Image.open('rb.png'), master=self.root4)
 
 
-        self.standardroom_btn= Button(self.root4, text="Standard room", fg="white", image=self.standardroom_img,
+        self.standardroom_btn= Button(self.root4, text="Standard room", image=self.standardroom_img,
                                    font=("Rockwell nova", 20,'bold'),
                                    cursor="hand2",borderwidth=0,
-                                   border='0', overrelief="sunken",compound=CENTER,command=self.fn_standardroom)
+                                   border='0', overrelief="sunken",fg="white",compound=CENTER,command=self.main_frame)
         self.standardroom_btn.place(x=30,y=150)
 
         self.deluxeroom_img = ImageTk.PhotoImage(Image.open('button.png'),master=self.root4)
@@ -95,10 +92,15 @@ class Roompage:
         self.book_btn.place(x=50,y=650)
 
     def main_frame(self):
-        self.standardroom_btn.config(image=self.standardroom_img, fg='white')
+        self.standardroom_btn.config(fg='green')
+        self.deluxeroom_btn.config(fg='white')
+        self.villa_btn.config(fg='white')
+        self.hall_btn.config(fg='white')
+
         self.frame_main = LabelFrame(self.root4, height=650, width=1040, borderwidth=10)
         self.frame_main.place(x=300, y=130)
         self.frame_main.pack_propagate(False)
+        self.fn_standardroom()
 
     def fn_standardroom(self):
         self.room_img = ImageTk.PhotoImage(Image.open('rb.png'), master=self.root4)
@@ -127,10 +129,14 @@ class Roompage:
                                    cursor="hand2",borderwidth=0,
                                    border='0', overrelief="sunken",compound=CENTER,command=self.roomm4)
         self.room5.place(x=810,y=30)
-        self.frame_main.pack_propagate(False)
+
         self.name_fn='Standard rooms'
 
     def fn_deluxeroom(self):
+        self.standardroom_btn.config(fg='white')
+        self.deluxeroom_btn.config(fg='green')
+        self.villa_btn.config(fg='white')
+        self.hall_btn.config(fg='white')
         self.room_img = ImageTk.PhotoImage(Image.open('rb.png'), master=self.root4)
         self.frame_deluxeroom = LabelFrame(self.root4, height=650, width=1050, borderwidth=10)
         self.frame_deluxeroom.place(x=300, y=130)
@@ -159,6 +165,10 @@ class Roompage:
         self.frame_main.pack_propagate(False)
         self.name_fn='deluxe room'
     def fn_villa(self):
+        self.standardroom_btn.config(fg='white')
+        self.deluxeroom_btn.config(fg='white')
+        self.villa_btn.config(fg='green')
+        self.hall_btn.config(fg='white')
         self.room_img = ImageTk.PhotoImage(Image.open('rb.png'), master=self.root4)
         self.frame_villa = LabelFrame(self.root4, height=650, width=1050, borderwidth=10)
         self.frame_villa.place(x=300, y=130)
@@ -188,6 +198,10 @@ class Roompage:
         self.frame_main.pack_propagate(False)
         self.name_fn='villa'
     def fn_hall(self):
+        self.standardroom_btn.config(fg='white')
+        self.deluxeroom_btn.config(fg='white')
+        self.villa_btn.config(fg='white')
+        self.hall_btn.config(fg='green')
         self.room_img = ImageTk.PhotoImage(Image.open('rb.png'), master=self.root4)
         self.frame_hall = LabelFrame(self.root4, height=650, width=1050, borderwidth=10)
         self.frame_hall.place(x=300, y=130)
@@ -474,6 +488,7 @@ class Roompage:
         self.lblv=Label(self.frame_sroom123,image=self.vg).place(x=0,y=0,width=937,height=490)
 
     def droom_infoframe(self):
+
         self.frame_main.place_forget()
         self.frame_droom123=LabelFrame(self.frame_deluxeroom,height=500,width=950,borderwidth=5)
         self.frame_droom123.place(x=50,y=100)
@@ -483,4 +498,5 @@ class Roompage:
         self.vpicc=Image.open('droom.png')
         self.vg=ImageTk.PhotoImage(self.vpicc,master=self.root4)
         self.lblv=Label(self.frame_droom123,image=self.vg).place(x=0,y=0,width=937,height=490)
+
 
