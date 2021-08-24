@@ -11,7 +11,7 @@ class Register:
         self.root2.title("registration form")
         self.root2.state('zoomed')
 
-        self.load=Image.open('registration.png')
+        self.load=Image.open('registration.png') #background picture
         self.bg=ImageTk.PhotoImage(self.load,master=self.root2)
         self.lbl=Label(self.root2,image=self.bg).place(x=0,y=0,relwidth=1,relheight=1)
 
