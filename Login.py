@@ -4,6 +4,7 @@ from PIL import ImageTk, Image
 from tkinter import messagebox
 import mysql.connector
 import main_page
+import registration_page
 
 class Login:
     def __init__(self,master):

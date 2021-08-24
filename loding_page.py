@@ -4,7 +4,7 @@ from PIL import ImageTk, Image
 import time
 import threading
 from playsound import playsound
-import login_page
+import Login
 class Loading:
     def __init__(self):
         self.root=Tk()
@@ -22,7 +22,7 @@ class Loading:
                 self.root.update_idletasks()
         else:
             self.root.destroy()
-            login_page.Login(Tk())
+            Login.Login(Tk())
 
 def startmusic():
     time.sleep(0.5)

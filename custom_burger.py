@@ -1,11 +1,9 @@
 from tkinter import *
-
 from time import sleep
 from PIL import ImageTk, Image
-
 class CustomBurger:
     def __init__(self):
-        self.root=Tk()
+        self.root=Toplevel()
         self.root.config(bg="black")
         self.root.title("Custom Loader")
         self.root.state('zoomed')
@@ -36,10 +34,10 @@ class CustomBurger:
         self.frame_main.pack_propagate(False)
         self.my_canvas = Canvas(self.frame_main)
         self.my_canvas.pack(fill="both", expand=True)
-        self.back1 = ImageTk.PhotoImage(Image.open(f'burger_background.jpg'))
+        self.back1 = ImageTk.PhotoImage(Image.open(f'burger_background.jpg'),master=self.root)
         self.my_canvas.create_image(0, 0, image=self.back1, anchor="nw")
-        self.btn_img = ImageTk.PhotoImage(Image.open(f'btn_img.png'))
-        self.btn_img_small = ImageTk.PhotoImage(Image.open(f'btn_img_small.png'))
+        self.btn_img = ImageTk.PhotoImage(Image.open(f'btn_img.png'),master=self.root)
+        self.btn_img_small = ImageTk.PhotoImage(Image.open(f'btn_img_small.png'),master=self.root)
         self.img_box =Image.open('burgar_box.png')
         self.img_box = self.img_box.resize((600,80), Image.ANTIALIAS)
         self.box_img = ImageTk.PhotoImage(self.img_box)
@@ -54,11 +52,11 @@ class CustomBurger:
         self.my_canvas.create_text(680, 110, text="CUSTOM MENU", font=("Algerian", 40, 'bold'), fill="black")
 
         # setting background image in canvas.
-        self.btn_fire = ImageTk.PhotoImage(Image.open(f'fire.png'))
+        self.btn_fire = ImageTk.PhotoImage(Image.open(f'fire.png'),master=self.root)
         self.btn_top_p=Button(self.frame_main,text="\n \n \nStart making",cursor="hand2",
                            font=("Algerian", 40, 'bold'),compound=CENTER,fg="white",image=self.btn_fire,borderwidth=10,command=self.burger_buttom)
         self.btn_top_p.place(x=100,y=300)
-        self.btn_fire_pizza = ImageTk.PhotoImage(Image.open(f'firepizza.png'))
+        self.btn_fire_pizza = ImageTk.PhotoImage(Image.open(f'firepizza.png'),master=self.root)
         self.btn_pizza = Button(self.frame_main, text="\n \n \nStart making", cursor="hand2",
                                 font=("Algerian", 40, 'bold'), compound=CENTER, fg="white", image=self.btn_fire_pizza,
                                 borderwidth=10, command=self.burger_buttom)
@@ -92,19 +90,19 @@ class CustomBurger:
         self.before_qty=0
         self.after_qty=0
         self.tot_qty.config(text=self.qty_total)
-        self.login2 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login2 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login2, anchor="nw")
-        self.login3 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login3 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login3, anchor="nw")
-        self.login4 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login4 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login4, anchor="nw")
-        self.login5 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login5 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login5, anchor="nw")
         self.login = ImageTk.PhotoImage(Image.open(f'remove.png'))
         self.my_canvas.create_image(self.b, self.a, image=self.login, anchor="nw")
-        self.login6 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login6 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login6, anchor="nw")
-        self.login7 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login7 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login7, anchor="nw")
         self.btn_tomato.config(text="Tomato:No", bg="black",fg="red4")
         self.btn_chicken.config(text="Chicken:No", bg="black",fg="red4")
@@ -122,7 +120,7 @@ class CustomBurger:
         self.my_canvas_bur = Canvas(self.frame_burger)
         self.my_canvas_bur.pack(fill="both", expand=True)
 
-        self.back2 = ImageTk.PhotoImage(Image.open(f'burger_background.jpg'))
+        self.back2 = ImageTk.PhotoImage(Image.open(f'burger_background.jpg'),master=self.root)
         self.my_canvas_bur.create_image(0, 0, image=self.back2, anchor="nw")
 
         self.my_canvas_bur.create_image(380, 50, image=self.box_img, anchor="nw")
@@ -204,7 +202,7 @@ class CustomBurger:
         self.tot_qty.place(x=1100, y=515)
         self.total_cost.config(text=self.total)
         for i in range(1, 7):
-            self.login1 = ImageTk.PhotoImage(Image.open(f'bunbutton_img/{i}.png'))
+            self.login1 = ImageTk.PhotoImage(Image.open(f'bunbutton_img/{i}.png'),master=self.root)
             self.my_canvas_bur.create_image(self.b, self.a, image=self.login1, anchor="nw")
             sleep(0.1)
             self.root.update_idletasks()
@@ -264,7 +262,7 @@ class CustomBurger:
         self.after = 0
         self.after = self.total - self.before
         for i in range(1, 7):
-            self.login = ImageTk.PhotoImage(Image.open(f'buntop_img/{i}.png'))
+            self.login = ImageTk.PhotoImage(Image.open(f'buntop_img/{i}.png'),master=self.root)
             self.my_canvas_bur.create_image(self.b,self.a-50, image=self.login, anchor="nw")
             sleep(0.1)
             self.root.update_idletasks()
@@ -282,19 +280,19 @@ class CustomBurger:
         self.qty_inc.config(state=DISABLED)
         self.qty_dec.config(state=DISABLED)
         self.btn_add.config(text="Add New ")
-        self.login2 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login2 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login2, anchor="nw")
-        self.login3 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login3 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login3, anchor="nw")
-        self.login4 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login4 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login4, anchor="nw")
-        self.login5 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login5 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login5, anchor="nw")
-        self.login = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login, anchor="nw")
-        self.login6 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login6 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login6, anchor="nw")
-        self.login7 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login7 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login7, anchor="nw")
         self.btn_tomato.config(text="Tomato:No", bg="black", fg="red4")
         self.btn_chicken.config(text="Chicken:No", bg="black", fg="red4")
@@ -320,7 +318,7 @@ class CustomBurger:
             print("to"+str(self.count))
             print("to" + str(self.count_to))
             for i in range(1, 7):
-                self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/{i}.png'))
+                self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/{i}.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.a, image=self.login2, anchor="nw")
                 sleep(0.1)
                 self.root.update_idletasks()
@@ -331,13 +329,13 @@ class CustomBurger:
             if self.count_to <= self.count_pi:
                 self.count_pi=self.count_pi-1
                 self.pos_pi = self.pos_pi + 50
-                self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/6.png'))
+                self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_pi, image=self.login3, anchor="nw")
             if self.count_to < self.count_ch:
                 self.count_ch=self.count_ch-1
                 print(self.a)
                 self.pos_ch = self.pos_ch + 50
-                self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/6.png'))
+                self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ch, image=self.login5, anchor="nw")
 
             if self.count_to < self.count_ce:
@@ -345,21 +343,21 @@ class CustomBurger:
                 print("ce")
                 print(self.a)
                 self.pos_ce = self.pos_ce + 50
-                self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/6.png'))
+                self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ce, image=self.login4, anchor="nw")
             if self.count_to < self.count_fi:
                 self.count_fi = self.count_fi - 1
                 print("ce")
                 print(self.a)
                 self.pos_fi = self.pos_fi + 50
-                self.login6 = ImageTk.PhotoImage(Image.open(f'fish/6.png'))
+                self.login6 = ImageTk.PhotoImage(Image.open(f'fish/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_fi, image=self.login6, anchor="nw")
             if self.count_to < self.count_sp:
                 self.count_sp = self.count_sp - 1
                 print("ce")
                 print(self.a)
                 self.pos_sp = self.pos_sp + 50
-                self.login7 = ImageTk.PhotoImage(Image.open(f'spinach_img/6.png'))
+                self.login7 = ImageTk.PhotoImage(Image.open(f'spinach_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_sp, image=self.login7, anchor="nw")
 
             self.a = self.a +50
@@ -368,7 +366,7 @@ class CustomBurger:
             print("tor" + str(self.count))
             print("tor" + str(self.count_to))
             self.btn_tomato.config(text="Tomato:No", bg="black",fg="red4")
-            self.login2 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+            self.login2 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
             self.my_canvas_bur.create_image(self.b, self.a, image=self.login2, anchor="nw")
 
     def burger_pickel(self):
@@ -384,7 +382,7 @@ class CustomBurger:
             print("pi" + str(self.count))
             print("pi" + str(self.count_pi))
             for i in range(1, 7):
-                self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/{i}.png'))
+                self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/{i}.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.a, image=self.login3, anchor="nw")
                 sleep(0.1)
                 self.root.update_idletasks()
@@ -394,13 +392,13 @@ class CustomBurger:
             if self.count_pi <= self.count_to:
                 self.count_to = self.count_to - 1
                 self.pos_to = self.pos_to + 50
-                self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/6.png'))
+                self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_pi, image=self.login2, anchor="nw")
             if self.count_pi < self.count_ch:
                 self.count_ch = self.count_ch - 1
                 print(self.a)
                 self.pos_ch = self.pos_ch + 50
-                self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/6.png'))
+                self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ch, image=self.login5, anchor="nw")
 
             if self.count_pi < self.count_ce:
@@ -408,21 +406,21 @@ class CustomBurger:
                 print("ce")
                 print(self.a)
                 self.pos_ce = self.pos_ce + 50
-                self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/6.png'))
+                self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ce, image=self.login4, anchor="nw")
             if self.count_pi < self.count_fi:
                 self.count_fi = self.count_fi - 1
                 print("ce")
                 print(self.a)
                 self.pos_fi = self.pos_fi + 50
-                self.login6 = ImageTk.PhotoImage(Image.open(f'fish/6.png'))
+                self.login6 = ImageTk.PhotoImage(Image.open(f'fish/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_fi, image=self.login6, anchor="nw")
             if self.count_pi < self.count_sp:
                 self.count_sp = self.count_sp - 1
                 print("ce")
                 print(self.a)
                 self.pos_sp = self.pos_sp + 50
-                self.login7 = ImageTk.PhotoImage(Image.open(f'spinach_img/6.png'))
+                self.login7 = ImageTk.PhotoImage(Image.open(f'spinach_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_sp, image=self.login7, anchor="nw")
 
 
@@ -432,7 +430,7 @@ class CustomBurger:
             print("tor" + str(self.count))
             print("tor" + str(self.count_to))
             self.btn_pickle.config(text="Pickle:No", bg="black",fg="red4")
-            self.login3 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+            self.login3 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
             self.my_canvas_bur.create_image(self.b, self.a, image=self.login3, anchor="nw")
 
 
@@ -449,7 +447,7 @@ class CustomBurger:
             print("ce" + str(self.count))
             print("ce" + str(self.count_ce))
             for i in range(1, 7):
-                self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/{i}.png'))
+                self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/{i}.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.a, image=self.login4, anchor="nw")
                 sleep(0.1)
                 self.root.update_idletasks()
@@ -459,13 +457,13 @@ class CustomBurger:
             if self.count_ce <= self.count_to:
                 self.count_to = self.count_to - 1
                 self.pos_to = self.pos_to + 50
-                self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/6.png'))
+                self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_to, image=self.login2, anchor="nw")
             if self.count_ce < self.count_ch:
                 self.count_ch = self.count_ch - 1
                 print(self.a)
                 self.pos_ch = self.pos_ch + 50
-                self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/6.png'))
+                self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ch, image=self.login5, anchor="nw")
 
             if self.count_ce < self.count_pi:
@@ -473,28 +471,28 @@ class CustomBurger:
                 print("ce")
                 print(self.a)
                 self.pos_pi = self.pos_pi + 50
-                self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/6.png'))
+                self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_pi, image=self.login3, anchor="nw")
             if self.count_ce < self.count_fi:
                 self.count_fi = self.count_fi - 1
                 print("ce")
                 print(self.a)
                 self.pos_fi = self.pos_fi + 50
-                self.login6 = ImageTk.PhotoImage(Image.open(f'fish/6.png'))
+                self.login6 = ImageTk.PhotoImage(Image.open(f'fish/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_fi, image=self.login6, anchor="nw")
             if self.count_ce < self.count_sp:
                 self.count_sp = self.count_sp - 1
                 print("ce")
                 print(self.a)
                 self.pos_sp = self.pos_sp + 50
-                self.login7 = ImageTk.PhotoImage(Image.open(f'spinach_img/6.png'))
+                self.login7 = ImageTk.PhotoImage(Image.open(f'spinach_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_sp, image=self.login7, anchor="nw")
 
             self.a = self.a +50
             self.count = self.count - 1
             self.count_ce = 0
             self.btn_chees.config(text="Cheese:No", bg="black",fg="red4")
-            self.login4 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+            self.login4 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
             self.my_canvas_bur.create_image(self.b, self.a, image=self.login4, anchor="nw")
 
     def burger_chicken(self):
@@ -507,7 +505,7 @@ class CustomBurger:
             self.count = self.count + 1
             self.count_ch = self.count
             for i in range(1, 7):
-                self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/{i}.png'))
+                self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/{i}.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.a, image=self.login5, anchor="nw")
                 sleep(0.1)
                 self.root.update_idletasks()
@@ -517,13 +515,13 @@ class CustomBurger:
             if self.count_ch <= self.count_to:
                 self.count_to=self.count_to-1
                 self.pos_to = self.pos_to + 50
-                self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/6.png'))
+                self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_to, image=self.login2, anchor="nw")
             if self.count_ch < self.count_ce:
                 self.count_ce=self.count_ce-1
                 print(self.a)
                 self.pos_ce = self.pos_ce + 50
-                self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/6.png'))
+                self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ce, image=self.login4, anchor="nw")
 
             if self.count_ch < self.count_pi:
@@ -531,21 +529,21 @@ class CustomBurger:
                 print("ce")
                 print(self.a)
                 self.pos_pi = self.pos_pi + 50
-                self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/6.png'))
+                self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_pi, image=self.login3, anchor="nw")
             if self.count_ch < self.count_fi:
                 self.count_fi = self.count_fi - 1
                 print("ce")
                 print(self.a)
                 self.pos_fi = self.pos_fi + 50
-                self.login6 = ImageTk.PhotoImage(Image.open(f'fish/6.png'))
+                self.login6 = ImageTk.PhotoImage(Image.open(f'fish/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_fi, image=self.login6, anchor="nw")
             if self.count_ch < self.count_sp:
                 self.count_sp = self.count_sp - 1
                 print("ce")
                 print(self.a)
                 self.pos_sp = self.pos_sp + 50
-                self.login7 = ImageTk.PhotoImage(Image.open(f'spinach_img/6.png'))
+                self.login7 = ImageTk.PhotoImage(Image.open(f'spinach_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_sp, image=self.login7, anchor="nw")
 
             self.a = self.a +50
@@ -553,7 +551,7 @@ class CustomBurger:
             self.count = self.count - 1
             self.count_ch = 0
             self.btn_chicken.config(text="Chicken:No", bg="black",fg="red4")
-            self.login5 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+            self.login5 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
             self.my_canvas_bur.create_image(self.b, self.a, image=self.login5, anchor="nw")
 
     def burger_fish(self):
@@ -567,7 +565,7 @@ class CustomBurger:
             self.count = self.count + 1
             self.count_fi = self.count
             for i in range(1, 7):
-                self.login6 = ImageTk.PhotoImage(Image.open(f'fish/{i}.png'))
+                self.login6 = ImageTk.PhotoImage(Image.open(f'fish/{i}.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.a, image=self.login6, anchor="nw")
                 sleep(0.1)
                 self.root.update_idletasks()
@@ -577,18 +575,18 @@ class CustomBurger:
             if self.count_fi <= self.count_ch:
                 self.count_ch=self.count_ch-1
                 self.pos_ch = self.pos_ch + 50
-                self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/6.png'))
+                self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ch, image=self.login5, anchor="nw")
             if self.count_fi <= self.count_to:
                 self.count_to=self.count_to-1
                 self.pos_to = self.pos_to + 50
-                self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/6.png'))
+                self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_to, image=self.login2, anchor="nw")
             if self.count_fi < self.count_ce:
                 self.count_ce=self.count_ce-1
                 print(self.a)
                 self.pos_ce = self.pos_ce + 50
-                self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/6.png'))
+                self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ce, image=self.login4, anchor="nw")
 
             if self.count_fi < self.count_pi:
@@ -596,14 +594,14 @@ class CustomBurger:
                 print("ce")
                 print(self.a)
                 self.pos_pi = self.pos_pi + 50
-                self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/6.png'))
+                self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_pi, image=self.login3, anchor="nw")
             if self.count_fi < self.count_sp:
                 self.count_sp = self.count_sp - 1
                 print("ce")
                 print(self.a)
                 self.pos_sp = self.pos_sp + 50
-                self.login7 = ImageTk.PhotoImage(Image.open(f'spinach_img/6.png'))
+                self.login7 = ImageTk.PhotoImage(Image.open(f'spinach_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_sp, image=self.login7, anchor="nw")
 
             self.a = self.a +50
@@ -611,7 +609,7 @@ class CustomBurger:
             self.count = self.count - 1
             self.count_fi = 0
             self.btn_fish.config(text="Fish:No", bg="black",fg="red4")
-            self.login6 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+            self.login6 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
             self.my_canvas_bur.create_image(self.b, self.a, image=self.login6, anchor="nw")
 
     def burger_spinach(self):
@@ -624,7 +622,7 @@ class CustomBurger:
             self.count = self.count + 1
             self.count_sp = self.count
             for i in range(1, 7):
-                self.login7 = ImageTk.PhotoImage(Image.open(f'spinach_img/{i}.png'))
+                self.login7 = ImageTk.PhotoImage(Image.open(f'spinach_img/{i}.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.a, image=self.login7, anchor="nw")
                 sleep(0.1)
                 self.root.update_idletasks()
@@ -634,36 +632,35 @@ class CustomBurger:
             if self.count_sp <= self.count_ch:
                 self.count_ch=self.count_ch-1
                 self.pos_ch = self.pos_ch + 50
-                self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/6.png'))
+                self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ch, image=self.login5, anchor="nw")
             if self.count_sp <= self.count_to:
                 self.count_to=self.count_to-1
                 self.pos_to = self.pos_to + 50
-                self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/6.png'))
+                self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_to, image=self.login2, anchor="nw")
             if self.count_sp < self.count_ce:
                 self.count_ce=self.count_ce-1
                 print(self.a)
                 self.pos_ce = self.pos_ce + 50
-                self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/6.png'))
+                self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ce, image=self.login4, anchor="nw")
             if self.count_sp < self.count_pi:
                 self.count_pi = self.count_pi - 1
                 print("ce")
                 print(self.a)
                 self.pos_pi = self.pos_pi + 50
-                self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/6.png'))
+                self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_pi, image=self.login3, anchor="nw")
             if self.count_sp < self.count_fi:
                 self.count_fi = self.count_fi - 1
 
                 self.pos_fi = self.pos_fi + 50
-                self.login6 = ImageTk.PhotoImage(Image.open(f'fish/6.png'))
+                self.login6 = ImageTk.PhotoImage(Image.open(f'fish/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_fi, image=self.login6, anchor="nw")
             self.a = self.a +50
             self.count = self.count - 1
             self.count_sp = 0
             self.btn_spinach.config(text="Spinach:No", bg="black",fg="red4")
-            self.login7 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+            self.login7 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
             self.my_canvas_bur.create_image(self.b, self.a, image=self.login7, anchor="nw")
-CustomBurger()

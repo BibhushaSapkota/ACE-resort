@@ -3,7 +3,7 @@ from PIL import Image,ImageTk
 from tkinter import ttk
 from tkinter import messagebox
 import mysql.connector
-import login_page
+import Login
 
 class Register:
     def __init__(self,master):
@@ -151,7 +151,7 @@ class Register:
 
     def login_window(self):
         self.root2.destroy()
-        login_page.Login(Toplevel())
+        Login.Login(Toplevel())
 
 
 
