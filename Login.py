@@ -4,8 +4,6 @@ from PIL import ImageTk, Image
 from tkinter import messagebox
 import mysql.connector
 
-
-
 class Login:
     def __init__(self,master):
         self.root1 = master
