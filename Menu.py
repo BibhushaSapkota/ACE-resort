@@ -5,7 +5,7 @@ class run:
     def __init__(self):
         self.root=Tk()
         self.root.state('zoomed')
-        self.img=ImageTk.PhotoImage(Image.open(f'menu.png'))
+        self.img=ImageTk.PhotoImage(Image.open(f'menu_bg.png'))
         print(self.img)
         self.my_canvas=Canvas(self.root)
         self.my_canvas.pack(fill='both',expand=True)
@@ -32,12 +32,11 @@ class run:
 
         #buff momo
         buff_momo = Label(text='Buff Momo------------------------------', font=("times new roman", 12, 'bold'),
-                            bg='black',
-                            fg='grey').place(x=220, y=250)
+                            bg='black', fg='grey').place(x=220, y=250)
         bmomo_price = Label(text='150', font=("times new roman", 12, 'bold'), bg='black',
                             fg='grey').place(x=450, y=250)
-        self.txt_chicken_momo = Entry(font=("times new roman", 12), bg='grey')
-        self.txt_chicken_momo.place(x=500, y=250, width=40)
+        self.txt_buff_momo = Entry(font=("times new roman", 12), bg='grey')
+        self.txt_buff_momo.place(x=500, y=250, width=40)
 
         # veg momo
         vegg_momo = Label(text='Veg Momo------------------------------', font=("times new roman", 12, 'bold'),
