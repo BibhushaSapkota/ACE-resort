@@ -99,7 +99,7 @@ class Register:
         self.txt_answer.delete(0, END)
         self.gender.set("Select")
 
-
+    #requirements
     def register_data(self):
         print(self.terms_chk.get())
         if self.txt_fname.get()=="" or self.txt_lname.get()=="" or self.txt_contact.get()==""or self.txt_email.get()==""or self.txt_age.get()==""or self.gender.get()==""or self.cmb_question.get()=='Select'or self.txt_password.get()==""or self.txt_confirm_password.get()=="":
@@ -118,7 +118,7 @@ class Register:
                 con= mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='1235',
+                    password='Leanstartup@1',
                     port=3306,
                     database='login_registration')
                 cur=con.cursor()
