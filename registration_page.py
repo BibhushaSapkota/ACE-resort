@@ -87,67 +87,7 @@ class Register:
         register_btn=Button(frame1,text="  Register  ",bg='#9a90e4',command=self.register_data).place(x=50,y=500,width=250)
         login_btn=Button(frame1,text="   Login  ",bg='#9a90e4',command=self.login_window).place(x=370,y=500,width=250)
         self.root2.mainloop()
-    def clear_data(self):
-        self.txt_fname.delete(0,END)
-        self.txt_lname.delete(0, END)
-        self.txt_contact.delete(0, END)
-        self.txt_email.delete(0, END)
-        self.txt_age.delete(0, END)
-        self.txt_password.delete(0, END)
-        self.txt_confirm_password.delete(0, END)
-        self.cmb_question.set("Select")
-        self.txt_answer.delete(0, END)
-        self.gender.set("Select")
-
-    #requirements
-    def register_data(self):
-        print(self.terms_chk.get())
-        if self.txt_fname.get()=="" or self.txt_lname.get()=="" or self.txt_contact.get()==""or self.txt_email.get()==""or self.txt_age.get()==""or self.gender.get()==""or self.cmb_question.get()=='Select'or self.txt_password.get()==""or self.txt_confirm_password.get()=="":
-            messagebox.showerror("Error","All fields are required",parent=self.root2)
-        elif self.txt_password.get()!= self.txt_confirm_password.get():
-            messagebox.showerror("Error","password and confirm password doesn't match",parent=self.root2)
-        elif self.terms_chk.get()==0:
-            print(self.terms_chk.get())
-            messagebox.showerror("Error","please agree to the terms and conditions",parent=self.root2)
-        elif self.txt_contact.get() is StringVar:
-            messagebox.showerror("Error","Enter the correct contact number")
-        elif len(self.txt_contact.get())!=10:
-            messagebox.showerror("Error","Contact number should be 10 digit")
-        else:
-            try:
-                con= mysql.connector.connect(
-                    host='127.0.0.1',
-                    user='root',
-                    password='Janakidevi24#',
-                    port=3306,
-                    database='registration')
-                cur=con.cursor()
-
-                fname=self.txt_fname.get()
-                lname=self.txt_lname.get()
-                contact_number=self.txt_contact.get()
-                email=self.txt_email.get()
-                gender=self.gender.get()
-                age=self.txt_age.get()
-                password=self.txt_password.get()
-                security_question=self.cmb_question.get()
-                answer=self.txt_answer.get()
-
-
-                sql="insert into registration(fname,lname,contact_number,email,gender,age,password,security_question,answer) " \
-                    "values('"+fname+"','"+lname+"',"+contact_number+",'"+email+"','"+gender+"',"+age+",'"+password+"','"+security_question+"','"+answer+"')"
-
-                values=cur.execute(sql)
-
-                con.commit()
-                con.close()
-                messagebox.showinfo("success","You have been successfully registered",parent=self.root2)
-                self.clear_data()
-
-            except:
-                print('error')
-                pass
-
+   
 
     def login_window(self):
         self.root2.destroy()
