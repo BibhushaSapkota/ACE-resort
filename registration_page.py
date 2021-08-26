@@ -9,7 +9,7 @@ class Register:
     def __init__(self,master):
         self.root2=master
         self.root2.title("registration form")
-        self.root2.state('zoomed')
+        self.root2.geometry("%dx%d+0+0" % (self.root2.winfo_screenwidth(), self.root2.winfo_screenheight()))
 
         self.load=Image.open('registration.png') #background picture
         self.bg=ImageTk.PhotoImage(self.load,master=self.root2)
