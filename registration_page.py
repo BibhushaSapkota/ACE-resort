@@ -123,6 +123,8 @@ class Register:
                     database='registration')
                 cur=con.cursor()
 
+
+
                 fname=self.txt_fname.get()
                 lname=self.txt_lname.get()
                 contact_number=self.txt_contact.get()
