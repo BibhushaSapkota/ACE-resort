@@ -28,6 +28,8 @@ class CustomBurger:
         self.root.update()
         self.root.mainloop()
     def main_frame_fn(self):
+        self.a = 550
+        self.b = 230
 
         self.frame_main = LabelFrame(self.root, height= self.root.winfo_screenheight(), width=self.root.winfo_screenwidth())
         self.frame_main.place(x=0, y=0)

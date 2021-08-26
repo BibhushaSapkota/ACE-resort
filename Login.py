@@ -92,7 +92,10 @@ class Login:
                 elif row==None:
                     messagebox.showerror("Error","Invalid username and password",parent=self.root1)
                 elif row!=None and self.var123.get()==1:
+
                     messagebox.showinfo("Success","Successful login",parent=self.root1)
+                    global usname
+                    usname = self.username_entry.get()
                     self.root1.withdraw()
                     main_page.MainPage(Toplevel())
                 elif row!=None and self.var123.get()==2:
@@ -136,5 +139,7 @@ class Login:
         self.my_canvas.create_line(x + c, y + h, x + w - c, y + h, fill="black", width=10)
         self.my_canvas.create_line(x, y + c, x, y + h - c, fill="black", width=10)
         self.my_canvas.create_line(x + w, y + c, x + w, y + h - c, fill="black", width=10)
+def gett():
+    return usname
 
 

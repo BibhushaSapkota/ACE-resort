@@ -11,9 +11,6 @@ class run:
         self.my_canvas.pack(fill='both',expand=True)
         self.my_canvas.create_image(0,0,image=self.img,anchor='nw')
 
-
-
-
         title=Label(text='MENU',font=("times new roman",40,'bold'),bg='black',fg='grey').place(x=590,y=100)
 
         quantity = Label(text='Quantity', font=("times new roman", 15, 'bold'), bg='black',

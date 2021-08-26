@@ -1,8 +1,10 @@
 from tkinter import *
+import mysql.connector
 from PIL import ImageTk, Image
 from time import sleep
 import  custom_burger
 import room
+import Login
 class MainPage:
     def __init__(self,master):
         self.root3 = master
@@ -11,12 +13,52 @@ class MainPage:
         self.my_canvas = Canvas(self.root3)
         self.my_canvas.pack(fill="both", expand=True)
         self.background = ImageTk.PhotoImage(Image.open('background.png'),master=self.root3)
+        self.male = ImageTk.PhotoImage(Image.open('male.png'), master=self.root3)
+        self.female = ImageTk.PhotoImage(Image.open('female.png'), master=self.root3)
         self.my_canvas.create_image(0, 0, image=self.background, anchor="nw")
         self.ace_images()
         self.buttons()
         self.menu_main_frame()
+        self.gender_part()
+        self.result=self.convertTuple(self.row1)
+        print(self.result)
+        self.user_name=Label(self.root3,text=self.us_name,font=("Rockwell nova", 40,'bold'),fg="Green")
+        self.user_name.place(x=1100, y=10)
+        if self.result=='Male':
+            self.Mr = Label(self.root3, text='Mr', font=("Rockwell nova", 40, 'bold'), fg="Green")
+            self.Mr.place(x=1000, y=10)
+            self.my_canvas.create_image(900, 10, image=self.male, anchor="nw")
+        else:
+            self.Mrs = Label(self.root3, text='Miss', font=("Rockwell nova", 40, 'bold'), fg="Green")
+            self.Mrs.place(x=1000, y=10)
+            self.my_canvas.create_image(900, 10, image=self.female, anchor="nw")
+
+
         self.root3.update()
         self.root3.mainloop()
+
+    def convertTuple(self,tup):
+        str = ''.join(tup)
+        return str
+    def gender_part(self):
+        self.us_name=Login.gett()
+        query = "select gender from registration where fname=%s"
+        try:
+            con1 = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='1235',
+                port=3306,
+                database='login_registration')
+
+            cur1 = con1.cursor()
+            cur1.execute(query, (self.us_name,))
+            self.row1 = cur1.fetchone()
+            con1.close()
+        except:
+            print('error')
+            pass
+
     def ace_images(self):
         # now set an image for moving
         self.img1 = ImageTk.PhotoImage(Image.open(f"ace_logo/ace.png"),master=self.root3)  # make sure that you have a photo
