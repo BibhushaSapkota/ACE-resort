@@ -9,7 +9,7 @@ class Register:
     def __init__(self,master):
         self.root2=master
         self.root2.title("registration form")
-        self.root2.state('zoomed')
+        self.root2.geometry("%dx%d+0+0" % (self.root2.winfo_screenwidth(), self.root2.winfo_screenheight()))
 
         self.load=Image.open('registration.png') #background picture
         self.bg=ImageTk.PhotoImage(self.load,master=self.root2)
@@ -118,9 +118,9 @@ class Register:
                 con= mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='Leanstartup@1',
+                    password='Janakidevi24#',
                     port=3306,
-                    database='login_registration')
+                    database='registration')
                 cur=con.cursor()
 
                 fname=self.txt_fname.get()
