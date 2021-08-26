@@ -101,7 +101,6 @@ class Register:
 
     #requirements
     def register_data(self):
-        
         print(self.terms_chk.get())
         if self.txt_fname.get()=="" or self.txt_lname.get()=="" or self.txt_contact.get()==""or self.txt_email.get()==""or self.txt_age.get()==""or self.gender.get()==""or self.cmb_question.get()=='Select'or self.txt_password.get()==""or self.txt_confirm_password.get()=="":
             messagebox.showerror("Error","All fields are required",parent=self.root2)
