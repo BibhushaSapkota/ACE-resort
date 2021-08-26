@@ -76,9 +76,9 @@ class Login:
                 con = mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='1235',
+                    password='Janakidevi24#',
                     port=3306,
-                    database='login_registration')
+                    database='registration')
                 cur = con.cursor()
                 cur.execute("select * from registration where email=%s and password=%s", (self.username_entry.get(),self.password_entry.get()))
                 row = cur.fetchone()
