@@ -32,8 +32,6 @@ class MainPage:
             self.Mrs = Label(self.root3, text='Miss', font=("Rockwell nova", 40, 'bold'), fg="Green")
             self.Mrs.place(x=1000, y=10)
             self.my_canvas.create_image(900, 10, image=self.female, anchor="nw")
-
-
         self.root3.update()
         self.root3.mainloop()
 
@@ -94,7 +92,6 @@ class MainPage:
 
 
     def buttons(self):
-
         self.menu_img = ImageTk.PhotoImage(Image.open('menu.png'),master=self.root3)
         self.menu_change_img = ImageTk.PhotoImage(Image.open('menu_change.png'),master=self.root3)
         self.details_img= ImageTk.PhotoImage(Image.open('details.png'),master=self.root3)
@@ -105,7 +102,6 @@ class MainPage:
         self.profile_change_img = ImageTk.PhotoImage(Image.open('profile_change.png'),master=self.root3)
         self.setting_img = ImageTk.PhotoImage(Image.open('setting.png'),master=self.root3)
         self.setting_change_img = ImageTk.PhotoImage(Image.open('setting_change.png'),master=self.root3)
-
 
         self.menu_btn= Button(self.root3, text="      MENU", fg="white",image=self.menu_change_img,
                                    font=("Rockwell nova", 20,'bold'),
