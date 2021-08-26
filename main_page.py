@@ -40,12 +40,12 @@ class MainPage:
         return str
     def gender_part(self):
         self.us_name=Login.gett()
-        query = "select gender from registration where fname=%s"
+        query = "select gender from registration_details where email=%s"
         try:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration')
 
