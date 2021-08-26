@@ -26,11 +26,11 @@ class MainPage:
         self.user_name.place(x=1100, y=10)
         if self.result=='Male':
             self.Mr = Label(self.root3, text='Mr', font=("Rockwell nova", 40, 'bold'), fg="Green")
-            self.Mr.place(x=1000, y=10)
+            self.Mr.place(x=980, y=10)
             self.my_canvas.create_image(900, 10, image=self.male, anchor="nw")
         else:
             self.Mrs = Label(self.root3, text='Miss', font=("Rockwell nova", 40, 'bold'), fg="Green")
-            self.Mrs.place(x=1000, y=10)
+            self.Mrs.place(x=980, y=10)
             self.my_canvas.create_image(900, 10, image=self.female, anchor="nw")
         self.root3.update()
         self.root3.mainloop()
@@ -305,6 +305,7 @@ class MainPage:
             any.create_image(x, y, image=self.room_img, anchor="nw")
             sleep(0.1)
             self.root3.update_idletasks()
+
     def cab_fn(self):
         self.frame_main.place_forget()
         self.frame_cab_in = LabelFrame(self.root3, height=550, width=1040, borderwidth=0)
@@ -312,25 +313,122 @@ class MainPage:
         self.frame_cab_in.pack_propagate(False)
         self.my_canvas_cab_in = Canvas(self.frame_cab_in)
         self.my_canvas_cab_in.pack(fill="both", expand=True)
-        self.cab_bg_img=ImageTk.PhotoImage(Image.open(f'cab_bg.png'),master=self.root3)
+        self.cab_bg_img = ImageTk.PhotoImage(Image.open(f'cab_bg.png'), master=self.root3)
         self.my_canvas_cab_in.create_image(0, 0, image=self.cab_bg_img, anchor="nw")
-        self.my_canvas_cab_in.create_text(450,80,text="BOOK A TAXI", font=("Algerian", 45),fill="white")
-        self.my_canvas_cab_in.create_text(230, 150, text="Pick up address:", font=("Times new roman", 20), fill="white")
-        self.my_canvas_cab_in.create_text(230, 250, text="Drop off  address:", font=("Times new roman", 20), fill="white")
-        self.my_canvas_cab_in.create_text(250, 200, text="Pick up Date:", font=("Times new roman", 20), fill="white")
-        self.my_canvas_cab_in.create_text(250, 300, text="Drop off Date:",font=("Times new roman", 20), fill="white")
 
-        self.pick_ent=Entry(self.frame_cab_in,bg="#05035b",fg="white",font=("Times new roman", 20),width=15)
-        self.pick_ent.place(x=350,y=130)
-        self.pick_dat = Entry(self.frame_cab_in,bg="#05035b",fg="white", font=("Times new roman", 20), width=15)
-        self.pick_dat.place(x=350, y=180)
-        self.pick_btn = Button(self.frame_cab_in,text="Book",bg="green",fg="white", font=("Times new roman", 18,'bold'))
-        self.pick_btn.place(x=580, y=160)
+        self.my_canvas_cab_in.create_text(450, 80, text="BOOK A TAXI", font=("Algerian", 45), fill="white")
+        self.my_canvas_cab_in.create_text(240, 150, text="Pick up address:", font=("Times new roman", 20),
+                                          fill="white")
+        self.my_canvas_cab_in.create_text(230, 300, text="Drop off  address:", font=("Times new roman", 20),
+                                          fill="white")
+        self.my_canvas_cab_in.create_text(250, 200, text="Pick up Date:", font=("Times new roman", 20),
+                                          fill="white")
+        self.my_canvas_cab_in.create_text(250, 350, text="Drop off Date:", font=("Times new roman", 20),
+                                          fill="white")
 
+        self.pick_ent = Entry(self.frame_cab_in, bg="#05035b", fg="white", font=("Times new roman", 20), width=20)
+        self.pick_ent.place(x=350, y=130)
+        self.pick_btn = Button(self.frame_cab_in, text=" Book pick up ", bg="#BA7AD1", fg="#350345",
+                               font=("Times new roman", 16, 'bold'))
+        self.pick_btn.place(x=300, y=230)
 
-        self.drop_ent = Entry(self.frame_cab_in,bg="#05035b",fg="white", font=("Times new roman", 20), width=15)
-        self.drop_ent.place(x=350, y=230)
-        self.drop_dat = Entry(self.frame_cab_in,bg="#05035b",fg="white", font=("Times new roman", 20), width=15)
-        self.drop_dat.place(x=350, y=280)
-        self.drop_btn = Button(self.frame_cab_in, text="Book", bg="green", fg="white", font=("Times new roman", 18,'bold'))
-        self.drop_btn.place(x=580, y=255)
+        self.drop_ent = Entry(self.frame_cab_in, bg="#05035b", fg="white", font=("Times new roman", 20), width=20)
+        self.drop_ent.place(x=350, y=280)
+        self.drop_btn = Button(self.frame_cab_in, text=" Book drop off ", bg="#BA7AD1", fg="#350345",
+                               font=("Times new roman", 16, 'bold'))
+        self.drop_btn.place(x=300, y=380)
+
+        # dropdowns
+        self.options = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ]
+        self.clicked = StringVar()
+        self.clicked.set("Sunday")
+
+        self.drop = OptionMenu(self.frame_cab_in, self.clicked, *self.options)
+        self.drop.place(x=450, y=190)
+
+        self.options2 = [
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+            "20", "21", "22", "23", "24", "25",
+            "26", "27", "28", "29", "30", "31", "32"
+        ]
+        self.clickeddate = StringVar()
+        self.clickeddate.set("1")
+
+        self.dropdate = OptionMenu(self.frame_cab_in, self.clickeddate, *self.options2)
+        self.dropdate.place(x=555, y=190)
+
+        self.options3 = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ]
+        self.clickedmonth = StringVar()
+        self.clickedmonth.set("January")
+
+        self.dropmonth = OptionMenu(self.frame_cab_in, self.clickedmonth, *self.options3)
+        self.dropmonth.place(x=350, y=190)
+
+        # dropdown for drop off
+        self.optionsd1 = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ]
+        self.clickedd1 = StringVar()
+        self.clickedd1.set("Sunday")
+
+        self.dropd1 = OptionMenu(self.frame_cab_in, self.clickedd1, *self.optionsd1)
+        self.dropd1.place(x=450, y=340)
+
+        self.optionsd2 = [
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+            "20", "21", "22", "23", "24", "25",
+            "26", "27", "28", "29", "30", "31", "32"
+        ]
+        self.clickeddated2 = StringVar()
+        self.clickeddated2.set("1")
+
+        self.dropdated2 = OptionMenu(self.frame_cab_in, self.clickeddated2, *self.optionsd2)
+        self.dropdated2.place(x=555, y=340)
+
+        self.optionsd3 = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ]
+        self.clickedmonthd3 = StringVar()
+        self.clickedmonthd3.set("January")
+
+        self.dropmonthd3 = OptionMenu(self.frame_cab_in, self.clickedmonthd3, *self.optionsd3)
+        self.dropmonthd3.place(x=350, y=340)
+
