@@ -10,7 +10,7 @@ class Login:
     def __init__(self,master):
         self.root1 = master
         self.root1.title("Login")
-        self.root1.state('zoomed')
+        self.root1.geometry("%dx%d+0+0" % (self.root1.winfo_screenwidth(), self.root1.winfo_screenheight()))
         self.my_canvas = Canvas(self.root1)
         self.my_canvas.pack(fill="both", expand=True)
         self.login1 = ImageTk.PhotoImage(Image.open(f'login.png'),master=self.root1)
@@ -76,12 +76,13 @@ class Login:
                 con = mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='1235',
+                    password='Leanstartup@1',
                     port=3306,
                     database='login_registration')
                 cur = con.cursor()
                 cur.execute("select * from registration where email=%s and password=%s", (self.username_entry.get(),self.password_entry.get()))
                 row = cur.fetchone()
+
                 if self.username_entry.get()=='admin' and self.password_entry.get()=='admin' and self.var123.get()==2:
                     messagebox.showinfo("Success", "Successful login", parent=self.root1)
                     self.root1.withdraw()
@@ -97,6 +98,8 @@ class Login:
                     global usname
                     usname = self.username_entry.get()
                     self.root1.withdraw()
+                    global usname
+                    usname = self.username_entry.get()
                     main_page.MainPage(Toplevel())
                 elif row!=None and self.var123.get()==2:
                     messagebox.showerror("Error", "Select currect authority", parent=self.root1)
@@ -142,4 +145,6 @@ class Login:
 def gett():
     return usname
 
+def gett():
+    return usname
 
