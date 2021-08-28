@@ -40,7 +40,7 @@ class MainPage:
         return str
     def gender_part(self):
         self.us_name=Login.gett()
-        query = "select gender from registration_details where email=%s"
+        query = "select gender from registration where email=%s"
         try:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
