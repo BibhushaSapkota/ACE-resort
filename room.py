@@ -516,7 +516,7 @@ class Roompage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()

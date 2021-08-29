@@ -76,7 +76,7 @@ class Login:
                 con = mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='Janakidevi24#',
+                    password='1235',
                     port=3306,
                     database='login_registration1')
                 cur = con.cursor()
@@ -140,11 +140,14 @@ class Login:
         self.my_canvas.create_line(x, y + c, x, y + h - c, fill="black", width=10)
         self.my_canvas.create_line(x + w, y + c, x + w, y + h - c, fill="black", width=10)
 
+def gett():
+    return usname
+
 def show_login_result(username, password):
     con = mysql.connector.connect(
         host='127.0.0.1',
         user='root',
-        password='@!2002bisesh',
+        password='1235',
         port=3306,
         database='login_registration1')
     cur = con.cursor()
@@ -162,9 +165,9 @@ def show_login_result(username, password):
     con = mysql.connector.connect(
         host='127.0.0.1',
         user='root',
-        password='Janakidevi24#',
+        password='1235',
         port=3306,
-        database='login_registration')
+        database='login_registration1')
     cur = con.cursor()
     cur.execute("select * from registration where username=%s and password=%s",
                     (username, password))

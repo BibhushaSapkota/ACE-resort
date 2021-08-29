@@ -47,7 +47,7 @@ class MainPage:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
 
@@ -450,7 +450,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -476,19 +476,19 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
 
 
-            email= self.us_name
+            username= self.us_name
             dropoff_address= self.drop_ent.get()
             month= self.clickedmonthd3.get()
             day=self.clickedd1.get()
             date=self.clickeddated2 .get()
 
-            sql = "insert into dropoff(email,dropoff_address,month,day,date)" "values ('" + email + "','" +dropoff_address+ "','" +month+ "','" +day+ "','" +date+"')"
+            sql = "insert into dropoff(username,dropoff_address,month,day,date)" "values ('" + username + "','" +dropoff_address+ "','" +month+ "','" +day+ "','" +date+"')"
             values = cur.execute(sql)
             con.commit()
             con.close()
