@@ -1,4 +1,6 @@
 from tkinter import *
+from tkinter import messagebox
+
 import mysql.connector
 from PIL import ImageTk, Image
 from time import sleep
@@ -40,14 +42,14 @@ class MainPage:
         return str
     def gender_part(self):
         self.us_name=Login.gett()
-        query = "select gender from registration where email=%s"
+        query = "select gender from registration where username=%s"
         try:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
                 password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
 
             cur1 = con1.cursor()
             cur1.execute(query, (self.us_name,))
@@ -329,13 +331,13 @@ class MainPage:
         self.pick_ent = Entry(self.frame_cab_in, bg="#05035b", fg="white", font=("Times new roman", 20), width=20)
         self.pick_ent.place(x=350, y=130)
         self.pick_btn = Button(self.frame_cab_in, text=" Book pick up ", bg="#BA7AD1", fg="#350345",
-                               font=("Times new roman", 16, 'bold'))
+                               font=("Times new roman", 16, 'bold'),command=self.pickup)
         self.pick_btn.place(x=300, y=230)
 
         self.drop_ent = Entry(self.frame_cab_in, bg="#05035b", fg="white", font=("Times new roman", 20), width=20)
         self.drop_ent.place(x=350, y=280)
         self.drop_btn = Button(self.frame_cab_in, text=" Book drop off ", bg="#BA7AD1", fg="#350345",
-                               font=("Times new roman", 16, 'bold'))
+                               font=("Times new roman", 16, 'bold'),command=self.dropoff)
         self.drop_btn.place(x=300, y=380)
 
         # dropdowns
@@ -432,3 +434,66 @@ class MainPage:
         self.dropmonthd3 = OptionMenu(self.frame_cab_in, self.clickedmonthd3, *self.optionsd3)
         self.dropmonthd3.place(x=350, y=340)
 
+    def clearpickup(self):
+        self.pick_ent.delete(0,END)
+        self.drop_ent.delete(0,END)
+        self.clickeddated2.set("1")
+        self.clickedd1.set("Sunday")
+        self.clickedmonthd3.set("January")
+        self.clickedmonth.set("January")
+        self.clickeddate.set("1")
+        self.clicked.set("Sunday")
+
+    def pickup(self):
+        self.us_name = Login.gett()
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='@!2002bisesh',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+
+
+            username= self.us_name
+            pickup_address= self.pick_ent.get()
+            month=self.clickedmonth.get()
+            day=self.clicked.get()
+            date=self.clickeddate.get()
+            sql = "insert into pickup(username,pickup_address,month,day,date)" "values ('" + username + "','" +pickup_address+ "','" +month+ "','" +day+ "','" +date+"')"
+            values = cur.execute(sql)
+            con.commit()
+            con.close()
+            messagebox.showinfo("success", "Your cab has been  booked", parent=self.root3)
+            self.clearpickup()
+
+        except:
+            print("error")
+    def dropoff(self):
+        self.us_name = Login.gett()
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='@!2002bisesh',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+
+
+            email= self.us_name
+            dropoff_address= self.drop_ent.get()
+            month= self.clickedmonthd3.get()
+            day=self.clickedd1.get()
+            date=self.clickeddated2 .get()
+
+            sql = "insert into dropoff(email,dropoff_address,month,day,date)" "values ('" + email + "','" +dropoff_address+ "','" +month+ "','" +day+ "','" +date+"')"
+            values = cur.execute(sql)
+            con.commit()
+            con.close()
+            messagebox.showinfo("success", "Your cab has been  booked", parent=self.root3)
+            self.clearpickup()
+
+        except:
+            print("error")

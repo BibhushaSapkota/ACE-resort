@@ -78,9 +78,9 @@ class Login:
                     user='root',
                     password='@!2002bisesh',
                     port=3306,
-                    database='login_registration')
+                    database='login_registration1')
                 cur = con.cursor()
-                cur.execute("select * from registration_details where email=%s and password=%s", (self.username_entry.get(),self.password_entry.get()))
+                cur.execute("select * from registration where username=%s and password=%s", (self.username_entry.get(),self.password_entry.get()))
                 row = cur.fetchone()
 
                 if self.username_entry.get()=='admin' and self.password_entry.get()=='admin' and self.var123.get()==2:
@@ -144,6 +144,21 @@ class Login:
 def gett():
     return usname
 
-def gett():
-    return usname
+def show_login_result(username, password):
+    con = mysql.connector.connect(
+        host='127.0.0.1',
+        user='root',
+        password='@!2002bisesh',
+        port=3306,
+        database='login_registration1')
+    cur = con.cursor()
+    cur.execute("select * from registration where username=%s and password=%s",
+                    (username, password))
+    check=cur.fetchall()
+    if check:
+        return "Pass"
+    else:
+        return "Fail"
+
+
 

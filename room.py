@@ -1,8 +1,11 @@
 from tkinter import *
-from PIL import ImageTk, Image
-
+from tkinter import messagebox
+from PIL import Image,ImageTk
+from tkinter import ttk
+import mysql.connector
+import Login
 class Roompage:
-    def __init__(self ,master):
+    def __init__(self,master):
         self.root4 = master
         self.root4.title("Room")
         self.root4.state('zoomed')
@@ -83,12 +86,17 @@ class Roompage:
 
         self.lbl=Label(self.root4,text="choose room/villa/hall:",fg='#9a90e4',font=("Rockwell nova", 15,'bold'))
         self.lbl.place(x=30,y=550)
-        self.txt=Entry(self.root4,bg='#9a90e4',font=("Rockwell nova", 15,'bold'))
-        self.txt.place(x=30,y=600)
+        self.txt = ttk.Combobox(self.root4, font=("times new roman", 12), state='readonly', justify=CENTER)
+        self.txt['values'] = ('Select', 'Room:1', 'Room:2', 'Room:3', 'Room:4', 'Room:5', 'Room:6'
+                              , 'Room:7', 'Room:8', 'Room:9'
+                              , 'Room:10', 'Villa:11', 'Villa:12', 'Villa:13', 'Villa:14', 'Villa:15'
+                              , 'Hall:16', 'Hall:17', 'Hall:18')
+        self.txt.place(x=30, y=600, width=250)
+        self.txt.current(0)
         self.book_btn= Button(self.root4, text="BOOK", fg="white",image=self.roooom_img,
                                    font=("Rockwell nova", 10,'bold'),
                                    cursor="hand2",borderwidth=0,
-                                   border='0', overrelief="sunken",compound=CENTER)
+                                   border='0', overrelief="sunken",compound=CENTER,command=self.room_booking)
         self.book_btn.place(x=50,y=650)
 
     def main_frame(self):
@@ -499,4 +507,33 @@ class Roompage:
         self.vg=ImageTk.PhotoImage(self.vpicc,master=self.root4)
         self.lblv=Label(self.frame_droom123,image=self.vg).place(x=0,y=0,width=937,height=490)
 
+    def clearroom_data(self):
+        self.txt.set("select")
+
+    def room_booking(self):
+        self.us_name = Login.gett()
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='@!2002bisesh',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+            cur.execute("select * from room_book where room_no=%s", (self.txt.get(),))
+            row = cur.fetchone()
+
+            if row != None:
+                messagebox.showerror('sorry', 'The room no you have choosen has already been booked')
+            else:
+                email = self.us_name
+                room_no = self.txt.get()
+                sql = "insert into room_book(username,room_no )" "values ('" + email + "','" + room_no + "')"
+                values = cur.execute(sql)
+                con.commit()
+                con.close()
+                messagebox.showinfo("success", "Your room has been successfully booked", parent=self.root4)
+                self.clearroom_data()
+        except:
+            print("error")
 
