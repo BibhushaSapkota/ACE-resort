@@ -523,6 +523,7 @@ class Roompage:
             cur.execute("select * from room_book where room_no=%s", (self.txt.get(),))
             row = cur.fetchone()
 
+
             if row != None:
                 messagebox.showerror('sorry', 'The room no you have choosen has already been booked')
             else:
