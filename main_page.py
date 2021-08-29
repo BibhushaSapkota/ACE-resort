@@ -350,13 +350,13 @@ class MainPage:
 
         self.pick_ent=Entry(self.frame_cab_in,bg="#05035b",fg="white",font=("Times new roman", 20),width=20)
         self.pick_ent.place(x=350,y=130)
-        self.pick_btn = Button(self.frame_cab_in,text=" Book pick up ",bg="green",fg="red", font=("Times new roman", 18,'bold'))
+        self.pick_btn = Button(self.frame_cab_in,text=" Book pick up ",bg="green",fg="red", font=("Times new roman", 18,'bold'), command=self.pickup)
         self.pick_btn.place(x=330, y=230)
 
 
         self.drop_ent = Entry(self.frame_cab_in,bg="#05035b",fg="white", font=("Times new roman", 20), width=20)
         self.drop_ent.place(x=350, y=280)
-        self.drop_btn = Button(self.frame_cab_in, text=" Book drop off ", bg="green", fg="red", font=("Times new roman", 18,'bold'))
+        self.drop_btn = Button(self.frame_cab_in, text=" Book drop off ", bg="green", fg="red", font=("Times new roman", 18,'bold'), command=self.dropoff)
         self.drop_btn.place(x=330, y=380)
 
 #dropdowns
