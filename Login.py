@@ -76,7 +76,7 @@ class Login:
                 con = mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='@!2002bisesh',
+                    password='Janakidevi24#',
                     port=3306,
                     database='login_registration1')
                 cur = con.cursor()
@@ -93,9 +93,7 @@ class Login:
                 elif row==None:
                     messagebox.showerror("Error","Invalid username and password",parent=self.root1)
                 elif row!=None and self.var123.get()==1:
-
                     messagebox.showinfo("Success","Successful login",parent=self.root1)
-
                     self.root1.withdraw()
                     global usname
                     usname = self.username_entry.get()
@@ -141,8 +139,6 @@ class Login:
         self.my_canvas.create_line(x + c, y + h, x + w - c, y + h, fill="black", width=10)
         self.my_canvas.create_line(x, y + c, x, y + h - c, fill="black", width=10)
         self.my_canvas.create_line(x + w, y + c, x + w, y + h - c, fill="black", width=10)
-def gett():
-    return usname
 
 def show_login_result(username, password):
     con = mysql.connector.connect(
@@ -162,3 +158,18 @@ def show_login_result(username, password):
 
 
 
+def show_login_result(username, password):
+    con = mysql.connector.connect(
+        host='127.0.0.1',
+        user='root',
+        password='Janakidevi24#',
+        port=3306,
+        database='login_registration')
+    cur = con.cursor()
+    cur.execute("select * from registration where username=%s and password=%s",
+                    (username, password))
+    check=cur.fetchall()
+    if check:
+        return "Pass"
+    else:
+        return "Fail"
