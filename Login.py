@@ -4,12 +4,13 @@ from PIL import ImageTk, Image
 from tkinter import messagebox
 import mysql.connector
 import main_page
+import registration_page
 
 class Login:
     def __init__(self,master):
         self.root1 = master
         self.root1.title("Login")
-        self.root1.state('zoomed')
+        self.root1.geometry("%dx%d+0+0" % (self.root1.winfo_screenwidth(), self.root1.winfo_screenheight()))
         self.my_canvas = Canvas(self.root1)
         self.my_canvas.pack(fill="both", expand=True)
         self.login1 = ImageTk.PhotoImage(Image.open(f'login.png'),master=self.root1)
@@ -75,13 +76,13 @@ class Login:
                 con = mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='1235',
+                    password='Janakidevi24#',
                     port=3306,
                     database='login_registration')
                 cur = con.cursor()
-                cur.execute("select * from registration where email=%s and password=%s", (self.username_entry.get(),self.password_entry.get()))
+                cur.execute("select * from registration where username=%s and password=%s", (self.username_entry.get(),self.password_entry.get()))
                 row = cur.fetchone()
-                print(row)
+
                 if self.username_entry.get()=='admin' and self.password_entry.get()=='admin' and self.var123.get()==2:
                     messagebox.showinfo("Success", "Successful login", parent=self.root1)
                     self.root1.withdraw()
@@ -89,7 +90,6 @@ class Login:
                 elif self.username_entry.get()=='admin' and self.password_entry.get()=='admin' and self.var123.get()==1:
                     print(self.var123.get())
                     messagebox.showerror("Error", "Select currect authority", parent=self.root1)
-
                 elif row==None:
                     messagebox.showerror("Error","Invalid username and password",parent=self.root1)
                 elif row!=None and self.var123.get()==1:
@@ -133,9 +133,6 @@ class Login:
         self.my_canvas.create_arc(x, y, x + 2 * c, y + 2 * c, start=90, extent=90, style="arc", width=10)
         self.my_canvas.create_arc(x + w - 2 * c, y + h - 2 * c, x + w, y + h, start=270, extent=90, style="arc",
                                   width=10)
-
-
-
         self.my_canvas.create_arc(x + w - 2 * c, y, x + w, y + 2 * c, start=0, extent=90, style="arc", width=10)
         self.my_canvas.create_arc(x, y + h - 2 * c, x + 2 * c, y + h, start=180, extent=90, style="arc", width=10)
         self.my_canvas.create_line(x + c, y, x + w - c, y, fill="black", width=10)
@@ -146,5 +143,18 @@ class Login:
 def gett():
     return usname
 
-
-
+def show_login_result(username, password):
+    con = mysql.connector.connect(
+        host='127.0.0.1',
+        user='root',
+        password='Janakidevi24#',
+        port=3306,
+        database='login_registration')
+    cur = con.cursor()
+    cur.execute("select * from registration where username=%s and password=%s",
+                    (username, password))
+    check=cur.fetchall()
+    if check:
+        return "Pass"
+    else:
+        return "Fail"

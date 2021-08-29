@@ -1,57 +1,82 @@
 from tkinter import *
-import mysql.connector
 from PIL import ImageTk, Image
+from tkinter import Tk
 from time import sleep
-import  custom_burger
+import custom_burger
 import room
 import Login
+import mysql.connector
+from tkinter import messagebox
 class MainPage:
     def __init__(self,master):
         self.root3 = master
         self.root3.title("Main")
-        self.root3.state('zoomed')
+        self.root3.geometry("%dx%d+0+0" % (self.root3.winfo_screenwidth(), self.root3.winfo_screenheight()))
         self.my_canvas = Canvas(self.root3)
         self.my_canvas.pack(fill="both", expand=True)
         self.background = ImageTk.PhotoImage(Image.open('background.png'),master=self.root3)
-        self.male = ImageTk.PhotoImage(Image.open('male.png'), master=self.root3)
+        '''self.male = ImageTk.PhotoImage(Image.open('male.png'), master=self.root3)
+        print("f")
         self.female = ImageTk.PhotoImage(Image.open('female.png'), master=self.root3)
+        print("g")'''
         self.my_canvas.create_image(0, 0, image=self.background, anchor="nw")
         self.ace_images()
         self.buttons()
+
         self.menu_main_frame()
+
         self.gender_part()
-        self.result=self.convertTuple(self.row1)
-        print(self.result)
-        self.user_name=Label(self.root3,text=self.us_name,font=("Rockwell nova", 40,'bold'),fg="Green")
-        self.user_name.place(x=1100, y=10)
-        if self.result=='Male':
-            self.Mr = Label(self.root3, text='Mr', font=("Rockwell nova", 40, 'bold'), fg="Green")
+
+        print(self.row1)
+        self.convertTuple(self.row1)
+
+        print(self.convertTuple(self.row1))
+        if self.convertTuple(self.row1) == 'Male':
+
+            self.point_img4 = ImageTk.PhotoImage(Image.open(f'male.png'), master=self.root3)
+
+            self.Mr = Label(self.root3, text='Mr', image=self.point_img4,font=("Rockwell nova", 40, 'bold'),
+                            fg="Green", compound = LEFT)
             self.Mr.place(x=1000, y=10)
-            self.my_canvas.create_image(900, 10, image=self.male, anchor="nw")
+            self.user_name = Label(self.root3, text=self.us_name, font=("Rockwell nova", 40, 'bold'), fg="Green")
+            self.user_name.place(x=1150, y=24)
+            print("o")
         else:
-            self.Mrs = Label(self.root3, text='Miss', font=("Rockwell nova", 40, 'bold'), fg="Green")
-            self.Mrs.place(x=1000, y=10)
-            self.my_canvas.create_image(900, 10, image=self.female, anchor="nw")
+            self.point_img5 = ImageTk.PhotoImage(Image.open(f'female.png'), master=self.root3)
+
+            self.Miss = Label(self.root3, text='Miss', image=self.point_img5, font=("Rockwell nova", 40, 'bold'),
+                            fg="Green", compound=LEFT)
+            self.Miss.place(x=1000, y=10)
+            self.user_name = Label(self.root3, text=self.us_name, font=("Rockwell nova", 40, 'bold'), fg="Green")
+            self.user_name.place(x=1185, y=24)
+
         self.root3.update()
         self.root3.mainloop()
 
-    def convertTuple(self,tup):
-        str = ''.join(tup)
-        return str
+    def convertTuple(self, tup):
+        self.str = ''.join(tup)
+        return self.str
+
+
     def gender_part(self):
-        self.us_name=Login.gett()
-        query = "select gender from registration where fname=%s"
+        self.us_name = Login.gett()
+        print(self.us_name)
+        query = "select gender from registration where username=%s"
         try:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Janakidevi24#',
                 port=3306,
                 database='login_registration')
+            print(con1)
 
             cur1 = con1.cursor()
+            print(cur1)
             cur1.execute(query, (self.us_name,))
+            print(cur1)
             self.row1 = cur1.fetchone()
+            print(self.row1)
             con1.close()
         except:
             print('error')
@@ -92,6 +117,7 @@ class MainPage:
 
 
     def buttons(self):
+
         self.menu_img = ImageTk.PhotoImage(Image.open('menu.png'),master=self.root3)
         self.menu_change_img = ImageTk.PhotoImage(Image.open('menu_change.png'),master=self.root3)
         self.details_img= ImageTk.PhotoImage(Image.open('details.png'),master=self.root3)
@@ -102,6 +128,7 @@ class MainPage:
         self.profile_change_img = ImageTk.PhotoImage(Image.open('profile_change.png'),master=self.root3)
         self.setting_img = ImageTk.PhotoImage(Image.open('setting.png'),master=self.root3)
         self.setting_change_img = ImageTk.PhotoImage(Image.open('setting_change.png'),master=self.root3)
+
 
         self.menu_btn= Button(self.root3, text="      MENU", fg="white",image=self.menu_change_img,
                                    font=("Rockwell nova", 20,'bold'),
@@ -314,23 +341,181 @@ class MainPage:
         self.my_canvas_cab_in.pack(fill="both", expand=True)
         self.cab_bg_img=ImageTk.PhotoImage(Image.open(f'cab_bg.png'),master=self.root3)
         self.my_canvas_cab_in.create_image(0, 0, image=self.cab_bg_img, anchor="nw")
-        self.my_canvas_cab_in.create_text(450,80,text="BOOK A TAXI", font=("Algerian", 45),fill="white")
-        self.my_canvas_cab_in.create_text(230, 150, text="Pick up address:", font=("Times new roman", 20), fill="white")
-        self.my_canvas_cab_in.create_text(230, 250, text="Drop off  address:", font=("Times new roman", 20), fill="white")
+
+        self.my_canvas_cab_in.create_text(450, 80,  text="BOOK A TAXI", font=("Algerian", 45),fill="white")
+        self.my_canvas_cab_in.create_text(240, 150, text="Pick up address:", font=("Times new roman", 20), fill="white")
+        self.my_canvas_cab_in.create_text(230, 300, text="Drop off  address:", font=("Times new roman", 20), fill="white")
         self.my_canvas_cab_in.create_text(250, 200, text="Pick up Date:", font=("Times new roman", 20), fill="white")
-        self.my_canvas_cab_in.create_text(250, 300, text="Drop off Date:",font=("Times new roman", 20), fill="white")
+        self.my_canvas_cab_in.create_text(250, 350, text="Drop off Date:",font=("Times new roman", 20), fill="white")
 
-        self.pick_ent=Entry(self.frame_cab_in,bg="#05035b",fg="white",font=("Times new roman", 20),width=15)
+        self.pick_ent=Entry(self.frame_cab_in,bg="#05035b",fg="white",font=("Times new roman", 20),width=20)
         self.pick_ent.place(x=350,y=130)
-        self.pick_dat = Entry(self.frame_cab_in,bg="#05035b",fg="white", font=("Times new roman", 20), width=15)
-        self.pick_dat.place(x=350, y=180)
-        self.pick_btn = Button(self.frame_cab_in,text="Book",bg="green",fg="white", font=("Times new roman", 18,'bold'))
-        self.pick_btn.place(x=580, y=160)
+        self.pick_btn = Button(self.frame_cab_in,text=" Book pick up ",bg="green",fg="red", font=("Times new roman", 18,'bold'))
+        self.pick_btn.place(x=330, y=230)
 
 
-        self.drop_ent = Entry(self.frame_cab_in,bg="#05035b",fg="white", font=("Times new roman", 20), width=15)
-        self.drop_ent.place(x=350, y=230)
-        self.drop_dat = Entry(self.frame_cab_in,bg="#05035b",fg="white", font=("Times new roman", 20), width=15)
-        self.drop_dat.place(x=350, y=280)
-        self.drop_btn = Button(self.frame_cab_in, text="Book", bg="green", fg="white", font=("Times new roman", 18,'bold'))
-        self.drop_btn.place(x=580, y=255)
+        self.drop_ent = Entry(self.frame_cab_in,bg="#05035b",fg="white", font=("Times new roman", 20), width=20)
+        self.drop_ent.place(x=350, y=280)
+        self.drop_btn = Button(self.frame_cab_in, text=" Book drop off ", bg="green", fg="red", font=("Times new roman", 18,'bold'))
+        self.drop_btn.place(x=330, y=380)
+
+#dropdowns
+        self.options =[
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ]
+        self.clicked = StringVar()
+        self.clicked.set("Sunday")
+
+        self.drop = OptionMenu(self.frame_cab_in, self.clicked,*self.options)
+        self.drop.place(x=450, y=190)
+
+
+        self.options2 = [
+            "1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25",
+            "26","27","28","29","30","31","32"
+        ]
+        self.clickeddate = StringVar()
+        self.clickeddate.set("1")
+
+        self.dropdate = OptionMenu(self.frame_cab_in, self.clickeddate, *self.options2)
+        self.dropdate.place(x=555, y=190)
+
+
+        self.options3 = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ]
+        self.clickedmonth = StringVar()
+        self.clickedmonth.set("January")
+
+        self.dropmonth = OptionMenu(self.frame_cab_in, self.clickedmonth, *self.options3)
+        self.dropmonth.place(x=350, y=190)
+
+
+ #dropdown for drop off
+        self.optionsd1 = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ]
+        self.clickedd1 = StringVar()
+        self.clickedd1.set("Sunday")
+
+        self.dropd1 = OptionMenu(self.frame_cab_in, self.clickedd1, *self.optionsd1)
+        self.dropd1.place(x=450, y=340)
+
+        self.optionsd2 = [
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+            "20", "21", "22", "23", "24", "25",
+            "26", "27", "28", "29", "30", "31", "32"
+        ]
+        self.clickeddated2 = StringVar()
+        self.clickeddated2.set("1")
+
+        self.dropdated2 = OptionMenu(self.frame_cab_in, self.clickeddated2, *self.optionsd2)
+        self.dropdated2.place(x=555, y=340)
+
+        self.optionsd3 = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ]
+        self.clickedmonthd3 = StringVar()
+        self.clickedmonthd3.set("January")
+
+        self.dropmonthd3 = OptionMenu(self.frame_cab_in, self.clickedmonthd3, *self.optionsd3)
+        self.dropmonthd3.place(x=350, y=340)
+
+    def clearpickup(self):
+        self.pick_ent.delete(0, END)
+        self.drop_ent.delete(0, END)
+        self.clickeddated2.set("1")
+        self.clickedd1.set("Sunday")
+        self.clickedmonthd3.set("January")
+        self.clickedmonth.set("January")
+        self.clickeddate.set("1")
+        self.clicked.set("Sunday")
+
+    def pickup(self):
+        self.us_name = Login.gett()
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='Janakidevi24#',
+                port=3306,
+                database='login_registration')
+            cur = con.cursor()
+
+            username = self.us_name
+            pickup_address = self.pick_ent.get()
+            month = self.clickedmonth.get()
+            day = self.clicked.get()
+            date = self.clickeddate.get()
+            sql = "insert into pickup(username,pickup_address,month,day,date)" "values ('" + username + "','" + pickup_address + "','" + month + "','" + day + "','" + date + "')"
+            values = cur.execute(sql)
+            con.commit()
+            con.close()
+            messagebox.showinfo("success", "Your cab has been  booked", parent=self.root3)
+            self.clearpickup()
+
+        except:
+            print("error")
+
+    def dropoff(self):
+        self.us_name = Login.gett()
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='Janakidevi24#',
+                port=3306,
+                database='login_registration')
+            cur = con.cursor()
+
+            username = self.us_name
+            dropoff_address = self.drop_ent.get()
+            month = self.clickedmonthd3.get()
+            day = self.clickedd1.get()
+            date = self.clickeddated2.get()
+
+            sql = "insert into dropoff(username,dropoff_address,month,day,date)" "values ('" + username + "','" + dropoff_address + "','" + month + "','" + day + "','" + date + "')"
+            values = cur.execute(sql)
+            con.commit()
+            con.close()
+            messagebox.showinfo("success", "Your cab has been  booked", parent=self.root3)
+            self.clearpickup()
+
+        except:
+            print("error")
+
+

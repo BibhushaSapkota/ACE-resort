@@ -43,10 +43,10 @@ class Register:
         self.txt_contact = Entry(frame1, font=("times new roman", 15), bg='#bcb5c0')
         self.txt_contact.place(x=50, y=190, width=250)
 
-        email = Label(frame1, text='Username', font=("times new roman", 15, 'bold'), bg='white',
+        username = Label(frame1, text='Username', font=("times new roman", 15, 'bold'), bg='white',
                       fg='#51375d').place(x=370, y=160)
-        self.txt_email = Entry(frame1, font=("times new roman", 15), bg='#bcb5c0')
-        self.txt_email.place(x=370, y=190, width=250)
+        self.txt_username = Entry(frame1, font=("times new roman", 15), bg='#bcb5c0')
+        self.txt_username.place(x=370, y=190, width=250)
 
         gender = Label(frame1, text='Gender', font=("times new roman", 15, 'bold'), bg='white',
                        fg='#51375d').place(x=50, y=220)
@@ -96,7 +96,7 @@ class Register:
         self.txt_fname.delete(0, END)
         self.txt_lname.delete(0, END)
         self.txt_contact.delete(0, END)
-        self.txt_email.delete(0, END)
+        self.txt_username.delete(0, END)
         self.txt_age.delete(0, END)
         self.txt_password.delete(0, END)
         self.txt_confirm_password.delete(0, END)
@@ -107,7 +107,7 @@ class Register:
     # requirements
     def register_data(self):
         print(self.terms_chk.get())
-        if self.txt_fname.get() == "" or self.txt_lname.get() == "" or self.txt_contact.get() == "" or self.txt_email.get() == "" or self.txt_age.get() == "" or self.gender.get() == "" or self.cmb_question.get() == 'Select' or self.txt_password.get() == "" or self.txt_confirm_password.get() == "":
+        if self.txt_fname.get() == "" or self.txt_lname.get() == "" or self.txt_contact.get() == "" or self.txt_username.get() == "" or self.txt_age.get() == "" or self.gender.get() == "" or self.cmb_question.get() == 'Select' or self.txt_password.get() == "" or self.txt_confirm_password.get() == "":
             messagebox.showerror("Error", "All fields are required", parent=self.root2)
         elif self.txt_password.get() != self.txt_confirm_password.get():
             messagebox.showerror("Error", "password and confirm password doesn't match", parent=self.root2)
@@ -123,7 +123,7 @@ class Register:
                 con = mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='1235',
+                    password='Janakidevi24#',
                     port=3306,
                     database='login_registration')
                 cur = con.cursor()
@@ -131,15 +131,15 @@ class Register:
                 fname = self.txt_fname.get()
                 lname = self.txt_lname.get()
                 contact_number = self.txt_contact.get()
-                email = self.txt_email.get()
+                username = self.txt_username.get()
                 gender = self.gender.get()
                 age = self.txt_age.get()
                 password = self.txt_password.get()
                 security_question = self.cmb_question.get()
                 answer = self.txt_answer.get()
 
-                sql = "insert into registration(fname,lname,contact_number,email,gender,age,password,security_question,answer) " \
-                      "values('" + fname + "','" + lname + "'," + contact_number + ",'" + email + "','" + gender + "'," + age + ",'" + password + "','" + security_question + "','" + answer + "')"
+                sql = "insert into registration(fname,lname,contact_number,username,gender,age,password,security_question,answer) " \
+                      "values('" + fname + "','" + lname + "'," + contact_number + ",'" + username + "','" + gender + "'," + age + ",'" + password + "','" + security_question + "','" + answer + "')"
 
                 values = cur.execute(sql)
 
