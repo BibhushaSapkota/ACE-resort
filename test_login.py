@@ -2,7 +2,7 @@ from Login import *
 
 
 def test_login():
-    db = show_login_result("nir", "123")
+    db = show_login_result("N", "N")
     assert db == "Pass"
 
 
