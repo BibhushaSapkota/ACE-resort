@@ -5,9 +5,8 @@ import mysql.connector
 import Login
 
 class CustomBurger:
-
-    def __init__(self):
-        self.root=Tk()
+    def __init__(self,master):
+        self.root=master
         self.root.config(bg="black")
         self.root.title("Custom Loader")
         self.root.state('zoomed')
@@ -418,11 +417,7 @@ class CustomBurger:
         self.btn_spinach.config(text="Spinach:No", bg="black", fg="red4")
         self.before_qty=self.qty_total
         self.before=self.total
-
-
-
     def burger_tomato(self):
-
         if self.btn_tomato.cget('text') == 'Tomato:No':
             self.total = self.total + 10
             self.total_cost.config(text=self.total)
@@ -453,7 +448,6 @@ class CustomBurger:
                 self.pos_ch = self.pos_ch + 50
                 self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ch, image=self.login5, anchor="nw")
-
             if self.count_to < self.count_ce:
                 self.count_ce = self.count_ce - 1
                 print("ce")
@@ -778,5 +772,5 @@ class CustomBurger:
             self.count = self.count - 1
             self.count_sp = 0
             self.btn_spinach.config(text="Spinach:No", bg="black",fg="red4")
-            self.login7 = ImageTk.PhotoImage(Image.open(f'remove.png'))
+            self.login7 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
             self.my_canvas_bur.create_image(self.b, self.a, image=self.login7, anchor="nw")

@@ -1,12 +1,12 @@
 from tkinter import *
 from tkinter import messagebox
-
+import pyautogui
 import mysql.connector
 from PIL import ImageTk, Image
 from time import sleep
-import  custom_burger
 import room
 import Login
+import  Menu
 class MainPage:
     def __init__(self,master):
         self.root3 = master
@@ -96,25 +96,25 @@ class MainPage:
     def buttons(self):
         self.menu_img = ImageTk.PhotoImage(Image.open('menu.png'),master=self.root3)
         self.menu_change_img = ImageTk.PhotoImage(Image.open('menu_change.png'),master=self.root3)
-        self.details_img= ImageTk.PhotoImage(Image.open('details.png'),master=self.root3)
-        self.details_change_img = ImageTk.PhotoImage(Image.open('details_change.png'),master=self.root3)
+        self.bill_img= ImageTk.PhotoImage(Image.open('bill.png'),master=self.root3)
+        self.bill_change_img = ImageTk.PhotoImage(Image.open('bill_change.png'),master=self.root3)
         self.about_img = ImageTk.PhotoImage(Image.open('information.png'),master=self.root3)
         self.about_change_img = ImageTk.PhotoImage(Image.open('information_change.png'),master=self.root3)
         self.profile_img = ImageTk.PhotoImage(Image.open('profile.png'),master=self.root3)
         self.profile_change_img = ImageTk.PhotoImage(Image.open('profile_change.png'),master=self.root3)
-        self.setting_img = ImageTk.PhotoImage(Image.open('setting.png'),master=self.root3)
-        self.setting_change_img = ImageTk.PhotoImage(Image.open('setting_change.png'),master=self.root3)
+        self.review_img = ImageTk.PhotoImage(Image.open('review.png'),master=self.root3)
+        self.review_change_img = ImageTk.PhotoImage(Image.open('review_change.png'),master=self.root3)
 
         self.menu_btn= Button(self.root3, text="      MENU", fg="white",image=self.menu_change_img,
                                    font=("Rockwell nova", 20,'bold'),
                                    cursor="hand2",borderwidth=0,
                                    border='0', overrelief="sunken",compound=CENTER,command=self.menu_main_frame)
         self.menu_btn.place(x=30,y=150)
-        self.details_btn = Button(self.root3, text="   DETAILS", fg="white", image=self.details_img,
+        self.bill_btn = Button(self.root3, text="   BILL", fg="white", image=self.bill_img,
                                font=("Rockwell nova", 20, 'bold'),
                                cursor="hand2", borderwidth=0,
-                               border='0', overrelief="sunken", compound=CENTER, command=self.fn_details)
-        self.details_btn.place(x=30, y=250)
+                               border='0', overrelief="sunken", compound=CENTER, command=self.fn_bill)
+        self.bill_btn.place(x=30, y=250)
 
 
         self.about_btn = Button(self.root3, text="ABOUT US", fg="white", image=self.about_img,
@@ -129,19 +129,19 @@ class MainPage:
                                   border='0', overrelief="sunken", compound=CENTER,command=lambda:self.fn_profile())
         self.profile_btn.place(x=30, y=450)
 
-        self.setting_btn = Button(self.root3, text="   SETTING", fg="white", image=self.setting_img,
+        self.review_btn = Button(self.root3, text="      REVIEW", fg="white", image=self.review_img,
                                font=("Rockwell nova", 20,'bold'),
                                cursor="hand2", borderwidth=0,
-                               border='0', overrelief="sunken", compound=CENTER,command=lambda:self.fn_setting())
-        self.setting_btn.place(x=30, y=550)
+                               border='0', overrelief="sunken", compound=CENTER,command=self.fn_review)
+        self.review_btn.place(x=30, y=550)
 
 
     def menu_main_frame(self):
         self.menu_btn.config(image=self.menu_change_img, fg='green')
-        self.details_btn.config(image=self.details_img, fg='white')
+        self.bill_btn.config(image=self.bill_img, fg='white')
         self.about_btn.config(image=self.about_img, fg='white')
         self.profile_btn.config(image=self.profile_img, fg='white')
-        self.setting_btn.config(image=self.setting_img, fg='white')
+        self.review_btn.config(image=self.review_img, fg='white')
 
         self.frame_main = LabelFrame(self.root3, height=550, width=1040, borderwidth=10)
         self.frame_main.place(x=300, y=130)
@@ -182,7 +182,7 @@ class MainPage:
         self.point_img1 = ImageTk.PhotoImage(Image.open(f'point.png'), master=self.root3)
         self.my_canvas_food.create_image(130, 140, image=self.point_img1, anchor="nw")
         self.food_btn = Button(self.frame_food, text="ORDER HERE", bg="green", fg="white", cursor="hand2",
-                              font=("Rockwell nova", 25, 'bold'), command=self.burgar)
+                              font=("Rockwell nova", 25, 'bold'), command=self.menu)
         self.food_btn.place(x=50, y=210)
 
 
@@ -222,17 +222,18 @@ class MainPage:
         self.my_canvas_cab.create_image(75, 320, image=self.cab_close, anchor="nw")
     def room_fn(self):
         room.Roompage(Toplevel())
-    def burgar(self):
-        custom_burger.CustomBurger()
+
+    def menu(self):
+        Menu.run(Toplevel())
 
 
-    def fn_details(self):
-        self.frame_details = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
-        self.frame_details.place(x=300, y=130)
-        self.topic=Label(self.frame_details,text='DETAILS',font=("Rockwell nova", 30,'bold'))
+    def fn_bill(self):
+        self.frame_bill = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
+        self.frame_bill.place(x=300, y=130)
+        self.topic=Label(self.frame_bill,text='BILL',font=("Rockwell nova", 30,'bold'))
         self.topic.place(x=420,y=30)
         self.frame_main.pack_propagate(False)
-        self.name_fn='details'
+        self.name_fn='bill'
         self.frame_main.place_forget()
 
         self.img_change()
@@ -251,53 +252,69 @@ class MainPage:
         self.topic.place(x=420, y=30)
         self.name_fn='profile'
         self.img_change()
-    def fn_setting(self):
-        self.frame_setting = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
-        self.frame_setting.place(x=300, y=130)
-        self.topic = Label(self.frame_setting, text='SETTING', font=("Rockwell nova", 30, 'bold'))
+    def fn_review(self):
+        self.frame_review = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
+        self.frame_review.place(x=300, y=130)
+        self.topic = Label(self.frame_review, text='REVIEW', font=("Rockwell nova", 30, 'bold'))
         self.topic.place(x=420, y=30)
-        self.name_fn = 'setting'
+        self.name_fn = 'review'
         self.img_change()
+        self.review_entry1=Entry(self.frame_review, font=("Times new roman", 30, 'bold')
+                               )
+        self.review_entry1.place(x=100,y=100)
+
+
+
+        self.review_entry1.bind('<Return>', self.press_enter)
+
+
+    def press_enter(self,e):
+        self.review_entry2 = Entry(self.frame_review, font=("Times new roman", 30, 'bold')
+                                   )
+        self.review_entry2.place(x=100, y=200)
+        pyautogui.click(450, 300)
+        pyautogui.moveTo(450, 300)
+        pyautogui.moveRel(0, 70)
 
     def img_change(self):
         if self.name_fn=='menu':
             self.menu_btn.config(image=self.menu_change_img, fg='green')
-            self.details_btn.config(image=self.details_img, fg='white')
+            self.bill_btn.config(image=self.bill_img, fg='white')
             self.about_btn.config(image=self.about_img, fg='white')
             self.profile_btn.config(image=self.profile_img, fg='white')
-            self.setting_btn.config(image=self.setting_img, fg='white')
+            self.review_btn.config(image=self.review_img, fg='white')
 
 
-        elif self.name_fn=='details':
+        elif self.name_fn=='bill':
             self.menu_btn.config(image=self.menu_img, fg='white')
-            self.details_btn.config(image=self.details_change_img,fg='green')
+            self.bill_btn.config(image=self.bill_change_img,fg='green')
             self.about_btn.config(image=self.about_img, fg='white')
             self.profile_btn.config(image=self.profile_img, fg='white')
-            self.setting_btn.config(image=self.setting_img, fg='white')
+            self.review_btn.config(image=self.review_img, fg='white')
 
 
         elif self.name_fn=='about':
             self.menu_btn.config(image=self.menu_img, fg='white')
-            self.details_btn.config(image=self.details_img,fg='white')
+            self.bill_btn.config(image=self.bill_img,fg='white')
             self.about_btn.config(image=self.about_change_img, fg='green')
             self.profile_btn.config(image=self.profile_img, fg='white')
-            self.setting_btn.config(image=self.setting_img, fg='white')
+            self.review_btn.config(image=self.review_img, fg='white')
 
             self.frame_main.place_forget()
         elif self.name_fn=='profile':
             self.menu_btn.config(image=self.menu_img, fg='white')
-            self.details_btn.config(image=self.details_img,fg='white')
+            self.bill_btn.config(image=self.bill_img,fg='white')
             self.about_btn.config(image=self.about_img, fg='white')
             self.profile_btn.config(image=self.profile_change_img, fg='green')
-            self.setting_btn.config(image=self.setting_img, fg='white')
+            self.review_btn.config(image=self.review_img, fg='white')
 
             self.frame_main.place_forget()
         else:
             self.menu_btn.config(image=self.menu_img, fg='white')
-            self.details_btn.config(image=self.details_img, fg='white')
+            self.bill_btn.config(image=self.bill_img, fg='white')
             self.about_btn.config(image=self.about_img, fg='white')
             self.profile_btn.config(image=self.profile_img, fg='white')
-            self.setting_btn.config(image=self.setting_change_img, fg='green')
+            self.review_btn.config(image=self.review_change_img, fg='green')
 
             self.frame_main.place_forget()
 
@@ -497,3 +514,4 @@ class MainPage:
 
         except:
             print("error")
+

@@ -159,20 +159,3 @@ def show_login_result(username, password):
     else:
         return "Fail"
 
-
-
-def show_login_result(username, password):
-    con = mysql.connector.connect(
-        host='127.0.0.1',
-        user='root',
-        password='1235',
-        port=3306,
-        database='login_registration1')
-    cur = con.cursor()
-    cur.execute("select * from registration where username=%s and password=%s",
-                    (username, password))
-    check=cur.fetchall()
-    if check:
-        return "Pass"
-    else:
-        return "Fail"
