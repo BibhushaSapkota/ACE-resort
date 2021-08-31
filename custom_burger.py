@@ -4,6 +4,7 @@ from PIL import ImageTk, Image
 import mysql.connector
 import Login
 
+
 class CustomBurger:
     def __init__(self,master):
         self.root=master
