@@ -1,6 +1,8 @@
 from tkinter import *
 from PIL import ImageTk,Image
 import custom_burger
+from tkinter import messagebox
+import mysql.connector
 
 class run:
     def __init__(self,master):
@@ -43,8 +45,8 @@ class run:
                           fg='grey').place(x=220, y=200)
         vmomo_price = Label(self.root,text='120', font=("times new roman", 12, 'bold'), bg='black',
                             fg='grey').place(x=450, y=200)
-        self.txt_chicken_momo = Entry(self.root,font=("times new roman", 12), bg='grey')
-        self.txt_chicken_momo.place(x=500, y=200, width=40)
+        self.txt_vegg_momo = Entry(self.root,font=("times new roman", 12), bg='grey')
+        self.txt_vegg_momo.place(x=500, y=200, width=40)
 
         #pizza
         pizza = Label(self.root,text='Pizza', font=("times new roman", 18, 'bold'), bg='black',
@@ -110,16 +112,16 @@ class run:
 
         #sizzler
 
-        sizzler = Label(self.root,text='Sizzler', font=("times new roman", 18, 'bold'), bg='black',
+        sizzlers = Label(self.root,text='Sizzler', font=("times new roman", 18, 'bold'), bg='black',
                        fg='grey').place(x=220, y=500)
 
-        special = Label(self.root,text='Special Sizzler----------------------------', font=("times new roman", 12, 'bold'),
+        sizzler = Label(self.root,text='Special Sizzler----------------------------', font=("times new roman", 12, 'bold'),
                            bg='black',
                            fg='grey').place(x=220, y=525)
-        mburger_price = Label(self.root,text='300', font=("times new roman", 12, 'bold'), bg='black',
+        sizzler_price = Label(self.root,text='300', font=("times new roman", 12, 'bold'), bg='black',
                               fg='grey').place(x=450, y=525)
-        self.txt_mix_burger = Entry(self.root,font=("times new roman", 12), bg='grey')
-        self.txt_mix_burger.place(x=500, y=525, width=40)
+        self.txt_sizzler = Entry(self.root,font=("times new roman", 12), bg='grey')
+        self.txt_sizzler.place(x=500, y=525, width=40)
 
         #newari khajaset
         # Newari cuisine
@@ -232,8 +234,86 @@ class run:
                            fg='grey',command=self.custom)
         self.custom_menu.place(x=650,y=620)
 
+        self.register_btn = Button(self.root,text="  Submit  ",font=("times new roman",18,'bold'), bg='black',
+                                   fg='grey',command=self.register_menu)
+        self.register_btn.place(x=450, y=620)
+
 
 
         self.root.mainloop()
+
+    def clear_data(self):
+        self.txt_chicken_momo.delete(0, END)
+        self.txt_buff_momo.delete(0, END)
+        self.txt_vegg_momo.delete(0, END)
+        self.txt_chicken_pizza.delete(0, END)
+        self.txt_alfungi_pizza.delete(0, END)
+        self.txt_cheese_pizza.delete(0, END)
+        self.txt_ham_burger.delete(0, END)
+        self.txt_chicken_burger.delete(0, END)
+        self.txt_mix_burger.delete(0, END)
+        self.txt_sizzler.delete(0,END)
+        self.txt_newari_khaja.delete(0,END)
+        self.txt_yomari.delete(0, END)
+        self.txt_choila.delete(0, END)
+        self.txt_Thakali_set.delete(0, END)
+        self.txt_chicken_sekuwa.delete(0, END)
+        self.txt_buff_sekuwa.delete(0, END)
+        self.txt_pork_sekuwa.delete(0, END)
+        self.txt_coke.delete(0, END)
+        self.txt_dew.delete(0, END)
+        self.txt_fanta.delete(0, END)
+
+    def register_menu(self):
+
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='9869167415',
+                port=3306,
+                database='login_registration')
+            cur = con.cursor()
+
+            chicken_momo = self.txt_chicken_momo.get()
+            buff_momo = self.txt_buff_momo.get()
+            vegg_momo =self.txt_vegg_momo.get()
+            chicken_pizza = self.txt_chicken_pizza.get()
+            alfungi_pizza=self.txt_alfungi_pizza.get()
+            cheese_pizza=self.txt_cheese_pizza.get()
+            ham_burger=self.txt_ham_burger.get()
+            chicken_burger=self.txt_chicken_burger.get()
+            mix_burger=self.txt_mix_burger.get()
+            sizzler=self.txt_sizzler.get()
+            newari_khajaset=self.txt_newari_khaja.get()
+            yomari=self.txt_yomari.get()
+            choila=self.txt_choila.get()
+            Thakali_set=self.txt_Thakali_set.get()
+            chicken_sekuwa=self.txt_chicken_sekuwa.get()
+            pork_sekuwa=self.txt_pork_sekuwa.get()
+            buff_sekuwa=self.txt_buff_sekuwa.get()
+            coke=self.txt_coke.get()
+            dew=self.txt_dew.get()
+            fanta=self.txt_fanta.get()
+
+            sql = "insert into registration(fname,lname,contact_number,username,gender,age,password,security_question,answer) " \
+                  "values('" + chicken_momo + "','" +buff_momo+ "'," + vegg_momo + "," \
+                    "'" + chicken_pizza + "','" + alfungi_pizza + "'," + cheese_pizza+ ",'" + ham_burger + "'," \
+                    "'" + chicken_burger + "','" + mix_burger + "','" + sizzler + "','" + newari_khajaset + "'," \
+                    " '" +yomari+"','"+choila+"','"+Thakali_set+"','"+chicken_sekuwa+"','"+pork_sekuwa+"'," \
+                    " '"+buff_sekuwa+"','"+coke+"','"+dew+"','"+fanta+"')"
+
+            values = cur.execute(sql)
+
+            con.commit()
+            con.close()
+            messagebox.showinfo("success", "You have been successfully registered", parent=self.root)
+            self.clear_data()
+
+        except:
+            print('error')
+            pass
+
+
     def custom(self):
         custom_burger.CustomBurger(Toplevel())
