@@ -24,6 +24,7 @@ class Loading:
             self.root.destroy()
             Login.Login(Tk())
 
+
 def startmusic():
     time.sleep(0.5)
     playsound('coffee1.mp3')
