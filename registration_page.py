@@ -118,9 +118,9 @@ class Register:
                 con= mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='1235',
+                    password='Janakidevi24#',
                     port=3306,
-                    database='login_registration1')
+                    database='login_registration')
                 cur=con.cursor()
 
                 fname=self.txt_fname.get()
@@ -167,4 +167,3 @@ def show_registration(contact):
     else:
         return "Pass"
 
-    
