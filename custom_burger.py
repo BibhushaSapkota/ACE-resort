@@ -246,7 +246,7 @@ class CustomBurger:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -267,7 +267,7 @@ class CustomBurger:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -315,7 +315,7 @@ class CustomBurger:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -361,7 +361,7 @@ class CustomBurger:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -750,12 +750,14 @@ class CustomBurger:
                 self.pos_to = self.pos_to + 50
                 self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_to, image=self.login2, anchor="nw")
+
             if self.count_sp < self.count_ce:
                 self.count_ce=self.count_ce-1
                 print(self.a)
                 self.pos_ce = self.pos_ce + 50
                 self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ce, image=self.login4, anchor="nw")
+
             if self.count_sp < self.count_pi:
                 self.count_pi = self.count_pi - 1
                 print("ce")
@@ -763,6 +765,8 @@ class CustomBurger:
                 self.pos_pi = self.pos_pi + 50
                 self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_pi, image=self.login3, anchor="nw")
+
+
             if self.count_sp < self.count_fi:
                 self.count_fi = self.count_fi - 1
 
