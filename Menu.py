@@ -3,7 +3,7 @@ from PIL import ImageTk,Image
 import custom_burger
 from tkinter import messagebox
 import mysql.connector
-
+import Login
 class run:
     def __init__(self,master):
 
@@ -28,7 +28,7 @@ class run:
                       fg='grey').place(x=220, y=160)
         cmomo_price= Label( self.root,text='190', font=("times new roman", 12, 'bold'), bg='black',
                       fg='grey').place(x=450, y=160)
-        self.txt_chicken_momo = Entry( self.root,font=("times new roman", 12), bg='grey')
+        self.txt_chicken_momo = Entry( self.root,font=("times new roman", 12),bg='grey')
         self.txt_chicken_momo.place(x=500, y=160, width=40)
 
         #buff momo
@@ -238,33 +238,76 @@ class run:
                                    fg='grey',command=self.register_menu)
         self.register_btn.place(x=450, y=620)
 
-
+        self.og = 0
+        self.txt_chicken_momo.insert(0,self.og)
+        self.txt_buff_momo.insert(0,self.og)
+        self.txt_vegg_momo.insert(0,self.og)
+        self.txt_chicken_pizza.insert(0, self.og)
+        self.txt_alfungi_pizza.insert(0, self.og)
+        self.txt_cheese_pizza.insert(0, self.og)
+        self.txt_ham_burger.insert(0, self.og)
+        self.txt_chicken_burger.insert(0, self.og)
+        self.txt_mix_burger.insert(0, self.og)
+        self.txt_sizzler.insert(0, self.og)
+        self.txt_newari_khaja.insert(0, self.og)
+        self.txt_yomari.insert(0, self.og)
+        self.txt_choila.insert(0, self.og)
+        self.txt_Thakali_set.insert(0, self.og)
+        self.txt_chicken_sekuwa.insert(0, self.og)
+        self.txt_buff_sekuwa.insert(0, self.og)
+        self.txt_pork_sekuwa.insert(0, self.og)
+        self.txt_coke.insert(0, self.og)
+        self.txt_dew.insert(0, self.og)
+        self.txt_fanta.insert(0, self.og)
 
         self.root.mainloop()
 
     def clear_data(self):
-        self.txt_chicken_momo.delete(0, END)
-        self.txt_buff_momo.delete(0, END)
-        self.txt_vegg_momo.delete(0, END)
-        self.txt_chicken_pizza.delete(0, END)
-        self.txt_alfungi_pizza.delete(0, END)
-        self.txt_cheese_pizza.delete(0, END)
-        self.txt_ham_burger.delete(0, END)
-        self.txt_chicken_burger.delete(0, END)
-        self.txt_mix_burger.delete(0, END)
+        self.txt_chicken_momo.delete(0,END)
+        self.txt_buff_momo.delete(0,END)
+        self.txt_vegg_momo.delete(0,END)
+        self.txt_chicken_pizza.delete(0,END)
+        self.txt_alfungi_pizza.delete(0,END)
+        self.txt_cheese_pizza.delete(0,END)
+        self.txt_ham_burger.delete(0,END)
+        self.txt_chicken_burger.delete(0,END)
+        self.txt_mix_burger.delete(0,END)
         self.txt_sizzler.delete(0,END)
         self.txt_newari_khaja.delete(0,END)
-        self.txt_yomari.delete(0, END)
-        self.txt_choila.delete(0, END)
-        self.txt_Thakali_set.delete(0, END)
-        self.txt_chicken_sekuwa.delete(0, END)
-        self.txt_buff_sekuwa.delete(0, END)
-        self.txt_pork_sekuwa.delete(0, END)
-        self.txt_coke.delete(0, END)
-        self.txt_dew.delete(0, END)
-        self.txt_fanta.delete(0, END)
+        self.txt_yomari.delete(0,END)
+        self.txt_choila.delete(0,END)
+        self.txt_Thakali_set.delete(0,END)
+        self.txt_chicken_sekuwa.delete(0,END)
+        self.txt_buff_sekuwa.delete(0,END)
+        self.txt_pork_sekuwa.delete(0,END)
+        self.txt_coke.delete(0,END)
+        self.txt_dew.delete(0,END)
+        self.txt_fanta.delete(0,END)
+
+    def zero(self):
+        self.txt_chicken_momo.insert(0, self.og)
+        self.txt_buff_momo.insert(0, self.og)
+        self.txt_vegg_momo.insert(0, self.og)
+        self.txt_chicken_pizza.insert(0, self.og)
+        self.txt_alfungi_pizza.insert(0, self.og)
+        self.txt_cheese_pizza.insert(0, self.og)
+        self.txt_ham_burger.insert(0, self.og)
+        self.txt_chicken_burger.insert(0, self.og)
+        self.txt_mix_burger.insert(0, self.og)
+        self.txt_sizzler.insert(0, self.og)
+        self.txt_newari_khaja.insert(0, self.og)
+        self.txt_yomari.insert(0, self.og)
+        self.txt_choila.insert(0, self.og)
+        self.txt_Thakali_set.insert(0, self.og)
+        self.txt_chicken_sekuwa.insert(0, self.og)
+        self.txt_buff_sekuwa.insert(0, self.og)
+        self.txt_pork_sekuwa.insert(0, self.og)
+        self.txt_coke.insert(0, self.og)
+        self.txt_dew.insert(0, self.og)
+        self.txt_fanta.insert(0, self.og)
 
     def register_menu(self):
+        self.us_name = Login.gett()
 
         try:
             con = mysql.connector.connect(
@@ -273,8 +316,10 @@ class run:
                 password='9869167415',
                 port=3306,
                 database='login_registration')
+            print (con)
             cur = con.cursor()
-
+            print (cur)
+            username = self.us_name
             chicken_momo = self.txt_chicken_momo.get()
             buff_momo = self.txt_buff_momo.get()
             vegg_momo =self.txt_vegg_momo.get()
@@ -296,22 +341,21 @@ class run:
             dew=self.txt_dew.get()
             fanta=self.txt_fanta.get()
 
-            sql = "insert into registration(fname,lname,contact_number,username,gender,age,password,security_question,answer) " \
-                  "values('" + chicken_momo + "','" +buff_momo+ "'," + vegg_momo + "," \
-                    "'" + chicken_pizza + "','" + alfungi_pizza + "'," + cheese_pizza+ ",'" + ham_burger + "'," \
-                    "'" + chicken_burger + "','" + mix_burger + "','" + sizzler + "','" + newari_khajaset + "'," \
-                    " '" +yomari+"','"+choila+"','"+Thakali_set+"','"+chicken_sekuwa+"','"+pork_sekuwa+"'," \
-                    " '"+buff_sekuwa+"','"+coke+"','"+dew+"','"+fanta+"')"
+            sql = "insert into menu(username,chicken_momo,buff_momo,vegg_momo,chicken_pizza,alfungi_pizza,cheese_pizza,ham_burger,chicken_burger,mix_burger,sizzler,newari_khajaset,yomari,choila,Thakali_set,chicken_sekuwa,pork_sekuwa,buff_sekuwa,coke,dew,fanta) " \
+                  "values('"+username+"','" + chicken_momo + "','" + buff_momo + "','" + vegg_momo + "','" + chicken_pizza + "','"+alfungi_pizza+"','"+cheese_pizza+"','"+ham_burger+"','" + chicken_burger + "','" + mix_burger + "','"+sizzler+"','" +newari_khajaset+"','" +yomari+"','" + choila +"','" +Thakali_set+ "','" + chicken_sekuwa + "','" + pork_sekuwa + "','" + buff_sekuwa + "','" + coke + "','" + dew + "','" + fanta + "')"
 
-            values = cur.execute(sql)
+
+
+            cur.execute(sql)
 
             con.commit()
             con.close()
             messagebox.showinfo("success", "You have been successfully registered", parent=self.root)
             self.clear_data()
+            self.zero()
 
         except:
-            print('error')
+            print('1234567')
             pass
 
 
