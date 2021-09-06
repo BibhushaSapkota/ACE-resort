@@ -1,9 +1,13 @@
 from tkinter import *
 from time import sleep
 from PIL import ImageTk, Image
+import mysql.connector
+import Login
+
+
 class CustomBurger:
-    def __init__(self):
-        self.root=Toplevel()
+    def __init__(self,master):
+        self.root=master
         self.root.config(bg="black")
         self.root.title("Custom Loader")
         self.root.state('zoomed')
@@ -28,9 +32,6 @@ class CustomBurger:
         self.root.update()
         self.root.mainloop()
     def main_frame_fn(self):
-        self.a = 550
-        self.b = 230
-
         self.frame_main = LabelFrame(self.root, height= self.root.winfo_screenheight(), width=self.root.winfo_screenwidth())
         self.frame_main.place(x=0, y=0)
         self.frame_main.pack_propagate(False)
@@ -42,7 +43,7 @@ class CustomBurger:
         self.btn_img_small = ImageTk.PhotoImage(Image.open(f'btn_img_small.png'),master=self.root)
         self.img_box =Image.open('burgar_box.png')
         self.img_box = self.img_box.resize((600,80), Image.ANTIALIAS)
-        self.box_img = ImageTk.PhotoImage(self.img_box)
+        self.box_img = ImageTk.PhotoImage(self.img_box,master=self.root)
 
         self.my_canvas.create_image(720, 180, image=self.box_img, anchor="nw")
         self.my_canvas.create_text(1000, 225, text="CUSTOM PIZZA", font=("Algerian", 30, 'bold'), fill="black")
@@ -100,7 +101,7 @@ class CustomBurger:
         self.my_canvas.create_image(self.b, self.a, image=self.login4, anchor="nw")
         self.login5 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login5, anchor="nw")
-        self.login = ImageTk.PhotoImage(Image.open(f'remove.png'))
+        self.login = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login, anchor="nw")
         self.login6 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
         self.my_canvas.create_image(self.b, self.a, image=self.login6, anchor="nw")
@@ -190,7 +191,7 @@ class CustomBurger:
                               compound=CENTER, font=("Areal", 15, 'bold'),command=self.qty_decrease)
         self.qty_dec.place(x=1050, y=510)
         self.giv_ord = Button(self.frame_burger, text="Give Order",width=10,bg="green",
-                              compound=CENTER, font=("Areal", 17, 'bold'), command=self.qty_increase)
+                              compound=CENTER, font=("Areal", 17, 'bold'),state=DISABLED,command=self.give_order)
         self.giv_ord.place(x=850, y=610)
         self.go_bac = Button(self.frame_burger, text="Go Back", width=10,bg="red",
                               compound=CENTER, font=("Areal", 17, 'bold'), command=self.go_back)
@@ -240,12 +241,97 @@ class CustomBurger:
             self.tot_qty.config(text=self.qty_total)
             self.total_cost.config(text=self.total)
     def give_order(self):
-        pass
+        self.qty = Entry(self.root, text=self.qty_total-self.before_qty)
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='@!2002bisesh',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+            print(cur)
+
+            sql = "insert into burgar(qty )" \
+                  "values ( " + self.qty['text'] + ")"
+            values = cur.execute(sql)
+
+            con.commit()
+            con.close()
+        except:
+            print('error')
+            pass
     def go_back(self):
+        self.qty = Entry(self.root, text='0')
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='@!2002bisesh',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+            print(cur)
+
+            sql = "insert into burgar(qty )" \
+                  "values ( " + self.qty['text']+ ")"
+            values = cur.execute(sql)
+
+            con.commit()
+            con.close()
+        except:
+            print('error')
+            pass
+        self.a = 550
+        self.b = 230
+        self.count = 0
+        self.count_pi = 0
+        self.count_fi = 0
+        self.count_ch = 0
+        self.count_ce = 0
+        self.count_to = 0
+        self.count_sp = 0
+        self.total = 0
+        self.qty_total = 0
+        self._pice_1 = 0
+        self.total_all = 0
+        self.before = 0
+        self.after = 0
+        self.before_qty = 0
+        self.after_qty = 0
         self.frame_burger.place_forget()
         self.main_frame_fn()
 
     def burger_top(self):
+        self.pi = Entry(self.root, text=self.count_pi)
+        self.fi = Entry(self.root, text=self.count_fi)
+        self.ch = Entry(self.root, text=self.count_ch)
+        self.ce = Entry(self.root, text=self.count_ce)
+        self.to = Entry(self.root, text=self.count_to)
+        self.sp = Entry(self.root, text=self.count_sp)
+
+        print(self.sp['text'])
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='@!2002bisesh',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+            print(cur)
+
+            sql = "insert into burgar(username,spanich,tomato,pickel,cheese,fish,chicken)" \
+                  "values ('"+Login.gett()+"'," + self.sp['text'] + "," + self.to['text'] + "," + self.pi['text'] + "," + self.ce[
+                      'text'] + "," + self.fi['text'] + "," + self.ch['text'] + ")"
+            values = cur.execute(sql)
+
+            con.commit()
+            con.close()
+        except:
+            print('error')
+            pass
+
         self.total = self.total + 20
         self.total_cost.config(text=self.total)
         self.btn_top.config(state=DISABLED)
@@ -261,6 +347,7 @@ class CustomBurger:
         self.btn_fish.config(state=DISABLED)
         self.qty_inc.config(state=NORMAL)
         self.qty_dec.config(state=NORMAL)
+        self.giv_ord.config(state=NORMAL)
         self.after = 0
         self.after = self.total - self.before
         for i in range(1, 7):
@@ -269,8 +356,35 @@ class CustomBurger:
             sleep(0.1)
             self.root.update_idletasks()
     def add_new(self):
+        self.qty = Entry(self.root, text=self.qty_total-self.before_qty)
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='@!2002bisesh',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+            print(cur)
+
+            sql = "insert into burgar(qty )" \
+                  "values ( " + self.qty['text'] + ")"
+            values = cur.execute(sql)
+
+            con.commit()
+            con.close()
+        except:
+            print('error')
+            pass
+        self.giv_ord.config(state=DISABLED)
         self.a = 550
         self.b = 230
+        self.count_pi = 0
+        self.count_fi = 0
+        self.count_ch = 0
+        self.count_ce = 0
+        self.count_to = 0
+        self.count_sp = 0
         self.btn_add.config(state=DISABLED)
         self.btn_top.config(state=NORMAL)
         self.btn_chees.config(state=NORMAL)
@@ -304,11 +418,7 @@ class CustomBurger:
         self.btn_spinach.config(text="Spinach:No", bg="black", fg="red4")
         self.before_qty=self.qty_total
         self.before=self.total
-
-
-
     def burger_tomato(self):
-
         if self.btn_tomato.cget('text') == 'Tomato:No':
             self.total = self.total + 10
             self.total_cost.config(text=self.total)
@@ -339,7 +449,6 @@ class CustomBurger:
                 self.pos_ch = self.pos_ch + 50
                 self.login5 = ImageTk.PhotoImage(Image.open(f'chicken_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ch, image=self.login5, anchor="nw")
-
             if self.count_to < self.count_ce:
                 self.count_ce = self.count_ce - 1
                 print("ce")
@@ -368,7 +477,7 @@ class CustomBurger:
             print("tor" + str(self.count))
             print("tor" + str(self.count_to))
             self.btn_tomato.config(text="Tomato:No", bg="black",fg="red4")
-            self.login2 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
+            self.login2 = ImageTk.PhotoImage(Image.open(f'remove.png'))
             self.my_canvas_bur.create_image(self.b, self.a, image=self.login2, anchor="nw")
 
     def burger_pickel(self):
@@ -432,7 +541,7 @@ class CustomBurger:
             print("tor" + str(self.count))
             print("tor" + str(self.count_to))
             self.btn_pickle.config(text="Pickle:No", bg="black",fg="red4")
-            self.login3 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
+            self.login3 = ImageTk.PhotoImage(Image.open(f'remove.png'))
             self.my_canvas_bur.create_image(self.b, self.a, image=self.login3, anchor="nw")
 
 
@@ -494,7 +603,7 @@ class CustomBurger:
             self.count = self.count - 1
             self.count_ce = 0
             self.btn_chees.config(text="Cheese:No", bg="black",fg="red4")
-            self.login4 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
+            self.login4 = ImageTk.PhotoImage(Image.open(f'remove.png'))
             self.my_canvas_bur.create_image(self.b, self.a, image=self.login4, anchor="nw")
 
     def burger_chicken(self):
@@ -553,7 +662,7 @@ class CustomBurger:
             self.count = self.count - 1
             self.count_ch = 0
             self.btn_chicken.config(text="Chicken:No", bg="black",fg="red4")
-            self.login5 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
+            self.login5 = ImageTk.PhotoImage(Image.open(f'remove.png'))
             self.my_canvas_bur.create_image(self.b, self.a, image=self.login5, anchor="nw")
 
     def burger_fish(self):
@@ -641,12 +750,14 @@ class CustomBurger:
                 self.pos_to = self.pos_to + 50
                 self.login2 = ImageTk.PhotoImage(Image.open(f'tomato_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_to, image=self.login2, anchor="nw")
+
             if self.count_sp < self.count_ce:
                 self.count_ce=self.count_ce-1
                 print(self.a)
                 self.pos_ce = self.pos_ce + 50
                 self.login4 = ImageTk.PhotoImage(Image.open(f'cheese_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_ce, image=self.login4, anchor="nw")
+
             if self.count_sp < self.count_pi:
                 self.count_pi = self.count_pi - 1
                 print("ce")
@@ -654,6 +765,8 @@ class CustomBurger:
                 self.pos_pi = self.pos_pi + 50
                 self.login3 = ImageTk.PhotoImage(Image.open(f'pickle_img/6.png'),master=self.root)
                 self.my_canvas_bur.create_image(self.b, self.pos_pi, image=self.login3, anchor="nw")
+
+
             if self.count_sp < self.count_fi:
                 self.count_fi = self.count_fi - 1
 
@@ -666,3 +779,5 @@ class CustomBurger:
             self.btn_spinach.config(text="Spinach:No", bg="black",fg="red4")
             self.login7 = ImageTk.PhotoImage(Image.open(f'remove.png'),master=self.root)
             self.my_canvas_bur.create_image(self.b, self.a, image=self.login7, anchor="nw")
+
+
