@@ -306,7 +306,7 @@ class MainPage:
             self.txt_age.insert(0, row[5])
             self.txt_password.insert(0, row[6])
         except:
-            print("sjkjfsd")
+            print("Tests2")
             pass
 
     def update(self):
