@@ -77,7 +77,7 @@ class admin:
         self.orders_btn = Button(self.root5, text="Order Details", fg="white", image=self.btn_img,
                                 font=("Rockwell nova", 20, 'bold'),
                                 cursor="hand2", borderwidth=0,
-                                border='0', overrelief="sunken", compound=CENTER)
+                                border='0', overrelief="sunken", compound=CENTER, command = self.orderdetails)
         self.orders_btn.place(x=30, y=350)
 
         self.cab_btn = Button(self.root5, text="Cab Details", fg="white", image=self.btn_img,
@@ -92,7 +92,7 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='9869167415',
+                password='Leanstartup@1',
                 port=3306,
                 database='login_registration')
             cur = con.cursor()
@@ -150,9 +150,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Leanstartup@1',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             cur.execute("select room_no from room_book")
             row = cur.fetchall()
@@ -310,7 +310,7 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='9869167415',
+                password='Leanstartup@1',
                 port=3306,
                 database='login_registration')
             cur = con.cursor()
@@ -331,7 +331,7 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='9869167415',
+                password='Leanstartup@1',
                 port=3306,
                 database='login_registration')
             cur = con.cursor()
@@ -438,3 +438,87 @@ class admin:
 
         self.dropoffdata()
         self.frame_pickup.destroy()
+
+    def customdata(self):
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='Leanstartup@1',
+                port=3306,
+                database='login_registration')
+            cur = con.cursor()
+            cur.execute("select * from burgar")
+            result = cur.fetchall()
+            if len(result) != 0:
+                for row in result:
+                    self.displaycustom.insert('', END, values=row)
+
+                con.close()
+
+        except:
+            print('error')
+            pass
+
+    def orderdetails(self):
+        self.users_btn.config(fg='white')
+        self.room_btn.config(fg='white')
+        self.orders_btn.config(fg='green')
+        self.cab_btn.config(fg='white')
+
+        self.frameo_button = LabelFrame(self.root5, height=660, width=1080, borderwidth=10)
+        self.frameo_button.place(x=300, y=130)
+        self.frameo_button.pack_propagate(False)
+
+        self.btnbg_img = ImageTk.PhotoImage(Image.open('rb.png'), master=self.root5)
+
+        self.custombtn = Button(self.frameo_button, text='Custom Menu', fg="white", image=self.btnbg_img,
+                                font=("Rockwell nova", 10, 'bold'), cursor="hand2", borderwidth=0,
+                                border='0', overrelief="sunken", compound=CENTER, command=self.showcustom)
+        self.custombtn.place(x=100, y=10)
+
+        self.menubtn = Button(self.frameo_button, text='Drop Off', fg="white", image=self.btnbg_img,
+                              font=("Rockwell nova", 10, 'bold'), cursor="hand2", borderwidth=0,
+                              border='0', overrelief="sunken", compound=CENTER)
+        self.menubtn.place(x=500, y=10)
+
+        self.custombtn.config(fg="green")
+        self.showcustom()
+
+    def showcustom(self):
+        self.custombtn.config(fg="green")
+        self.menubtn.config(fg="white")
+
+        self.frame_custom = LabelFrame(self.frameo_button, height=400, width=1000, borderwidth=10)
+        self.frame_custom.place(x=10, y=100)
+        self.frame_custom.propagate(False)
+
+        scrollc = Scrollbar(self.frame_custom, orient=VERTICAL)
+        self.displaycustom = ttk.Treeview(self.frame_custom, height=400, column=(
+        "username", "spanich", "tomato", "pickel", "cheese", "fish", "chicken", "qty"),
+                                          xscrollcommand=scrollc.set)
+        scrollc.pack(side=RIGHT, fill=Y)
+
+        self.displaycustom.heading("username", text="User name")
+        self.displaycustom.heading("spanich", text="Spinach")
+        self.displaycustom.heading("tomato", text="Tomato")
+        self.displaycustom.heading("pickel", text="Pickel")
+        self.displaycustom.heading("cheese", text="Cheese")
+        self.displaycustom.heading("fish", text="Fish")
+        self.displaycustom.heading("chicken", text="Chicken")
+        self.displaycustom.heading("qty", text="Quantity")
+
+        self.displaycustom['show'] = 'headings'
+
+        self.displaycustom.column("username", width=100)
+        self.displaycustom.column("spanich", width=100)
+        self.displaycustom.column("tomato", width=100)
+        self.displaycustom.column("pickel", width=100)
+        self.displaycustom.column("cheese", width=100)
+        self.displaycustom.column("fish", width=100)
+        self.displaycustom.column("chicken", width=100)
+        self.displaycustom.column("qty", width=100)
+
+        self.displaycustom.pack(fill=BOTH, expand=1)
+
+        self.customdata()
