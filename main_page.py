@@ -1,13 +1,12 @@
 from tkinter import *
+from tkinter import ttk
 from tkinter import messagebox
-import pyautogui
 import mysql.connector
 from PIL import ImageTk, Image
 from time import sleep
-from tkinter import ttk
 import room
 import Login
-import  Menu
+import Menu
 class MainPage:
     def __init__(self,master):
         self.root3 = master
@@ -48,7 +47,7 @@ class MainPage:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='Janakidevi24#',
                 port=3306,
                 database='login_registration')
 
@@ -238,27 +237,14 @@ class MainPage:
         self.frame_main.place_forget()
 
         self.img_change()
-
     def fn_about(self):
-        self.frame_about_in = LabelFrame(self.root3, height=550, width=1040, borderwidth=0)
-        self.frame_about_in.place(x=300, y=130)
-        self.frame_about_in.pack_propagate(False)
-        self.my_canvas_about_in = Canvas(self.frame_about_in)
-        self.my_canvas_about_in.pack(fill="both", expand=True)
-        self.about_bg_img = ImageTk.PhotoImage(Image.open(f'about_bg.png'), master=self.root3)
-        self.my_canvas_about_in.create_image(0, 0, image=self.about_bg_img, anchor="nw")
-        self.name_fn = 'about'
+        self.frame_about = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
+        self.frame_about.place(x=300, y=130)
+        self.topic = Label(self.frame_about, text='ABOUT US', font=("Rockwell nova", 30, 'bold'))
+        self.topic.place(x=420, y=30)
+        self.name_fn='about'
+
         self.img_change()
-
-        #image
-        self.about_feature_img = ImageTk.PhotoImage(Image.open(f'about_feature.png'), master=self.root3)
-        self.my_canvas_about_in.create_image(75, 230, image=self.about_feature_img, anchor="nw")
-
-        #Text
-        self.my_canvas_about_in.create_text(450, 60, text="ABOUT US", font=("Algerian", 45), fill="white")
-        self.my_canvas_about_in.create_text(200, 100, text="Ace Resort.... ", font=("Times new roman", 20),
-                                      fill="white")
-        self.my_canvas_about_in.create_text(500, 210, text="SPECIAL FEATURES", font=("Algerian", 40, 'bold'), fill="gold")
 
     def fn_profile(self):
         self.frame_profile = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
@@ -307,7 +293,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='Janakidevi24#',
                 port=3306,
                 database='login_registration')
             cur = con.cursor()
@@ -328,7 +314,7 @@ class MainPage:
             con5 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='Janakidevi24#',
                 port=3306,
                 database='login_registration')
             print(con5)
@@ -338,19 +324,13 @@ class MainPage:
             print(self.us_name)
             sql_update = "update registration set fname=%s,lname=%s,contact_number=%s,gender=%s,age=%s,password=%s where username=%s"
             val = (
-                self.txt_fname.get(), self.txt_lname.get(), self.txt_contact.get(), self.gender.get(),
-                self.txt_age.get(),
-                self.txt_password.get(), self.us_name,)
+            self.txt_fname.get(), self.txt_lname.get(), self.txt_contact.get(), self.gender.get(), self.txt_age.get(),
+            self.txt_password.get(), self.us_name,)
             cursor.execute(sql_update, val)
             con5.commit()
         except:
             print("sjkjfsd")
             pass
-
-
-
-
-
     def fn_review(self):
         self.frame_review = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
         self.frame_review.place(x=300, y=130)
@@ -371,11 +351,9 @@ class MainPage:
         self.review_entry2 = Entry(self.frame_review, font=("Times new roman", 30, 'bold')
                                    )
         self.review_entry2.place(x=100, y=200)
-        pyautogui.click(450, 300)
-        pyautogui.moveTo(450, 300)
-        pyautogui.moveRel(0, 70)
 
     def img_change(self):
+        
         if self.name_fn=='menu':
             self.menu_btn.config(image=self.menu_change_img, fg='green')
             self.bill_btn.config(image=self.bill_img, fg='white')
@@ -400,7 +378,6 @@ class MainPage:
             self.review_btn.config(image=self.review_img, fg='white')
 
             self.frame_main.place_forget()
-
         elif self.name_fn=='profile':
             self.menu_btn.config(image=self.menu_img, fg='white')
             self.bill_btn.config(image=self.bill_img,fg='white')
@@ -567,7 +544,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='Janakidevi24#',
                 port=3306,
                 database='login_registration')
             cur = con.cursor()
@@ -593,7 +570,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='Janakidevi24#',
                 port=3306,
                 database='login_registration')
             cur = con.cursor()
@@ -614,4 +591,3 @@ class MainPage:
 
         except:
             print("error")
-
