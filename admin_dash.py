@@ -596,6 +596,7 @@ class admin:
 
         self.displaycustom['show'] = 'headings'
 
+
         self.displaycustom.column("username", width=100)
         self.displaycustom.column("spanich", width=100)
         self.displaycustom.column("tomato", width=100)
