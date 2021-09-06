@@ -100,6 +100,7 @@ class Register:
         self.gender.set("Select")
 
 
+
     #requirements
     def register_data(self):
         print(self.terms_chk.get())
