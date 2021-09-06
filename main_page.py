@@ -243,8 +243,8 @@ class MainPage:
         self.topic = Label(self.frame_about, text='ABOUT US', font=("Rockwell nova", 30, 'bold'))
         self.topic.place(x=420, y=30)
         self.name_fn='about'
-
         self.img_change()
+
 
     def fn_profile(self):
         self.frame_profile = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
@@ -306,7 +306,7 @@ class MainPage:
             self.txt_age.insert(0, row[5])
             self.txt_password.insert(0, row[6])
         except:
-            print("sjkjfsd")
+            print("Tests2")
             pass
 
     def update(self):
@@ -353,7 +353,7 @@ class MainPage:
         self.review_entry2.place(x=100, y=200)
 
     def img_change(self):
-        
+
         if self.name_fn=='menu':
             self.menu_btn.config(image=self.menu_change_img, fg='green')
             self.bill_btn.config(image=self.bill_img, fg='white')

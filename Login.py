@@ -3,6 +3,8 @@ from tkinter.tix import *
 from PIL import ImageTk, Image
 from tkinter import messagebox
 import mysql.connector
+
+import admin_dash
 import main_page
 import registration_page
 
@@ -76,7 +78,7 @@ class Login:
                 con = mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='Janakidevi24#',
+                    password='Leanstartup@1',
                     port=3306,
                     database='login_registration')
                 cur = con.cursor()
@@ -86,7 +88,7 @@ class Login:
                 if self.username_entry.get()=='admin' and self.password_entry.get()=='admin' and self.var123.get()==2:
                     messagebox.showinfo("Success", "Successful login", parent=self.root1)
                     self.root1.withdraw()
-                    main_page.MainPage(Tk())
+                    admin_dash.admin(Toplevel())
                 elif self.username_entry.get()=='admin' and self.password_entry.get()=='admin' and self.var123.get()==1:
                     print(self.var123.get())
                     messagebox.showerror("Error", "Select currect authority", parent=self.root1)

@@ -4,7 +4,6 @@ from tkinter import ttk
 import mysql.connector
 from PIL import Image, ImageTk
 
-
 class admin:
     def __init__(self, master):
         self.root5 = master
@@ -20,7 +19,7 @@ class admin:
         self.main_frame()
 
         self.root5.mainloop()
-
+    #
     def ace_images(self):
         # now set an image for moving
         self.img1 = ImageTk.PhotoImage(Image.open(f"ace_logo/ace.png"), master=self.root5)
@@ -203,9 +202,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             cur.execute("select * from room_book")
             result = cur.fetchall()
@@ -387,9 +386,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             cur.execute("select * from pickup")
             result = cur.fetchall()
@@ -408,9 +407,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             cur.execute("select * from dropoff")
             result = cur.fetchall()
@@ -526,9 +525,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             cur.execute("select * from burgar")
             result = cur.fetchall()
