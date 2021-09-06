@@ -47,9 +47,9 @@ class MainPage:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
 
             cur1 = con1.cursor()
             cur1.execute(query, (self.us_name,))
@@ -293,9 +293,9 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
             cur.execute("select * from registration where username=%s", (self.us_name,))
             row = cur.fetchone()
@@ -314,9 +314,9 @@ class MainPage:
             con5 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             print(con5)
             cursor = con5.cursor()
             print(cursor)
@@ -544,9 +544,9 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
 
 
@@ -570,9 +570,9 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
 
 
