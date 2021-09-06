@@ -202,9 +202,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             cur.execute("select * from room_book")
             result = cur.fetchall()
@@ -386,9 +386,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             cur.execute("select * from pickup")
             result = cur.fetchall()
@@ -407,9 +407,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             cur.execute("select * from dropoff")
             result = cur.fetchall()
@@ -525,9 +525,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             cur.execute("select * from burgar")
             result = cur.fetchall()
