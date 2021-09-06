@@ -243,8 +243,8 @@ class MainPage:
         self.topic = Label(self.frame_about, text='ABOUT US', font=("Rockwell nova", 30, 'bold'))
         self.topic.place(x=420, y=30)
         self.name_fn='about'
-
         self.img_change()
+
 
     def fn_profile(self):
         self.frame_profile = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)

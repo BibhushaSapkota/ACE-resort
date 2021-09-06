@@ -4,7 +4,6 @@ from tkinter import ttk
 import mysql.connector
 from PIL import Image, ImageTk
 
-
 class admin:
     def __init__(self, master):
         self.root5 = master
@@ -20,7 +19,7 @@ class admin:
         self.main_frame()
 
         self.root5.mainloop()
-
+    #
     def ace_images(self):
         # now set an image for moving
         self.img1 = ImageTk.PhotoImage(Image.open(f"ace_logo/ace.png"), master=self.root5)
