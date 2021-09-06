@@ -99,6 +99,7 @@ class Register:
         self.txt_answer.delete(0, END)
         self.gender.set("Select")
 
+
     #requirements
     def register_data(self):
         print(self.terms_chk.get())
@@ -118,7 +119,7 @@ class Register:
                 con= mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='Janakidevi24#',
+                    password='9869167415',
                     port=3306,
                     database='login_registration')
                 cur=con.cursor()
@@ -167,3 +168,4 @@ def show_registration(contact):
     else:
         return "Pass"
 
+    
