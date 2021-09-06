@@ -313,7 +313,7 @@ class run:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='9869167415',
+                password='Janakidevi24#',
                 port=3306,
                 database='login_registration')
             print (con)

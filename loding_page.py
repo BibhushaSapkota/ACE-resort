@@ -7,6 +7,7 @@ from playsound import playsound
 import Login
 
 class Loading:
+
     def __init__(self):
         self.root=Tk()
         self.root.config(bg="black")
@@ -29,6 +30,7 @@ class Loading:
 def startmusic():
     time.sleep(0.5)
     playsound('coffee1.mp3')
+    
 def startthreads():
     thread1=threading.Thread(target=startmusic)
     thread1.start()
