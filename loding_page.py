@@ -34,5 +34,6 @@ def startmusic():
 def startthreads():
     thread1=threading.Thread(target=startmusic)
     thread1.start()
+    
 startthreads()
 Loading()
