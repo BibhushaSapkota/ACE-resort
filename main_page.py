@@ -47,9 +47,9 @@ class MainPage:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
 
             cur1 = con1.cursor()
             cur1.execute(query, (self.us_name,))
@@ -232,19 +232,116 @@ class MainPage:
         self.frame_bill.place(x=300, y=130)
         self.topic=Label(self.frame_bill,text='BILL',font=("Rockwell nova", 30,'bold'))
         self.topic.place(x=420,y=30)
-        self.frame_main.pack_propagate(False)
-        self.name_fn='bill'
+        self.frame_bill.propagate(False)
+        self.name_fn = 'bill'
         self.frame_main.place_forget()
+        self.room_name=Label(self.frame_bill,text="Room Total Price:",font=("times new roman", 15, 'bold'))
+        self.room_name.place(x=100,y=300)
+
+        self.room_total=0
+        self.display=Label(self.frame_bill,text="",font=("times new roman", 15, 'bold'))
+        self.display.place(x=270,y=300)
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='@!2002bisesh',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+            cur.execute("select * from room_book where username=%s", (self.us_name,))
+            result = cur.fetchall()
+            if len(result) != 0:
+                for row in result:
+                    if row[1]=="Room:1":
+                        self.room_total = 5000+self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Room:2":
+                        self.room_total = 5000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Room:3":
+                        self.room_total = 5000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Room:4":
+                        self.room_total = 5000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Room:5":
+                        self.room_total = 5000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Room:6":
+                        self.room_total = 7000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Room:7":
+                        self.room_total = 7000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Room:8":
+                        self.room_total = 7000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Room:9":
+                        self.room_total = 7000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Room:10":
+                        self.room_total = 7000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Villa:11":
+                        self.room_total = 15000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Villa:12":
+                        self.room_total = 15000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Villa:13":
+                        self.room_total = 15000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Villa:14":
+                        self.room_total = 15000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Villa:15":
+                        self.room_total = 15000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Hall:16":
+                        self.room_total = 50000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Hall:17":
+                        self.room_total = 70000 + self.room_total
+                        self.display.config(text=self.room_total)
+                    if row[1]=="Hall:18":
+                        self.room_total = 100000 + self.room_total
+                        self.display.config(text=self.room_total)
+
+
+
+
+                con.close()
+        except:
+            print("sjkjfsd")
+            pass
+        print(self.room_total)
+
+
 
         self.img_change()
+
     def fn_about(self):
-        self.frame_about = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
-        self.frame_about.place(x=300, y=130)
-        self.topic = Label(self.frame_about, text='ABOUT US', font=("Rockwell nova", 30, 'bold'))
-        self.topic.place(x=420, y=30)
-        self.name_fn='about'
-
+        self.frame_about_in = LabelFrame(self.root3, height=550, width=1040, borderwidth=0)
+        self.frame_about_in.place(x=300, y=130)
+        self.frame_about_in.pack_propagate(False)
+        self.my_canvas_about_in = Canvas(self.frame_about_in)
+        self.my_canvas_about_in.pack(fill="both", expand=True)
+        self.about_bg_img = ImageTk.PhotoImage(Image.open(f'about_bg.png'), master=self.root3)
+        self.my_canvas_about_in.create_image(0, 0, image=self.about_bg_img, anchor="nw")
+        self.name_fn = 'about'
         self.img_change()
+
+        # image
+        self.about_feature_img = ImageTk.PhotoImage(Image.open(f'about_feature.png'), master=self.root3)
+        self.my_canvas_about_in.create_image(75, 230, image=self.about_feature_img, anchor="nw")
+
+        # Text
+        self.my_canvas_about_in.create_text(450, 60, text="ABOUT US", font=("Algerian", 45), fill="white")
+        self.my_canvas_about_in.create_text(200, 100, text="Ace Resort.... ", font=("Times new roman", 20),
+                                            fill="white")
+        self.my_canvas_about_in.create_text(500, 210, text="SPECIAL FEATURES", font=("Algerian", 40, 'bold'),
+                                            fill="gold")
 
     def fn_profile(self):
         self.frame_profile = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
@@ -293,9 +390,9 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
             cur.execute("select * from registration where username=%s", (self.us_name,))
             row = cur.fetchone()
@@ -314,9 +411,9 @@ class MainPage:
             con5 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             print(con5)
             cursor = con5.cursor()
             print(cursor)
@@ -338,16 +435,13 @@ class MainPage:
         self.topic.place(x=420, y=30)
         self.name_fn = 'review'
         self.img_change()
-        self.review_entry1=Entry(self.frame_review, font=("Times new roman", 30, 'bold')
-                               )
-        self.review_entry1.place(x=100,y=100)
 
+        self.review_entry1 = Text(self.frame_review, height=10, font=("Times new roman", 15, 'bold'))
+        self.review_entry1.place(x=100, y=100)
+        self.submit_btn = Button(self.frame_review, text="Submit", font=("Times new roman", 25, 'bold'))
+        self.submit_btn.place(x=300, y=350)
 
-
-        self.review_entry1.bind('<Return>', self.press_enter)
-
-
-    def press_enter(self,e):
+    def press_enter(self, e):
         self.review_entry2 = Entry(self.frame_review, font=("Times new roman", 30, 'bold')
                                    )
         self.review_entry2.place(x=100, y=200)
@@ -544,9 +638,9 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
 
 
@@ -570,9 +664,9 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
 
 

@@ -118,9 +118,9 @@ class Register:
                 con= mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='Janakidevi24#',
+                    password='@!2002bisesh',
                     port=3306,
-                    database='login_registration')
+                    database='login_registration1')
                 cur=con.cursor()
 
                 fname=self.txt_fname.get()
