@@ -246,9 +246,9 @@ class CustomBurger:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             print(cur)
 
@@ -267,9 +267,9 @@ class CustomBurger:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             print(cur)
 
@@ -315,9 +315,9 @@ class CustomBurger:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             print(cur)
 
@@ -361,9 +361,9 @@ class CustomBurger:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             print(cur)
 
