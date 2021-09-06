@@ -2,6 +2,7 @@ from tkinter import *
 
 import mysql.connector
 from PIL import Image,ImageTk
+from tkinter import ttk
 
 
 class admin:
@@ -83,7 +84,7 @@ class admin:
         self.cab_btn = Button(self.root5, text="Cab Details", fg="white", image=self.btn_img,
                                font=("Rockwell nova", 20, 'bold'),
                                cursor="hand2", borderwidth=0,
-                               border='0', overrelief="sunken", compound=CENTER)
+                               border='0', overrelief="sunken", compound=CENTER, command=self.cabdetails)
         self.cab_btn.place(x=30, y=450)
 
 
@@ -109,9 +110,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             cur.execute("select room_no from room_book")
             row = cur.fetchall()
@@ -263,3 +264,137 @@ class admin:
         self.hall3.place(x=550,y=430)
 
         self.fetchroom()
+
+    def pickupdata(self):
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='Janakidevi24#',
+                port=3306,
+                database='login_registration')
+            cur = con.cursor()
+            cur.execute("select * from pickup")
+            result = cur.fetchall()
+            if len(result) != 0:
+                for row in result:
+                    self.displaypickup.insert('', END, values=row)
+
+                con.close()
+
+        except:
+            print('error')
+            pass
+
+    def dropoffdata(self):
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='Janakidevi24#',
+                port=3306,
+                database='login_registration')
+            cur = con.cursor()
+            cur.execute("select * from dropoff")
+            result = cur.fetchall()
+            if len(result) != 0:
+                for row in result:
+                    self.displaydropoff.insert('', END, values=row)
+
+                con.close()
+
+        except:
+            print('error')
+            pass
+
+    def cabdetails(self):
+        self.users_btn.config(fg='white')
+        self.room_btn.config(fg='white')
+        self.orders_btn.config(fg='white')
+        self.cab_btn.config(fg='green')
+
+        self.framec_button = LabelFrame(self.root5, height=660, width=1080, borderwidth=10)
+        self.framec_button.place(x=300, y=130)
+        self.framec_button.pack_propagate(False)
+
+        self.btnbg_img = ImageTk.PhotoImage(Image.open('rb.png'), master=self.root5)
+
+        self.pickupbtn = Button(self.framec_button, text='Pick Up', fg="white", image=self.btnbg_img,
+                                font=("Rockwell nova", 10, 'bold'), cursor="hand2", borderwidth=0,
+                                border='0', overrelief="sunken", compound=CENTER, command=self.showpickup)
+        self.pickupbtn.place(x=100, y=10)
+
+        self.dropoffbtn = Button(self.framec_button, text='Drop Off', fg="white", image=self.btnbg_img,
+                                 font=("Rockwell nova", 10, 'bold'), cursor="hand2", borderwidth=0,
+                                 border='0', overrelief="sunken", compound=CENTER, command=self.showdropoff)
+        self.dropoffbtn.place(x=500, y=10)
+
+        self.pickupbtn.config(fg='green')
+        self.showpickup()
+
+    def showpickup(self):
+        self.pickupbtn.config(fg="green")
+        self.dropoffbtn.config(fg="white")
+
+        self.frame_pickup = LabelFrame(self.framec_button, height=400, width=800, borderwidth=10)
+        self.frame_pickup.place(x=100, y=100)
+        self.frame_pickup.propagate(False)
+
+        scrollp = Scrollbar(self.frame_pickup, orient=VERTICAL)
+        self.displaypickup = ttk.Treeview(self.frame_pickup, height=400,
+                                          column=("username", "pickup_address", "month", "day", "date"),
+                                          xscrollcommand=scrollp.set)
+        scrollp.pack(side=RIGHT, fill=Y)
+
+        self.displaypickup.heading("username", text="User name")
+        self.displaypickup.heading("pickup_address", text="Pickup Address")
+        self.displaypickup.heading("month", text="Month")
+        self.displaypickup.heading("day", text="Day")
+        self.displaypickup.heading("date", text="Date")
+
+        self.displaypickup['show'] = 'headings'
+
+        self.displaypickup.column("username", width=100)
+        self.displaypickup.column("pickup_address", width=400)
+        self.displaypickup.column("month", width=100)
+        self.displaypickup.column("day", width=100)
+        self.displaypickup.column("date", width=100)
+
+        self.displaypickup.pack(fill=BOTH, expand=1)
+
+        self.pickupdata()
+
+        self.frame_dropoff.destroy()
+
+    def showdropoff(self):
+        self.pickupbtn.config(fg="white")
+        self.dropoffbtn.config(fg="green")
+
+        self.frame_dropoff = LabelFrame(self.framec_button, height=400, width=800, borderwidth=10)
+        self.frame_dropoff.place(x=100, y=100)
+        self.frame_dropoff.propagate(False)
+
+        scrolld = Scrollbar(self.frame_dropoff, orient=VERTICAL)
+        self.displaydropoff = ttk.Treeview(self.frame_dropoff, height=400,
+                                           column=("username", "dropoff_address", "month", "day", "date"),
+                                           xscrollcommand=scrolld.set)
+        scrolld.pack(side=RIGHT, fill=Y)
+
+        self.displaydropoff.heading("username", text="User name")
+        self.displaydropoff.heading("dropoff_address", text="Dropoff Address")
+        self.displaydropoff.heading("month", text="Month")
+        self.displaydropoff.heading("day", text="Day")
+        self.displaydropoff.heading("date", text="Date")
+
+        self.displaydropoff['show'] = 'headings'
+
+        self.displaydropoff.column("username", width=100)
+        self.displaydropoff.column("dropoff_address", width=400)
+        self.displaydropoff.column("month", width=100)
+        self.displaydropoff.column("day", width=100)
+        self.displaydropoff.column("date", width=100)
+
+        self.displaydropoff.pack(fill=BOTH, expand=1)
+
+        self.dropoffdata()
+        self.frame_pickup.destroy()
