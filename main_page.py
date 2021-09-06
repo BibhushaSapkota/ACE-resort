@@ -4,6 +4,7 @@ import pyautogui
 import mysql.connector
 from PIL import ImageTk, Image
 from time import sleep
+from tkinter import ttk
 import room
 import Login
 import  Menu
@@ -47,9 +48,9 @@ class MainPage:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Leanstartup@1',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
 
             cur1 = con1.cursor()
             cur1.execute(query, (self.us_name,))
@@ -237,21 +238,119 @@ class MainPage:
         self.frame_main.place_forget()
 
         self.img_change()
-    def fn_about(self):
-        self.frame_about = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
-        self.frame_about.place(x=300, y=130)
-        self.topic = Label(self.frame_about, text='ABOUT US', font=("Rockwell nova", 30, 'bold'))
-        self.topic.place(x=420, y=30)
-        self.name_fn='about'
 
+    def fn_about(self):
+        self.frame_about_in = LabelFrame(self.root3, height=550, width=1040, borderwidth=0)
+        self.frame_about_in.place(x=300, y=130)
+        self.frame_about_in.pack_propagate(False)
+        self.my_canvas_about_in = Canvas(self.frame_about_in)
+        self.my_canvas_about_in.pack(fill="both", expand=True)
+        self.about_bg_img = ImageTk.PhotoImage(Image.open(f'about_bg.png'), master=self.root3)
+        self.my_canvas_about_in.create_image(0, 0, image=self.about_bg_img, anchor="nw")
+        self.name_fn = 'about'
         self.img_change()
+
+        #image
+        self.about_feature_img = ImageTk.PhotoImage(Image.open(f'about_feature.png'), master=self.root3)
+        self.my_canvas_about_in.create_image(75, 230, image=self.about_feature_img, anchor="nw")
+
+        #Text
+        self.my_canvas_about_in.create_text(450, 60, text="ABOUT US", font=("Algerian", 45), fill="white")
+        self.my_canvas_about_in.create_text(200, 100, text="Ace Resort.... ", font=("Times new roman", 20),
+                                      fill="white")
+        self.my_canvas_about_in.create_text(500, 210, text="SPECIAL FEATURES", font=("Algerian", 40, 'bold'), fill="gold")
+
     def fn_profile(self):
         self.frame_profile = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
         self.frame_profile.place(x=300, y=130)
         self.topic = Label(self.frame_profile, text='YOUR PROFILE', font=("Rockwell nova", 30, 'bold'))
         self.topic.place(x=420, y=30)
-        self.name_fn='profile'
+        self.name_fn = 'profile'
         self.img_change()
+        fname = Label(self.frame_profile, text='First Name', font=("times new roman", 15, 'bold'), bg='white',
+                      fg='#51375d').place(x=50, y=100)
+        self.txt_fname = Entry(self.frame_profile, font=("times new roman", 15), bg='#bcb5c0')
+        self.txt_fname.place(x=50, y=130, width=250)
+
+        lname = Label(self.frame_profile, text='Last Name', font=("times new roman", 15, 'bold'), bg='white',
+                      fg='#51375d').place(x=370, y=100)
+        self.txt_lname = Entry(self.frame_profile, font=("times new roman", 15), bg='#bcb5c0')
+        self.txt_lname.place(x=370, y=130, width=250)
+
+        contact = Label(self.frame_profile, text='Contact Number', font=("times new roman", 15, 'bold'), bg='white',
+                        fg='#51375d').place(x=50, y=160)
+        self.txt_contact = Entry(self.frame_profile, font=("times new roman", 15), bg='#bcb5c0')
+        self.txt_contact.place(x=50, y=190, width=250)
+
+        gender = Label(self.frame_profile, text='Gender', font=("times new roman", 15, 'bold'), bg='white',
+                       fg='#51375d').place(x=50, y=220)
+        self.gender = ttk.Combobox(self.frame_profile, font=("times new roman", 12), state='readonly', justify=CENTER)
+        self.gender['values'] = ('Select', 'Male', 'Female')
+        self.gender.place(x=50, y=250, width=250)
+        self.gender.current(0)
+
+        age = Label(self.frame_profile, text='Age', font=("times new roman", 15, 'bold'), bg='white',
+                    fg='#51375d').place(x=370, y=220)
+        self.txt_age = Entry(self.frame_profile, font=("times new roman", 15), bg='#bcb5c0')
+        self.txt_age.place(x=370, y=250, width=250)
+
+        password = Label(self.frame_profile, text='Password', font=("times new roman", 15, 'bold'), bg='white',
+                         fg='#51375d').place(x=50, y=280)
+
+        self.txt_password = Entry(self.frame_profile, font=("times new roman", 15), bg='#bcb5c0', show="*")
+        self.txt_password.place(x=50, y=310, width=250)
+
+        self.update_profile = Button(self.frame_profile, text="UPDATE", command=self.update,
+                                     font=("times new roman", 25), bg='#bcb5c0')
+        self.update_profile.place(x=100, y=400)
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='Leanstartup@1',
+                port=3306,
+                database='login_registration')
+            cur = con.cursor()
+            cur.execute("select * from registration where username=%s", (self.us_name,))
+            row = cur.fetchone()
+            self.txt_fname.insert(0, row[0])
+            self.txt_lname.insert(0, row[1])
+            self.txt_contact.insert(0, row[2])
+            self.gender.set(row[4])
+            self.txt_age.insert(0, row[5])
+            self.txt_password.insert(0, row[6])
+        except:
+            print("sjkjfsd")
+            pass
+
+    def update(self):
+        try:
+            con5 = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='Leanstartup@1',
+                port=3306,
+                database='login_registration')
+            print(con5)
+            cursor = con5.cursor()
+            print(cursor)
+            print(self.txt_fname.get())
+            print(self.us_name)
+            sql_update = "update registration set fname=%s,lname=%s,contact_number=%s,gender=%s,age=%s,password=%s where username=%s"
+            val = (
+                self.txt_fname.get(), self.txt_lname.get(), self.txt_contact.get(), self.gender.get(),
+                self.txt_age.get(),
+                self.txt_password.get(), self.us_name,)
+            cursor.execute(sql_update, val)
+            con5.commit()
+        except:
+            print("sjkjfsd")
+            pass
+
+
+
+
+
     def fn_review(self):
         self.frame_review = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
         self.frame_review.place(x=300, y=130)
@@ -301,6 +400,7 @@ class MainPage:
             self.review_btn.config(image=self.review_img, fg='white')
 
             self.frame_main.place_forget()
+
         elif self.name_fn=='profile':
             self.menu_btn.config(image=self.menu_img, fg='white')
             self.bill_btn.config(image=self.bill_img,fg='white')
@@ -467,9 +567,9 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Leanstartup@1',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
 
 
@@ -493,9 +593,9 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Leanstartup@1',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
 
 
