@@ -353,7 +353,7 @@ class MainPage:
         self.review_entry2.place(x=100, y=200)
 
     def img_change(self):
-        
+
         if self.name_fn=='menu':
             self.menu_btn.config(image=self.menu_change_img, fg='green')
             self.bill_btn.config(image=self.bill_img, fg='white')
