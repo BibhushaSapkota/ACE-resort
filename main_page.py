@@ -7,16 +7,14 @@ from time import sleep
 import room
 import Login
 import Menu
-
-
 class MainPage:
-    def __init__(self, master):
+    def __init__(self,master):
         self.root3 = master
         self.root3.title("Main")
         self.root3.state('zoomed')
         self.my_canvas = Canvas(self.root3)
         self.my_canvas.pack(fill="both", expand=True)
-        self.background = ImageTk.PhotoImage(Image.open('background.png'), master=self.root3)
+        self.background = ImageTk.PhotoImage(Image.open('background.png'),master=self.root3)
         self.male = ImageTk.PhotoImage(Image.open('male.png'), master=self.root3)
         self.female = ImageTk.PhotoImage(Image.open('female.png'), master=self.root3)
         self.my_canvas.create_image(0, 0, image=self.background, anchor="nw")
@@ -24,11 +22,11 @@ class MainPage:
         self.buttons()
         self.menu_main_frame()
         self.gender_part()
-        self.result = self.convertTuple(self.row1)
+        self.result=self.convertTuple(self.row1)
         print(self.result)
-        self.user_name = Label(self.root3, text=self.us_name, font=("Rockwell nova", 40, 'bold'), fg="Green")
+        self.user_name=Label(self.root3,text=self.us_name,font=("Rockwell nova", 40,'bold'),fg="Green")
         self.user_name.place(x=1100, y=10)
-        if self.result == 'Male':
+        if self.result=='Male':
             self.Mr = Label(self.root3, text='Mr', font=("Rockwell nova", 40, 'bold'), fg="Green")
             self.Mr.place(x=980, y=10)
             self.my_canvas.create_image(900, 10, image=self.male, anchor="nw")
@@ -39,20 +37,19 @@ class MainPage:
         self.root3.update()
         self.root3.mainloop()
 
-    def convertTuple(self, tup):
+    def convertTuple(self,tup):
         str = ''.join(tup)
         return str
-
     def gender_part(self):
-        self.us_name = Login.gett()
+        self.us_name=Login.gett()
         query = "select gender from registration where username=%s"
         try:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
 
             cur1 = con1.cursor()
             cur1.execute(query, (self.us_name,))
@@ -64,18 +61,18 @@ class MainPage:
 
     def ace_images(self):
         # now set an image for moving
-        self.img1 = ImageTk.PhotoImage(Image.open(f"ace_logo/ace.png"),
-                                       master=self.root3)  # make sure that you have a photo
+        self.img1 = ImageTk.PhotoImage(Image.open(f"ace_logo/ace.png"),master=self.root3)  # make sure that you have a photo
         # in you current folder that you are working with
-        self.img2 = ImageTk.PhotoImage(Image.open(f"ace_logo/ace1.png"), master=self.root3)
-        self.img3 = ImageTk.PhotoImage(Image.open(f"ace_logo/ace2.png"), master=self.root3)
-        self.img4 = ImageTk.PhotoImage(Image.open(f"ace_logo/ace3.png"), master=self.root3)
+        self.img2 = ImageTk.PhotoImage(Image.open(f"ace_logo/ace1.png"),master=self.root3)
+        self.img3 = ImageTk.PhotoImage(Image.open(f"ace_logo/ace2.png"),master=self.root3)
+        self.img4 = ImageTk.PhotoImage(Image.open(f"ace_logo/ace3.png"),master=self.root3)
         # Create a label
         self.l = Label(self.root3, font="bold")
         self.l.place(x=20, y=0)
         # take a variable
         self.x = 1
         self.ace_move()
+
 
     def ace_move(self):
         if self.x == 5:
@@ -94,46 +91,50 @@ class MainPage:
         # set images to work automatically by "after" feature in tkinter
         self.root3.after(1500, self.ace_move)
 
-    def buttons(self):
-        self.menu_img = ImageTk.PhotoImage(Image.open('menu.png'), master=self.root3)
-        self.menu_change_img = ImageTk.PhotoImage(Image.open('menu_change.png'), master=self.root3)
-        self.bill_img = ImageTk.PhotoImage(Image.open('bill.png'), master=self.root3)
-        self.bill_change_img = ImageTk.PhotoImage(Image.open('bill_change.png'), master=self.root3)
-        self.about_img = ImageTk.PhotoImage(Image.open('information.png'), master=self.root3)
-        self.about_change_img = ImageTk.PhotoImage(Image.open('information_change.png'), master=self.root3)
-        self.profile_img = ImageTk.PhotoImage(Image.open('profile.png'), master=self.root3)
-        self.profile_change_img = ImageTk.PhotoImage(Image.open('profile_change.png'), master=self.root3)
-        self.review_img = ImageTk.PhotoImage(Image.open('review.png'), master=self.root3)
-        self.review_change_img = ImageTk.PhotoImage(Image.open('review_change.png'), master=self.root3)
 
-        self.menu_btn = Button(self.root3, text="      MENU", fg="white", image=self.menu_change_img,
-                               font=("Rockwell nova", 20, 'bold'),
-                               cursor="hand2", borderwidth=0,
-                               border='0', overrelief="sunken", compound=CENTER, command=self.menu_main_frame)
-        self.menu_btn.place(x=30, y=150)
+
+    def buttons(self):
+        self.menu_img = ImageTk.PhotoImage(Image.open('menu.png'),master=self.root3)
+        self.menu_change_img = ImageTk.PhotoImage(Image.open('menu_change.png'),master=self.root3)
+        self.bill_img= ImageTk.PhotoImage(Image.open('bill.png'),master=self.root3)
+        self.bill_change_img = ImageTk.PhotoImage(Image.open('bill_change.png'),master=self.root3)
+        self.about_img = ImageTk.PhotoImage(Image.open('information.png'),master=self.root3)
+        self.about_change_img = ImageTk.PhotoImage(Image.open('information_change.png'),master=self.root3)
+        self.profile_img = ImageTk.PhotoImage(Image.open('profile.png'),master=self.root3)
+        self.profile_change_img = ImageTk.PhotoImage(Image.open('profile_change.png'),master=self.root3)
+        self.review_img = ImageTk.PhotoImage(Image.open('review.png'),master=self.root3)
+        self.review_change_img = ImageTk.PhotoImage(Image.open('review_change.png'),master=self.root3)
+
+        self.menu_btn= Button(self.root3, text="      MENU", fg="white",image=self.menu_change_img,
+                                   font=("Rockwell nova", 20,'bold'),
+                                   cursor="hand2",borderwidth=0,
+                                   border='0', overrelief="sunken",compound=CENTER,command=self.menu_main_frame)
+        self.menu_btn.place(x=30,y=150)
         self.bill_btn = Button(self.root3, text="   BILL", fg="white", image=self.bill_img,
                                font=("Rockwell nova", 20, 'bold'),
                                cursor="hand2", borderwidth=0,
                                border='0', overrelief="sunken", compound=CENTER, command=self.fn_bill)
         self.bill_btn.place(x=30, y=250)
 
+
         self.about_btn = Button(self.root3, text="ABOUT US", fg="white", image=self.about_img,
-                                font=("Rockwell nova", 20, 'bold'),
-                                cursor="hand2", borderwidth=0,
-                                border='0', overrelief="sunken", compound=CENTER, command=lambda: self.fn_about())
+                               font=("Rockwell nova", 20,'bold'),
+                               cursor="hand2", borderwidth=0,
+                               border='0', overrelief="sunken", compound=CENTER,command=lambda:self.fn_about())
         self.about_btn.place(x=30, y=350)
 
         self.profile_btn = Button(self.root3, text="PROFILE", fg="white", image=self.profile_img,
-                                  font=("Rockwell nova", 20, 'bold'),
+                                  font=("Rockwell nova", 20,'bold'),
                                   cursor="hand2", borderwidth=0,
-                                  border='0', overrelief="sunken", compound=CENTER, command=lambda: self.fn_profile())
+                                  border='0', overrelief="sunken", compound=CENTER,command=lambda:self.fn_profile())
         self.profile_btn.place(x=30, y=450)
 
         self.review_btn = Button(self.root3, text="      REVIEW", fg="white", image=self.review_img,
-                                 font=("Rockwell nova", 20, 'bold'),
-                                 cursor="hand2", borderwidth=0,
-                                 border='0', overrelief="sunken", compound=CENTER, command=self.fn_review)
+                               font=("Rockwell nova", 20,'bold'),
+                               cursor="hand2", borderwidth=0,
+                               border='0', overrelief="sunken", compound=CENTER,command=self.fn_review)
         self.review_btn.place(x=30, y=550)
+
 
     def menu_main_frame(self):
         self.menu_btn.config(image=self.menu_change_img, fg='green')
@@ -146,12 +147,13 @@ class MainPage:
         self.frame_main.place(x=300, y=130)
         self.frame_main.pack_propagate(False)
 
+
         self.frame_room = LabelFrame(self.frame_main, height=530, width=340, borderwidth=10)
         self.frame_room.place(x=0, y=0)
         self.frame_room.pack_propagate(False)
         self.my_canvas_room = Canvas(self.frame_room)
         self.my_canvas_room.pack(fill="both", expand=True)
-        self.room_close = ImageTk.PhotoImage(Image.open(f'room/room1.png'), master=self.root3)
+        self.room_close = ImageTk.PhotoImage(Image.open(f'room/room1.png'),master=self.root3)
         self.my_canvas_room.create_image(60, 300, image=self.room_close, anchor="nw")
         self.frame_room.bind("<Enter>", self.change_room)
         self.frame_room.bind("<Leave>", self.change_back_room)
@@ -161,15 +163,17 @@ class MainPage:
         self.my_canvas_room.create_image(130, 140, image=self.point_img2, anchor="nw")
 
         self.room_btn = Button(self.frame_room, text="BOOK HERE", bg="green", fg="white", cursor="hand2",
-                               font=("Rockwell nova", 25, 'bold'), command=self.room_fn)
+                              font=("Rockwell nova", 25, 'bold'), command=self.room_fn)
         self.room_btn.place(x=50, y=210)
+
+
 
         self.frame_food = LabelFrame(self.frame_main, height=530, width=340, borderwidth=10)
         self.frame_food.place(x=340, y=0)
         self.frame_food.pack_propagate(False)
         self.my_canvas_food = Canvas(self.frame_food)
         self.my_canvas_food.pack(fill="both", expand=True)
-        self.food_close = ImageTk.PhotoImage(Image.open(f'food/food1.png'), master=self.root3)
+        self.food_close = ImageTk.PhotoImage(Image.open(f'food/food1.png'),master=self.root3)
         self.my_canvas_food.create_image(75, 320, image=self.food_close, anchor="nw")
         self.frame_food.bind("<Enter>", self.change_food)
         self.frame_food.bind("<Leave>", self.change_back_food)
@@ -178,15 +182,17 @@ class MainPage:
         self.point_img1 = ImageTk.PhotoImage(Image.open(f'point.png'), master=self.root3)
         self.my_canvas_food.create_image(130, 140, image=self.point_img1, anchor="nw")
         self.food_btn = Button(self.frame_food, text="ORDER HERE", bg="green", fg="white", cursor="hand2",
-                               font=("Rockwell nova", 25, 'bold'), command=self.menu)
+                              font=("Rockwell nova", 25, 'bold'), command=self.menu)
         self.food_btn.place(x=50, y=210)
+
+
 
         self.frame_cab = LabelFrame(self.frame_main, height=530, width=340, borderwidth=10)
         self.frame_cab.place(x=680, y=0)
         self.frame_cab.pack_propagate(False)
         self.my_canvas_cab = Canvas(self.frame_cab)
         self.my_canvas_cab.pack(fill="both", expand=True)
-        self.cab_close = ImageTk.PhotoImage(Image.open(f'cab/cab1.png'), master=self.root3)
+        self.cab_close = ImageTk.PhotoImage(Image.open(f'cab/cab1.png'),master=self.root3)
         self.my_canvas_cab.create_image(75, 320, image=self.cab_close, anchor="nw")
         self.frame_cab.bind("<Enter>", self.change_cab)
         self.frame_cab.bind("<Leave>", self.change_back_cab)
@@ -194,158 +200,55 @@ class MainPage:
         self.topic_cab.place(x=50, y=5)
         self.point_img = ImageTk.PhotoImage(Image.open(f'point.png'), master=self.root3)
         self.my_canvas_cab.create_image(130, 140, image=self.point_img, anchor="nw")
-        self.cab_btn = Button(self.frame_cab, text="BOOK HERE", bg="green", fg="white", cursor="hand2",
-                              font=("Rockwell nova", 25, 'bold'), command=self.cab_fn)
-        self.cab_btn.place(x=50, y=210)
+        self.cab_btn=Button(self.frame_cab,text="BOOK HERE",bg="green",fg="white",cursor="hand2",font=("Rockwell nova", 25,'bold'),command=self.cab_fn)
+        self.cab_btn.place(x=50,y=210)
 
-    def change_room(self, e):
-        self.animation('room', 'room', 60, 300, self.my_canvas_room)
 
-    def change_back_room(self, e):
-        self.room_close = ImageTk.PhotoImage(Image.open(f'room/room1.png'), master=self.root3)
+
+    def change_room(self,e):
+        self.animation('room','room',60,300,self.my_canvas_room)
+    def change_back_room(self,e):
+        self.room_close = ImageTk.PhotoImage(Image.open(f'room/room1.png'),master=self.root3)
         self.my_canvas_room.create_image(60, 300, image=self.room_close, anchor="nw")
-
-    def change_food(self, f):
-        self.animation('food', 'food', 75, 320, self.my_canvas_food)
-
-    def change_back_food(self, f):
-        self.food_close = ImageTk.PhotoImage(Image.open(f'food/food1.png'), master=self.root3)
+    def change_food(self,f):
+        self.animation('food','food',75,320,self.my_canvas_food)
+    def change_back_food(self,f):
+        self.food_close = ImageTk.PhotoImage(Image.open(f'food/food1.png'),master=self.root3)
         self.my_canvas_food.create_image(75, 320, image=self.food_close, anchor="nw")
-
-    def change_cab(self, g):
-        self.animation('cab', 'cab', 75, 320, self.my_canvas_cab)
-
-    def change_back_cab(self, g):
-        self.cab_close = ImageTk.PhotoImage(Image.open(f'cab/cab1.png'), master=self.root3)
+    def change_cab(self,g):
+        self.animation('cab','cab',75,320,self.my_canvas_cab)
+    def change_back_cab(self,g):
+        self.cab_close = ImageTk.PhotoImage(Image.open(f'cab/cab1.png'),master=self.root3)
         self.my_canvas_cab.create_image(75, 320, image=self.cab_close, anchor="nw")
-
     def room_fn(self):
         room.Roompage(Toplevel())
 
     def menu(self):
         Menu.run(Toplevel())
 
+
     def fn_bill(self):
         self.frame_bill = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
         self.frame_bill.place(x=300, y=130)
-        self.frame_bill.propagate(False)
-        self.topic = Label(self.frame_bill, text='BILL', font=("Rockwell nova", 30, 'bold'))
-        self.topic.place(x=420, y=30)
+        self.topic=Label(self.frame_bill,text='BILL',font=("Rockwell nova", 30,'bold'))
+        self.topic.place(x=420,y=30)
         self.frame_main.pack_propagate(False)
-        self.name_fn = 'bill'
+        self.name_fn='bill'
         self.frame_main.place_forget()
-        self.room_name=Label(self.frame_bill,text="Room Total Price:",font=("times new roman", 15, 'bold'))
-        self.room_name.place(x=100,y=300)
-
-        self.room_total=0
-        self.display=Label(self.frame_bill,text="",font=("times new roman", 15, 'bold'))
-        self.display.place(x=270,y=300)
-        try:
-            con = mysql.connector.connect(
-                host='127.0.0.1',
-                user='root',
-                password='1235',
-                port=3306,
-                database='login_registration1')
-            cur = con.cursor()
-            cur.execute("select * from room_book where username=%s", (self.us_name,))
-            result = cur.fetchall()
-            if len(result) != 0:
-                for row in result:
-                    if row[1]=="Room:1":
-                        self.room_total = 5000+self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Room:2":
-                        self.room_total = 5000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Room:3":
-                        self.room_total = 5000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Room:4":
-                        self.room_total = 5000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Room:5":
-                        self.room_total = 5000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Room:6":
-                        self.room_total = 7000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Room:7":
-                        self.room_total = 7000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Room:8":
-                        self.room_total = 7000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Room:9":
-                        self.room_total = 7000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Room:10":
-                        self.room_total = 7000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Villa:11":
-                        self.room_total = 15000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Villa:12":
-                        self.room_total = 15000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Villa:13":
-                        self.room_total = 15000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Villa:14":
-                        self.room_total = 15000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Villa:15":
-                        self.room_total = 15000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Hall:16":
-                        self.room_total = 50000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Hall:17":
-                        self.room_total = 70000 + self.room_total
-                        self.display.config(text=self.room_total)
-                    if row[1]=="Hall:18":
-                        self.room_total = 100000 + self.room_total
-                        self.display.config(text=self.room_total)
-
-
-
-
-                con.close()
-        except:
-            print("sjkjfsd")
-            pass
-        print(self.room_total)
-
-
 
         self.img_change()
-
-
     def fn_about(self):
-        self.frame_about_in = LabelFrame(self.root3, height=550, width=1040, borderwidth=0)
-        self.frame_about_in.place(x=300, y=130)
-        self.frame_about_in.pack_propagate(False)
-        self.my_canvas_about_in = Canvas(self.frame_about_in)
-        self.my_canvas_about_in.pack(fill="both", expand=True)
-        self.about_bg_img = ImageTk.PhotoImage(Image.open(f'about_bg.png'), master=self.root3)
-        self.my_canvas_about_in.create_image(0, 0, image=self.about_bg_img, anchor="nw")
-        self.name_fn = 'about'
+        self.frame_about = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
+        self.frame_about.place(x=300, y=130)
+        self.topic = Label(self.frame_about, text='ABOUT US', font=("Rockwell nova", 30, 'bold'))
+        self.topic.place(x=420, y=30)
+        self.name_fn='about'
+
         self.img_change()
-
-        #image
-        self.about_feature_img = ImageTk.PhotoImage(Image.open(f'about_feature.png'), master=self.root3)
-        self.my_canvas_about_in.create_image(75, 230, image=self.about_feature_img, anchor="nw")
-
-        #Text
-        self.my_canvas_about_in.create_text(450, 60, text="ABOUT US", font=("Algerian", 45), fill="white")
-        self.my_canvas_about_in.create_text(200, 100, text="Ace Resort.... ", font=("Times new roman", 20),
-                                      fill="white")
-        self.my_canvas_about_in.create_text(500, 210, text="SPECIAL FEATURES", font=("Algerian", 40, 'bold'), fill="gold")
 
     def fn_profile(self):
         self.frame_profile = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
         self.frame_profile.place(x=300, y=130)
-        self.frame_profile.propagate(False)
         self.topic = Label(self.frame_profile, text='YOUR PROFILE', font=("Rockwell nova", 30, 'bold'))
         self.topic.place(x=420, y=30)
         self.name_fn = 'profile'
@@ -390,9 +293,9 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             cur.execute("select * from registration where username=%s", (self.us_name,))
             row = cur.fetchone()
@@ -411,9 +314,9 @@ class MainPage:
             con5 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             print(con5)
             cursor = con5.cursor()
             print(cursor)
@@ -421,15 +324,13 @@ class MainPage:
             print(self.us_name)
             sql_update = "update registration set fname=%s,lname=%s,contact_number=%s,gender=%s,age=%s,password=%s where username=%s"
             val = (
-                self.txt_fname.get(), self.txt_lname.get(), self.txt_contact.get(), self.gender.get(),
-                self.txt_age.get(),
-                self.txt_password.get(), self.us_name,)
+            self.txt_fname.get(), self.txt_lname.get(), self.txt_contact.get(), self.gender.get(), self.txt_age.get(),
+            self.txt_password.get(), self.us_name,)
             cursor.execute(sql_update, val)
             con5.commit()
         except:
             print("sjkjfsd")
             pass
-
     def fn_review(self):
         self.frame_review = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
         self.frame_review.place(x=300, y=130)
@@ -437,19 +338,23 @@ class MainPage:
         self.topic.place(x=420, y=30)
         self.name_fn = 'review'
         self.img_change()
-        self.review_entry1 = Text(self.frame_review,height=10, font=("Times new roman", 15, 'bold'))
-        self.review_entry1.place(x=100, y=100)
-        self.submit_btn=Button(self.frame_review,text="Submit", font=("Times new roman", 25, 'bold'))
-        self.submit_btn.place(x=300,y=350)
+        self.review_entry1=Entry(self.frame_review, font=("Times new roman", 30, 'bold')
+                               )
+        self.review_entry1.place(x=100,y=100)
 
-    def press_enter(self, e):
+
+
+        self.review_entry1.bind('<Return>', self.press_enter)
+
+
+    def press_enter(self,e):
         self.review_entry2 = Entry(self.frame_review, font=("Times new roman", 30, 'bold')
                                    )
         self.review_entry2.place(x=100, y=200)
 
     def img_change(self):
-
-        if self.name_fn == 'menu':
+        
+        if self.name_fn=='menu':
             self.menu_btn.config(image=self.menu_change_img, fg='green')
             self.bill_btn.config(image=self.bill_img, fg='white')
             self.about_btn.config(image=self.about_img, fg='white')
@@ -457,25 +362,25 @@ class MainPage:
             self.review_btn.config(image=self.review_img, fg='white')
 
 
-        elif self.name_fn == 'bill':
+        elif self.name_fn=='bill':
             self.menu_btn.config(image=self.menu_img, fg='white')
-            self.bill_btn.config(image=self.bill_change_img, fg='green')
+            self.bill_btn.config(image=self.bill_change_img,fg='green')
             self.about_btn.config(image=self.about_img, fg='white')
             self.profile_btn.config(image=self.profile_img, fg='white')
             self.review_btn.config(image=self.review_img, fg='white')
 
 
-        elif self.name_fn == 'about':
+        elif self.name_fn=='about':
             self.menu_btn.config(image=self.menu_img, fg='white')
-            self.bill_btn.config(image=self.bill_img, fg='white')
+            self.bill_btn.config(image=self.bill_img,fg='white')
             self.about_btn.config(image=self.about_change_img, fg='green')
             self.profile_btn.config(image=self.profile_img, fg='white')
             self.review_btn.config(image=self.review_img, fg='white')
 
             self.frame_main.place_forget()
-        elif self.name_fn == 'profile':
+        elif self.name_fn=='profile':
             self.menu_btn.config(image=self.menu_img, fg='white')
-            self.bill_btn.config(image=self.bill_img, fg='white')
+            self.bill_btn.config(image=self.bill_img,fg='white')
             self.about_btn.config(image=self.about_img, fg='white')
             self.profile_btn.config(image=self.profile_change_img, fg='green')
             self.review_btn.config(image=self.review_img, fg='white')
@@ -490,9 +395,9 @@ class MainPage:
 
             self.frame_main.place_forget()
 
-    def animation(self, name, type, x, y, any):
+    def animation(self,name,type,x,y,any):
         for i in range(1, 5):
-            self.room_img = ImageTk.PhotoImage(Image.open(f'{name}/{type}{i}.png'), master=self.root3)
+            self.room_img = ImageTk.PhotoImage(Image.open(f'{name}/{type}{i}.png'),master=self.root3)
             any.create_image(x, y, image=self.room_img, anchor="nw")
             sleep(0.1)
             self.root3.update_idletasks()
@@ -520,13 +425,13 @@ class MainPage:
         self.pick_ent = Entry(self.frame_cab_in, bg="#05035b", fg="white", font=("Times new roman", 20), width=20)
         self.pick_ent.place(x=350, y=130)
         self.pick_btn = Button(self.frame_cab_in, text=" Book pick up ", bg="#BA7AD1", fg="#350345",
-                               font=("Times new roman", 16, 'bold'), command=self.pickup)
+                               font=("Times new roman", 16, 'bold'),command=self.pickup)
         self.pick_btn.place(x=300, y=230)
 
         self.drop_ent = Entry(self.frame_cab_in, bg="#05035b", fg="white", font=("Times new roman", 20), width=20)
         self.drop_ent.place(x=350, y=280)
         self.drop_btn = Button(self.frame_cab_in, text=" Book drop off ", bg="#BA7AD1", fg="#350345",
-                               font=("Times new roman", 16, 'bold'), command=self.dropoff)
+                               font=("Times new roman", 16, 'bold'),command=self.dropoff)
         self.drop_btn.place(x=300, y=380)
 
         # dropdowns
@@ -624,8 +529,8 @@ class MainPage:
         self.dropmonthd3.place(x=350, y=340)
 
     def clearpickup(self):
-        self.pick_ent.delete(0, END)
-        self.drop_ent.delete(0, END)
+        self.pick_ent.delete(0,END)
+        self.drop_ent.delete(0,END)
         self.clickeddated2.set("1")
         self.clickedd1.set("Sunday")
         self.clickedmonthd3.set("January")
@@ -639,17 +544,18 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
 
-            username = self.us_name
-            pickup_address = self.pick_ent.get()
-            month = self.clickedmonth.get()
-            day = self.clicked.get()
-            date = self.clickeddate.get()
-            sql = "insert into pickup(username,pickup_address,month,day,date)" "values ('" + username + "','" + pickup_address + "','" + month + "','" + day + "','" + date + "')"
+
+            username= self.us_name
+            pickup_address= self.pick_ent.get()
+            month=self.clickedmonth.get()
+            day=self.clicked.get()
+            date=self.clickeddate.get()
+            sql = "insert into pickup(username,pickup_address,month,day,date)" "values ('" + username + "','" +pickup_address+ "','" +month+ "','" +day+ "','" +date+"')"
             values = cur.execute(sql)
             con.commit()
             con.close()
@@ -658,25 +564,25 @@ class MainPage:
 
         except:
             print("error")
-
     def dropoff(self):
         self.us_name = Login.gett()
         try:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
 
-            username = self.us_name
-            dropoff_address = self.drop_ent.get()
-            month = self.clickedmonthd3.get()
-            day = self.clickedd1.get()
-            date = self.clickeddated2.get()
 
-            sql = "insert into dropoff(username,dropoff_address,month,day,date)" "values ('" + username + "','" + dropoff_address + "','" + month + "','" + day + "','" + date + "')"
+            username= self.us_name
+            dropoff_address= self.drop_ent.get()
+            month= self.clickedmonthd3.get()
+            day=self.clickedd1.get()
+            date=self.clickeddated2 .get()
+
+            sql = "insert into dropoff(username,dropoff_address,month,day,date)" "values ('" + username + "','" +dropoff_address+ "','" +month+ "','" +day+ "','" +date+"')"
             values = cur.execute(sql)
             con.commit()
             con.close()
