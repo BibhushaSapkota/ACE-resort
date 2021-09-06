@@ -78,9 +78,9 @@ class Login:
                 con = mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='Leanstartup@1',
+                    password='@!2002bisesh',
                     port=3306,
-                    database='login_registration')
+                    database='login_registration1')
                 cur = con.cursor()
                 cur.execute("select * from registration where username=%s and password=%s", (self.username_entry.get(),self.password_entry.get()))
                 row = cur.fetchone()
@@ -88,7 +88,7 @@ class Login:
                 if self.username_entry.get()=='admin' and self.password_entry.get()=='admin' and self.var123.get()==2:
                     messagebox.showinfo("Success", "Successful login", parent=self.root1)
                     self.root1.withdraw()
-                    admin_dash.admin(Toplevel())
+                    admin_dash.admin(Tk())
                 elif self.username_entry.get()=='admin' and self.password_entry.get()=='admin' and self.var123.get()==1:
                     print(self.var123.get())
                     messagebox.showerror("Error", "Select currect authority", parent=self.root1)
@@ -149,9 +149,9 @@ def show_login_result(username, password):
     con = mysql.connector.connect(
         host='127.0.0.1',
         user='root',
-        password='Janakidevi24#',
+        password='@!2002bisesh',
         port=3306,
-        database='login_registration')
+        database='login_registration1')
     cur = con.cursor()
     cur.execute("select * from registration where username=%s and password=%s",
                     (username, password))
