@@ -5,6 +5,7 @@ import time
 import threading
 from playsound import playsound
 import Login
+
 class Loading:
     def __init__(self):
         self.root=Tk()

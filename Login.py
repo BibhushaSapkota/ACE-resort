@@ -3,8 +3,6 @@ from tkinter.tix import *
 from PIL import ImageTk, Image
 from tkinter import messagebox
 import mysql.connector
-
-import admin_dash
 import main_page
 import registration_page
 
@@ -78,9 +76,9 @@ class Login:
                 con = mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='@!2002bisesh',
+                    password='Janakidevi24#',
                     port=3306,
-                    database='login_registration1')
+                    database='login_registration')
                 cur = con.cursor()
                 cur.execute("select * from registration where username=%s and password=%s", (self.username_entry.get(),self.password_entry.get()))
                 row = cur.fetchone()
@@ -88,7 +86,7 @@ class Login:
                 if self.username_entry.get()=='admin' and self.password_entry.get()=='admin' and self.var123.get()==2:
                     messagebox.showinfo("Success", "Successful login", parent=self.root1)
                     self.root1.withdraw()
-                    admin_dash.admin(Tk())
+                    main_page.MainPage(Tk())
                 elif self.username_entry.get()=='admin' and self.password_entry.get()=='admin' and self.var123.get()==1:
                     print(self.var123.get())
                     messagebox.showerror("Error", "Select currect authority", parent=self.root1)
@@ -141,17 +139,17 @@ class Login:
         self.my_canvas.create_line(x + c, y + h, x + w - c, y + h, fill="black", width=10)
         self.my_canvas.create_line(x, y + c, x, y + h - c, fill="black", width=10)
         self.my_canvas.create_line(x + w, y + c, x + w, y + h - c, fill="black", width=10)
-
 def gett():
     return usname
+
 
 def show_login_result(username, password):
     con = mysql.connector.connect(
         host='127.0.0.1',
         user='root',
-        password='@!2002bisesh',
+        password='Janakidevi24#',
         port=3306,
-        database='login_registration1')
+        database='login_registration')
     cur = con.cursor()
     cur.execute("select * from registration where username=%s and password=%s",
                     (username, password))
@@ -160,4 +158,5 @@ def show_login_result(username, password):
         return "Pass"
     else:
         return "Fail"
+
 

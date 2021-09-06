@@ -25,13 +25,12 @@ class Roompage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
             cur.execute("select room_no from room_book")
             row = cur.fetchall()
-            print(row)
             for i in range (19):
                 try:
                     if row[i] == ('Room:1',):
@@ -609,7 +608,7 @@ class Roompage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
