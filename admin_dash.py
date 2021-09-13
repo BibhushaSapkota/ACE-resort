@@ -116,6 +116,8 @@ class admin:
         scrollu=Scrollbar(self.frame_main,orient=VERTICAL)
         self.displayuserdata=ttk.Treeview(self.frame_main,height=500,column=("username","fname","lname","contact_number","gender"),xscrollcommand=scrollu.set)
         scrollu.pack(side=RIGHT,fill=Y)
+        scrollu.config(command=self.displayuserdata.yview)
+
         self.displayuserdata.heading("username",text="User name")
         self.displayuserdata.heading("fname",text="First name")
         self.displayuserdata.heading("lname", text="Last name")
@@ -202,9 +204,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
             cur.execute("select * from room_book")
             result = cur.fetchall()
@@ -369,6 +371,7 @@ class admin:
         scroll=Scrollbar(self.frame_info,orient=VERTICAL)
         self.display=ttk.Treeview(self.frame_info,height=500,column=("username","room_no"),xscrollcommand=scroll.set)
         scroll.pack(side=RIGHT,fill=Y)
+        scroll.config(command=self.display.yview)
         self.display.heading("username",text="User name")
         self.display.heading("room_no",text="Room number")
         self.display['show']='headings'
@@ -386,9 +389,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
             cur.execute("select * from pickup")
             result = cur.fetchall()
@@ -407,9 +410,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
             cur.execute("select * from dropoff")
             result = cur.fetchall()
@@ -432,6 +435,7 @@ class admin:
         self.framec_button = LabelFrame(self.root5, height=660, width=1080, borderwidth=10)
         self.framec_button.place(x=300, y=130)
         self.framec_button.pack_propagate(False)
+
 
         self.btnbg_img = ImageTk.PhotoImage(Image.open('rb.png'), master=self.root5)
 
@@ -462,6 +466,7 @@ class admin:
         self.displaypickup = ttk.Treeview(self.frame_pickup, height=400, column=("username", "pickup_address","month","day","date"),
                                     xscrollcommand=scrollp.set)
         scrollp.pack(side=RIGHT, fill=Y)
+        scrollp.config(command=self.displaypickup.yview)
 
         self.displaypickup.heading("username", text="User name")
         self.displaypickup.heading("pickup_address", text="Pickup Address")
@@ -500,6 +505,7 @@ class admin:
                                           column=("username", "dropoff_address", "month", "day", "date"),
                                           xscrollcommand=scrolld.set)
         scrolld.pack(side=RIGHT, fill=Y)
+        scrolld.config(command=self.displaydropoff.yview)
 
         self.displaydropoff.heading("username", text="User name")
         self.displaydropoff.heading("dropoff_address", text="Dropoff Address")
@@ -525,15 +531,36 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
             cur.execute("select * from burgar")
             result = cur.fetchall()
             if len(result) != 0:
                 for row in result:
                     self.displaycustom.insert('', END, values=row)
+
+                con.close()
+
+        except:
+            print('error')
+            pass
+
+    def menu(self):
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='@!2002bisesh',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+            cur.execute("select * from menu")
+            result = cur.fetchall()
+            if len(result) != 0:
+                for row in result:
+                    self.displaymenu.insert('', END, values=row)
 
                 con.close()
 
@@ -559,20 +586,86 @@ class admin:
                                   border='0', overrelief="sunken", compound=CENTER, command=self.showcustom)
         self.custombtn.place(x=100, y=10)
 
-        self.menubtn = Button(self.frameo_button, text='Drop Off', fg="white", image=self.btnbg_img,
+        self.menubtn = Button(self.frameo_button, text='Menu', fg="white", image=self.btnbg_img,
                                   font=("Rockwell nova", 10, 'bold'), cursor="hand2", borderwidth=0,
-                                  border='0', overrelief="sunken", compound=CENTER)
+                                  border='0', overrelief="sunken", compound=CENTER,command=self.showmenu)
         self.menubtn.place(x=500, y=10)
 
         self.custombtn.config(fg="green")
         self.showcustom()
 
 
+    def showmenu(self):
+        self.custombtn.config(fg="white")
+        self.menubtn.config(fg="green")
+
+        self.frame_menu = LabelFrame(self.frameo_button, height=400, width=1000, borderwidth=10)
+        self.frame_menu.place(x=10, y=100)
+        self.frame_menu.propagate(False)
+
+        scrollm = Scrollbar(self.frame_menu, orient=HORIZONTAL)
+        self.displaymenu = ttk.Treeview(self.frame_menu, height=400, column=("username","chicken_momo","buff_momo","vegg_momo","chicken_pizza","alfungi_pizza","cheese_pizza","ham_burger","chicken_burger","mix_burger","sizzler","newari_khajaset","yomari","choila","Thakali_set","chicken_sekuwa","pork_sekuwa","buff_sekuwa","coke","dew","fanta"),
+                                    xscrollcommand=scrollm.set)
+
+        scrollm.pack(side=BOTTOM, fill=X)
+        scrollm.config(command=self.displaymenu.xview)
+
+        self.displaymenu.heading("username", text="User name")
+        self.displaymenu.heading("chicken_momo", text="Chicken momo")
+        self.displaymenu.heading("buff_momo", text="Buff momo")
+        self.displaymenu.heading("vegg_momo", text="Veg momo")
+        self.displaymenu.heading("chicken_pizza", text="Chicken pizza")
+        self.displaymenu.heading("alfungi_pizza", text="Alfungi pizza")
+        self.displaymenu.heading("cheese_pizza", text="Cheese pizza")
+        self.displaymenu.heading("ham_burger", text="Ham burger")
+        self.displaymenu.heading("chicken_burger", text="Chicken Burger")
+        self.displaymenu.heading("mix_burger", text="Mix Burger")
+        self.displaymenu.heading("sizzler", text="Sizzler")
+        self.displaymenu.heading("newari_khajaset", text="Newari set")
+        self.displaymenu.heading("yomari", text="Yomari")
+        self.displaymenu.heading("choila", text="Choila")
+        self.displaymenu.heading("Thakali_set", text="Thakali set")
+        self.displaymenu.heading("chicken_sekuwa", text="Chicken sekuwa")
+        self.displaymenu.heading("pork_sekuwa", text="Pork sekuwa")
+        self.displaymenu.heading("buff_sekuwa", text="Buff Sekuwa")
+        self.displaymenu.heading("coke", text="Coke")
+        self.displaymenu.heading("dew", text="Dew")
+        self.displaymenu.heading("fanta", text="Fanta")
+
+
+
+        self.displaymenu['show'] = 'headings'
+
+        self.displaymenu.column("username", width=100)
+        self.displaymenu.column("chicken_momo", width=100)
+        self.displaymenu.column("buff_momo",width=100)
+        self.displaymenu.column("vegg_momo", width=100)
+        self.displaymenu.column("chicken_pizza", width=100)
+        self.displaymenu.column("alfungi_pizza", width=100)
+        self.displaymenu.column("cheese_pizza", width=100)
+        self.displaymenu.column("ham_burger", width=100)
+        self.displaymenu.column("chicken_burger", width=100)
+        self.displaymenu.column("mix_burger", width=100)
+        self.displaymenu.column("sizzler",width=50 )
+        self.displaymenu.column("newari_khajaset", width=100)
+        self.displaymenu.column("yomari",width=50)
+        self.displaymenu.column("choila", width=50)
+        self.displaymenu.column("Thakali_set", width=100)
+        self.displaymenu.column("chicken_sekuwa", width=100)
+        self.displaymenu.column("pork_sekuwa", width=100)
+        self.displaymenu.column("buff_sekuwa", width=100)
+        self.displaymenu.column("coke",width=50)
+        self.displaymenu.column("dew", width=50)
+        self.displaymenu.column("fanta", width=50)
+
+        self.displaymenu.pack(fill=BOTH, expand=1)
+
+
+        self.menu()
+
     def showcustom(self):
         self.custombtn.config(fg="green")
         self.menubtn.config(fg="white")
-
-
 
         self.frame_custom = LabelFrame(self.frameo_button, height=400, width=1000, borderwidth=10)
         self.frame_custom.place(x=10, y=100)
@@ -582,6 +675,7 @@ class admin:
         self.displaycustom = ttk.Treeview(self.frame_custom, height=400, column=("username", "spanich","tomato","pickel","cheese","fish","chicken","qty"),
                                     xscrollcommand=scrollc.set)
         scrollc.pack(side=RIGHT, fill=Y)
+        scrollc.config(command=self.displaycustom.yview)
 
         self.displaycustom.heading("username", text="User name")
         self.displaycustom.heading("spanich", text="Spinach")
