@@ -3,7 +3,6 @@ from tkinter.tix import *
 from PIL import ImageTk, Image
 from tkinter import messagebox
 import mysql.connector
-
 import admin_dash
 import main_page
 import registration_page
@@ -48,7 +47,7 @@ class Login:
                                     bg="snow3", fg="#05035b")
         self.my_canvas.create_window(680, 420, anchor="nw", window=self.password_entry)
         self.forget_btn = Button(self.root1, text="Forgot password",bg="red",fg="white",font=("Rockwell nova", 15), cursor="hand2",
-                               border='0',overrelief="sunken")
+                               border='0',command=self.checking_username12,overrelief="sunken")
         self.forget_btn.place(x=770, y=480)
 
 
@@ -68,7 +67,101 @@ class Login:
     def register_window(self):
         self.root1.withdraw()
         registration_page.Register(Toplevel())
+    def checking_username12(self):
+        if self.username_entry.get()=="" or self.username_entry.get()=="Enter Username Here":
+            messagebox.showerror("Error", "username entry field is empty", parent=self.root1)
+        else:
+            try:
+                con = mysql.connector.connect(
+                    host='127.0.0.1',
+                    user='root',
+                    password='Janakidevi24#',
+                    port=3306,
+                    database='login_registration')
+                cur = con.cursor()
+                cur.execute("select username from registration where username=%s",
+                            (self.username_entry.get(),))
+                self.check = cur.fetchone()
+                if len(self.check)>0:
+                    print(len(self.check))
+                    return self.forget_fn()
+            except:
+                messagebox.showerror("Error", "username not found", parent=self.root1)
 
+
+
+
+
+    def forget_fn(self):
+        self.root1.withdraw()
+        self.root2=Toplevel()
+        self.root2.geometry("%dx%d+0+0" % (self.root2.winfo_screenwidth(), self.root2.winfo_screenheight()))
+        self.my_canvas1 = Canvas(self.root2)
+        self.my_canvas1.pack(fill="both", expand=True)
+        self.log_btn = Button(self.root2, text="Go Back to Login", font=("Algerian", 20, 'bold'),
+                              command=self.back_login)
+        self.log_btn.place(x=880, y=650)
+        self.login2 = ImageTk.PhotoImage(Image.open(f'login.png'), master=self.root2)
+        self.my_canvas1.create_image(0,0,image=self.login2, anchor="nw")
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='Janakidevi24#',
+                port=3306,
+                database='login_registration')
+            cur = con.cursor()
+            cur.execute("select security_question,answer from registration where username=%s",(self.username_entry.get(),))
+            self.check = cur.fetchone()
+
+
+        except:
+            print("abcd")
+        self.my_canvas1.create_text(1000, 70, text="Forget password.No problem.Answer the security question.Change password.",fill="red", font=("Arial", 20))
+        self.my_canvas1.create_text(1000, 150, text="Security question", font=("Algerian", 30, 'bold'), fill="gold")
+        self.my_canvas1.create_text(1000,200,text=self.check[0], font=("Arial", 20, 'bold'))
+        self.my_canvas1.create_text(1000, 250, text="Answer", font=("Algerian", 30, 'bold'), fill="gold")
+        self.ans_entry=Entry(self.root2,font=("areal", 20))
+        self.ans_entry.place(x=850,y=300)
+        self.submit_btn=Button(self.root2,text="Submit",font=("Algerian", 20, 'bold'),command=self.submit_fn)
+        self.submit_btn.place(x=950,y=350)
+        self.root1.mainloop()
+    def submit_fn(self):
+        if self.ans_entry.get()==self.check[1]:
+            self.my_canvas1.create_text(1000, 450, text="Change password Here", font=("Arial", 20, 'bold'))
+            self.new_pass_entry = Entry(self.root2,font=("areal", 20))
+            self.new_pass_entry.place(x=850, y=500)
+            self.change_btn = Button(self.root2, text="Change", font=("Algerian", 20, 'bold'), command=self.change_update)
+            self.change_btn.place(x=950, y=550)
+        else:
+            messagebox.showerror("Error","Please give the correct answer or contact admin",parent=self.root2)
+
+
+    def change_update(self):
+        if self.new_pass_entry.get()=="":
+            return messagebox.showerror("Error", "Please type new password", parent=self.root2)
+        else:
+            try:
+                con5 = mysql.connector.connect(
+                    host='127.0.0.1',
+                    user='root',
+                    password='Janakidevi24#',
+                    port=3306,
+                    database='login_registration')
+                print(con5)
+                cursor = con5.cursor()
+                print(cursor)
+                sql_update = "update registration set password=%s where username=%s"
+                val = (self.new_pass_entry.get(), self.username_entry.get(),)
+                cursor.execute(sql_update, val)
+                con5.commit()
+                messagebox.showerror("Success", "Changed successfully", parent=self.root2)
+
+            except:
+                messagebox.showerror("Error", "Do not leave empty.", parent=self.root2)
+    def back_login(self):
+        self.root2.withdraw()
+        Login(Toplevel())
 
     def login(self):
         if self.username_entry.get()=="" or self.password_entry.get()=="":
@@ -78,9 +171,9 @@ class Login:
                 con = mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='@!2002bisesh',
+                    password='Janakidevi24#',
                     port=3306,
-                    database='login_registration1')
+                    database='login_registration')
                 cur = con.cursor()
                 cur.execute("select * from registration where username=%s and password=%s", (self.username_entry.get(),self.password_entry.get()))
                 row = cur.fetchone()
@@ -149,9 +242,9 @@ def show_login_result(username, password):
     con = mysql.connector.connect(
         host='127.0.0.1',
         user='root',
-        password='@!2002bisesh',
+        password='Janakidevi24#',
         port=3306,
-        database='login_registration1')
+        database='login_registration')
     cur = con.cursor()
     cur.execute("select * from registration where username=%s and password=%s",
                     (username, password))
@@ -160,5 +253,3 @@ def show_login_result(username, password):
         return "Pass"
     else:
         return "Fail"
-
-
