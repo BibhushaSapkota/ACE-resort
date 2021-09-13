@@ -313,9 +313,9 @@ class run:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Janakidevi24#',
+                password='@!2002bisesh',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             print (con)
             cur = con.cursor()
             print (cur)
@@ -350,7 +350,7 @@ class run:
 
             con.commit()
             con.close()
-            messagebox.showinfo("success", "You have been successfully registered", parent=self.root)
+            messagebox.showinfo("Thank you", "Your order has been placed", parent=self.root)
             self.clear_data()
             self.zero()
 
