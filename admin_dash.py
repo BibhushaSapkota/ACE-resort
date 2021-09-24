@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
 
 import mysql.connector
 from PIL import Image, ImageTk
@@ -88,9 +88,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             cur.execute("select username,fname,lname,contact_number,gender from registration")
             result = cur.fetchall()
@@ -144,9 +144,9 @@ class admin:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Janakidevi24#',
                 port=3306,
-                database='login_registration1')
+                database='login_registration')
             cur = con.cursor()
             cur.execute("select room_no from room_book")
             row = cur.fetchall()
@@ -246,7 +246,20 @@ class admin:
         self.roomviewbtn.place(x=100, y=0)
 
 
-        self.roomviewbtn.config(fg='white')
+        self.txt = ttk.Combobox(self.frame_button, font=("times new roman", 12), state='readonly', justify=CENTER)
+        self.txt['values'] = ('Select', 'Room:1', 'Room:2', 'Room:3', 'Room:4', 'Room:5', 'Room:6'
+                              , 'Room:7', 'Room:8', 'Room:9'
+                              , 'Room:10', 'Villa:11', 'Villa:12', 'Villa:13', 'Villa:14', 'Villa:15'
+                              , 'Hall:16', 'Hall:17', 'Hall:18')
+        self.txt.place(x=600, y=5, width=250)
+        self.txt.current(0)
+        self.book_checkout = Button(self.frame_button, text="Check out", fg="white", image=self.room_img,
+                                    font=("Rockwell nova", 10, 'bold'),
+                                    cursor="hand2", borderwidth=0,
+                                    border='0', overrelief="sunken", compound=CENTER, command=self.room_checkout)
+        self.book_checkout.place(x=900, y=0)
+
+        self.roomviewbtn.config(fg='green')
         self.roomview()
     def roomview(self):
         self.roomviewbtn.config(fg='green')
@@ -255,6 +268,8 @@ class admin:
         self.room_btn.config(fg='green')
         self.orders_btn.config(fg='white')
         self.cab_btn.config(fg='white')
+
+
 
         self.frame_standardroom = LabelFrame(self.frame_button, height=550, width=1040, borderwidth=10)
         self.frame_standardroom.place(x=10, y=60)
@@ -703,3 +718,29 @@ class admin:
         self.displaycustom.pack(fill=BOTH, expand=1)
 
         self.customdata()
+
+    def room_checkout(self):
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='Janakidevi24#',
+                port=3306,
+                database='login_registration')
+            cur = con.cursor()
+            cur.execute("select * from room_book where room_no=%s", (self.txt.get(),))
+            row = cur.fetchone()
+            if row != None:
+                cur.execute("delete from room_book where room_no=%s", (self.txt.get(),))
+                messagebox.showinfo("success", "The room has been sucessfully checked out", parent=self.root5)
+
+                con.commit()
+                con.close()
+            else:
+                messagebox.showerror('sorry', 'The room no you have choosen has not been booked yet')
+
+
+
+        finally:
+            pass
+        self.moreinfo()
