@@ -47,7 +47,7 @@ class MainPage:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
 
@@ -245,7 +245,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -390,7 +390,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -403,7 +403,7 @@ class MainPage:
             self.txt_age.insert(0, row[5])
             self.txt_password.insert(0, row[6])
         except:
-            print("error")
+            print("sjkjfsd")
             pass
 
     def update(self):
@@ -411,7 +411,7 @@ class MainPage:
             con5 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             print(con5)
@@ -438,7 +438,7 @@ class MainPage:
 
         self.review_entry1 = Text(self.frame_review, height=10, font=("Times new roman", 15, 'bold'))
         self.review_entry1.place(x=100, y=100)
-        self.submit_btn = Button(self.frame_review, text="Submit", font=("Times new roman", 25, 'bold'))
+        self.submit_btn = Button(self.frame_review, text="Submit", font=("Times new roman", 25, 'bold'),command=self.review)
         self.submit_btn.place(x=300, y=350)
 
     def press_enter(self, e):
@@ -638,7 +638,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -658,13 +658,14 @@ class MainPage:
 
         except:
             print("error")
+
     def dropoff(self):
         self.us_name = Login.gett()
         try:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -685,3 +686,28 @@ class MainPage:
 
         except:
             print("error")
+
+    def review(self):
+        self.us_name = Login.gett()
+        try:
+
+            username = self.us_name
+            review1 = self.review_entry1.get("1.0", "end-1c")
+
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='9869167415',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+            print("a")
+            cur.execute("insert into review(username,review)" "values ('" + username + "','" + review1 + "')")
+            con.commit()
+            con.close()
+            messagebox.showinfo("success", "Your review has been submitted", parent=self.root3)
+            self.review_entry1.delete("1.0", "end-1c")
+
+        except:
+            print("error")
+
