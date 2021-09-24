@@ -200,7 +200,7 @@ class Roompage:
                                    cursor="hand2",borderwidth=0,
                                    border='0', overrelief="sunken",compound=CENTER,command=self.roomm4)
         self.room5.place(x=810,y=30)
-
+        self.sroom()
         self.name_fn='Standard rooms'
         self.room_check()
 
@@ -209,6 +209,7 @@ class Roompage:
         self.deluxeroom_btn.config(fg='green')
         self.villa_btn.config(fg='white')
         self.hall_btn.config(fg='white')
+
         self.room_img = ImageTk.PhotoImage(Image.open('rb.png'), master=self.root4)
         self.frame_deluxeroom = LabelFrame(self.root4, height=650, width=1050, borderwidth=10)
         self.frame_deluxeroom.place(x=300, y=130)
@@ -235,6 +236,7 @@ class Roompage:
                                    border='0', overrelief="sunken",compound=CENTER,command=self.roomm8)
         self.room10.place(x=810,y=30)
         self.frame_main.pack_propagate(False)
+        self.droom()
         self.name_fn='deluxe room'
         self.room_check()
     def fn_villa(self):
@@ -269,6 +271,7 @@ class Roompage:
                                    border='0', overrelief="sunken",compound=CENTER,command=self.villa5)
         self.villa105.place(x=810,y=30)
         self.frame_main.pack_propagate(False)
+        self.villa_info()
         self.name_fn='villa'
         self.room_check()
     def fn_hall(self):
@@ -293,6 +296,7 @@ class Roompage:
         self.frame_main.pack_propagate(False)
         self.name_fn='seminar hall'
         self.room_check()
+        self.hall16()
 
     def sroom(self):
         self.frame_main.place_forget()
@@ -494,7 +498,7 @@ class Roompage:
         self.frame_hall1.pack_propagate(False)
         self.my_canvas_room = Canvas(self.frame_hall1)
         self.my_canvas_room.pack(fill="both", expand=True)
-        self.vpicc=Image.open('vinfo.png')
+        self.vpicc=Image.open('hall16.jpg')
         self.vg=ImageTk.PhotoImage(self.vpicc,master=self.root4)
         self.lblv=Label(self.frame_hall1,image=self.vg).place(x=0,y=0,width=937,height=490)
         self.room_check()
@@ -509,7 +513,7 @@ class Roompage:
         self.frame_hall1.pack_propagate(False)
         self.my_canvas_room = Canvas(self.frame_hall1)
         self.my_canvas_room.pack(fill="both", expand=True)
-        self.vpicc=Image.open('vinfo.png')
+        self.vpicc=Image.open('hall17.jpg')
         self.vg=ImageTk.PhotoImage(self.vpicc,master=self.root4)
         self.lblv=Label(self.frame_hall1,image=self.vg).place(x=0,y=0,width=937,height=490)
         self.room_check()
@@ -523,7 +527,7 @@ class Roompage:
         self.frame_hall1.pack_propagate(False)
         self.my_canvas_room = Canvas(self.frame_hall1)
         self.my_canvas_room.pack(fill="both", expand=True)
-        self.vpicc=Image.open('vinfo.png')
+        self.vpicc=Image.open('hall18.jpg')
         self.vg=ImageTk.PhotoImage(self.vpicc,master=self.root4)
         self.lblv=Label(self.frame_hall1,image=self.vg).place(x=0,y=0,width=937,height=490)
         self.room_check()

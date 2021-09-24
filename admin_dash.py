@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
 
 import mysql.connector
 from PIL import Image, ImageTk
@@ -79,6 +79,15 @@ class admin:
                               cursor="hand2", borderwidth=0,
                               border='0', overrelief="sunken", compound=CENTER,command=self.cabdetails)
         self.cab_btn.place(x=30, y=450)
+        usernamelbl = Label(self.root5, text='username :', font=("times new roman", 15, 'bold'), bg='white',
+                    fg='#51375d').place(x=30, y=550)
+        self.userentry=Entry(self.root5,font=("times new roman",15),bg='#bcb5c0')
+        self.userentry.place(x=30,y=600)
+        self.delete_btn = Button(self.root5, text="DELETE", fg="white", image=self.btn_img,
+                              font=("Rockwell nova", 20, 'bold'),
+                              cursor="hand2", borderwidth=0,
+                              border='0', overrelief="sunken", compound=CENTER,command=self.deleteuser)
+        self.delete_btn.place(x=30, y=650)
 
 
 
@@ -237,7 +246,7 @@ class admin:
         self.roominfobtn = Button(self.frame_button, text='Info', fg="white", image=self.room_img,
                                   font=("Rockwell nova", 10, 'bold'), cursor="hand2", borderwidth=0,
                                   border='0', overrelief="sunken", compound=CENTER, command=self.moreinfo)
-        self.roominfobtn.place(x=500, y=0)
+        self.roominfobtn.place(x=300, y=0)
 
 
         self.roomviewbtn = Button(self.frame_button, text='View rooms', fg="white", image=self.room_img,
@@ -245,8 +254,20 @@ class admin:
                                   border='0', overrelief="sunken", compound=CENTER, command=self.roomview)
         self.roomviewbtn.place(x=100, y=0)
 
+        self.txt = ttk.Combobox(self.frame_button, font=("times new roman", 12), state='readonly', justify=CENTER)
+        self.txt['values'] = ('Select', 'Room:1', 'Room:2', 'Room:3', 'Room:4', 'Room:5', 'Room:6'
+                              , 'Room:7', 'Room:8', 'Room:9'
+                              , 'Room:10', 'Villa:11', 'Villa:12', 'Villa:13', 'Villa:14', 'Villa:15'
+                              , 'Hall:16', 'Hall:17', 'Hall:18')
+        self.txt.place(x=600, y=5, width=250)
+        self.txt.current(0)
+        self.book_checkout = Button(self.frame_button, text="Check out", fg="white", image=self.room_img,
+                               font=("Rockwell nova", 10, 'bold'),
+                               cursor="hand2", borderwidth=0,
+                               border='0', overrelief="sunken", compound=CENTER, command=self.room_checkout)
+        self.book_checkout.place(x=900, y=0)
 
-        self.roomviewbtn.config(fg='white')
+        self.roomviewbtn.config(fg='green')
         self.roomview()
     def roomview(self):
         self.roomviewbtn.config(fg='green')
@@ -363,7 +384,7 @@ class admin:
         self.orders_btn.config(fg='white')
         self.cab_btn.config(fg='white')
         self.frame_standardroom.destroy()
-
+        self.frame_standardroom.destroy()
         self.frame_info = LabelFrame(self.frame_button, height=500, width=800, borderwidth=10)
         self.frame_info.place(x=100, y=100)
         self.frame_info.propagate(False)
@@ -703,3 +724,57 @@ class admin:
         self.displaycustom.pack(fill=BOTH, expand=1)
 
         self.customdata()
+
+
+    def room_checkout(self):
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='@!2002bisesh',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+            cur.execute("select * from room_book where room_no=%s", (self.txt.get(),))
+            row = cur.fetchone()
+            if row != None:
+                cur.execute("delete from room_book where room_no=%s", (self.txt.get(),))
+                messagebox.showinfo("success", "The room has been sucessfully checked out", parent=self.root5)
+
+                con.commit()
+                con.close()
+            else:
+                messagebox.showerror('sorry', 'The room no you have choosen has not been booked yet')
+
+
+
+        finally:
+            pass
+        self.moreinfo()
+    def deleteuser(self):
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='@!2002bisesh',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+            cur.execute("select * from registration where username=%s", (self.userentry.get(),))
+            row = cur.fetchone()
+            if row != None:
+                cur.execute("delete from registration where username=%s", (self.userentry.get(),))
+                messagebox.showinfo("success", "The user has been successfully removed from the system", parent=self.root5)
+
+                con.commit()
+                con.close()
+            else:
+                messagebox.showerror('sorry', 'The user with username you have given does not exist in our system')
+
+        finally:
+            pass
+
+        self.main_frame()
+        self.userentry.delete(0,END)
+
+

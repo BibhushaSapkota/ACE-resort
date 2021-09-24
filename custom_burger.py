@@ -267,7 +267,7 @@ class CustomBurger:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@12002bisesh',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
