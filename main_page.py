@@ -47,9 +47,9 @@ class MainPage:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
 
             cur1 = con1.cursor()
             cur1.execute(query, (self.us_name,))
@@ -245,9 +245,9 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
             cur.execute("select * from room_book where username=%s", (self.us_name,))
             result = cur.fetchall()
@@ -346,70 +346,53 @@ class MainPage:
     def fn_profile(self):
         self.frame_profile = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
         self.frame_profile.place(x=300, y=130)
-
-        self.frame_profile.pack_propagate(False)
-        self.my_canvas_profile = Canvas(self.frame_profile)
-        self.my_canvas_profile.pack(fill="both", expand=True)
-        self.profile_bg_img = ImageTk.PhotoImage(Image.open(f'profile_bg.png'), master=self.root3)
-        self.my_canvas_profile.create_image(0, 0, image=self.profile_bg_img, anchor="nw")
+        self.topic = Label(self.frame_profile, text='YOUR PROFILE', font=("Rockwell nova", 30, 'bold'))
+        self.topic.place(x=420, y=30)
         self.name_fn = 'profile'
         self.img_change()
-
-
-
-
-        self.my_canvas_profile.create_text(450, 100, text="Personal and Account Information", font=("Algerian", 45), fill="white")
-
-        self.my_canvas_profile.create_text(155, 150, text="First Name", font=("times new roman", 15), fill="white")
-
+        fname = Label(self.frame_profile, text='First Name', font=("times new roman", 15, 'bold'), bg='white',
+                      fg='#51375d').place(x=50, y=100)
         self.txt_fname = Entry(self.frame_profile, font=("times new roman", 15), bg='#bcb5c0')
-        self.txt_fname.place(x=120, y=170, width=250)
+        self.txt_fname.place(x=50, y=130, width=250)
 
-        self.my_canvas_profile.create_text(480, 150, text="Last Name", font=("times new roman", 15), fill="white")
-
+        lname = Label(self.frame_profile, text='Last Name', font=("times new roman", 15, 'bold'), bg='white',
+                      fg='#51375d').place(x=370, y=100)
         self.txt_lname = Entry(self.frame_profile, font=("times new roman", 15), bg='#bcb5c0')
-        self.txt_lname.place(x=450, y=170, width=250)
+        self.txt_lname.place(x=370, y=130, width=250)
 
-        self.my_canvas_profile.create_text(170, 230, text="Contact Number", font=("times new roman", 15), fill="white")
-
-
+        contact = Label(self.frame_profile, text='Contact Number', font=("times new roman", 15, 'bold'), bg='white',
+                        fg='#51375d').place(x=50, y=160)
         self.txt_contact = Entry(self.frame_profile, font=("times new roman", 15), bg='#bcb5c0')
-        self.txt_contact.place(x=120, y=250, width=250)
+        self.txt_contact.place(x=50, y=190, width=250)
 
-        self.my_canvas_profile.create_text(150, 310, text="Gender", font=("times new roman", 15), fill="white")
-
+        gender = Label(self.frame_profile, text='Gender', font=("times new roman", 15, 'bold'), bg='white',
+                       fg='#51375d').place(x=50, y=220)
         self.gender = ttk.Combobox(self.frame_profile, font=("times new roman", 12), state='readonly', justify=CENTER)
         self.gender['values'] = ('Select', 'Male', 'Female')
-        self.gender.place(x=120, y=330, width=250)
+        self.gender.place(x=50, y=250, width=250)
         self.gender.current(0)
 
-        self.my_canvas_profile.create_text(460, 230, text="Age", font=("times new roman", 15), fill="white")
-
-
+        age = Label(self.frame_profile, text='Age', font=("times new roman", 15, 'bold'), bg='white',
+                    fg='#51375d').place(x=370, y=220)
         self.txt_age = Entry(self.frame_profile, font=("times new roman", 15), bg='#bcb5c0')
-        self.txt_age.place(x=450, y=250, width=250)
+        self.txt_age.place(x=370, y=250, width=250)
 
-        self.my_canvas_profile.create_text(480, 310, text="Password", font=("times new roman", 15), fill="white")
-
+        password = Label(self.frame_profile, text='Password', font=("times new roman", 15, 'bold'), bg='white',
+                         fg='#51375d').place(x=50, y=280)
 
         self.txt_password = Entry(self.frame_profile, font=("times new roman", 15), bg='#bcb5c0', show="*")
-        self.txt_password.place(x=450, y=330, width=250)
+        self.txt_password.place(x=50, y=310, width=250)
 
-        #self.update_profile = Button(self.frame_profile, text="UPDATE", command=self.update,
-                                     #font=("times new roman", 25), bg='#bcb5c0')
-        #self.update_profile.place(x=210, y=450, width=250)
-
-        self.update_profile = Button(self.frame_profile, text=" Update " ,command=self.update, bg="#BA7AD1", fg="#350345",
-                                     font=("Times new roman", 25, 'bold'))
-        self.update_profile.place(x=300, y=420, width=250)
-
+        self.update_profile = Button(self.frame_profile, text="UPDATE", command=self.update,
+                                     font=("times new roman", 25), bg='#bcb5c0')
+        self.update_profile.place(x=100, y=400)
         try:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
             cur.execute("select * from registration where username=%s", (self.us_name,))
             row = cur.fetchone()
@@ -420,7 +403,7 @@ class MainPage:
             self.txt_age.insert(0, row[5])
             self.txt_password.insert(0, row[6])
         except:
-            print("error")
+            print("sjkjfsd")
             pass
 
     def update(self):
@@ -428,9 +411,9 @@ class MainPage:
             con5 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             print(con5)
             cursor = con5.cursor()
             print(cursor)
@@ -442,10 +425,9 @@ class MainPage:
             self.txt_password.get(), self.us_name,)
             cursor.execute(sql_update, val)
             con5.commit()
-            messagebox.showinfo("Update", "update successful",parent=self.root3)
         except:
-            messagebox.showinfo("Update", "update unsuccessful",parent=self.root3)
-
+            print("sjkjfsd")
+            pass
     def fn_review(self):
         self.frame_review = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
         self.frame_review.place(x=300, y=130)
@@ -456,7 +438,7 @@ class MainPage:
 
         self.review_entry1 = Text(self.frame_review, height=10, font=("Times new roman", 15, 'bold'))
         self.review_entry1.place(x=100, y=100)
-        self.submit_btn = Button(self.frame_review, text="Submit", font=("Times new roman", 25, 'bold'))
+        self.submit_btn = Button(self.frame_review, text="Submit", font=("Times new roman", 25, 'bold'),command=self.review)
         self.submit_btn.place(x=300, y=350)
 
     def press_enter(self, e):
@@ -656,9 +638,9 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
 
 
@@ -676,15 +658,16 @@ class MainPage:
 
         except:
             print("error")
+
     def dropoff(self):
         self.us_name = Login.gett()
         try:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
-                database='login_registration')
+                database='login_registration1')
             cur = con.cursor()
 
 
@@ -703,3 +686,28 @@ class MainPage:
 
         except:
             print("error")
+
+    def review(self):
+        self.us_name = Login.gett()
+        try:
+
+            username = self.us_name
+            review1 = self.review_entry1.get("1.0", "end-1c")
+
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='9869167415',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+            print("a")
+            cur.execute("insert into review(username,review)" "values ('" + username + "','" + review1 + "')")
+            con.commit()
+            con.close()
+            messagebox.showinfo("success", "Your review has been submitted", parent=self.root3)
+            self.review_entry1.delete("1.0", "end-1c")
+
+        except:
+            print("error")
+
