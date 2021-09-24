@@ -246,16 +246,16 @@ class CustomBurger:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
-            print(cur)
 
-            sql = "insert into burgar(qty )" \
-                  "values ( " + self.qty['text'] + ")"
+            sql = "insert into burgar(username,qty,total)" \
+                  "values ('"+Login.gett()+"', " + self.qty['text'] + "," + str(self.total_cost['text']) + ")"
             values = cur.execute(sql)
-
+            print("adsnkdas")
+            print(values)
             con.commit()
             con.close()
         except:
@@ -267,14 +267,14 @@ class CustomBurger:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@12002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
             print(cur)
 
-            sql = "insert into burgar(qty )" \
-                  "values ( " + self.qty['text']+ ")"
+            sql = "insert into burgar(username,qty )" \
+                  "values ('"+Login.gett()+"', " + self.qty['text']+ ")"
             values = cur.execute(sql)
 
             con.commit()
@@ -315,7 +315,7 @@ class CustomBurger:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -361,14 +361,14 @@ class CustomBurger:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
             print(cur)
 
-            sql = "insert into burgar(qty )" \
-                  "values ( " + self.qty['text'] + ")"
+            sql = "insert into burgar(username,qty )" \
+                  "values ( '"+Login.gett()+"'," + self.qty['text'] + ")"
             values = cur.execute(sql)
 
             con.commit()

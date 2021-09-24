@@ -47,7 +47,7 @@ class MainPage:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
 
@@ -236,16 +236,23 @@ class MainPage:
         self.name_fn = 'bill'
         self.frame_main.place_forget()
         self.room_name=Label(self.frame_bill,text="Room Total Price:",font=("times new roman", 15, 'bold'))
-        self.room_name.place(x=100,y=300)
-
+        self.room_name.place(x=50,y=300)
+        self.food_bill = Label(self.frame_bill, text="Food Total Price:", font=("times new roman", 15, 'bold'))
+        self.food_bill.place(x=300, y=300)
+        self.burgar_bill = Label(self.frame_bill, text="Custom Burger Total Price:", font=("times new roman", 15, 'bold'))
+        self.burgar_bill.place(x=600, y=300)
         self.room_total=0
         self.display=Label(self.frame_bill,text="",font=("times new roman", 15, 'bold'))
-        self.display.place(x=270,y=300)
+        self.display.place(x=100,y=400)
+        self.display_menu=Label(self.frame_bill,text="",font=("times new roman", 15, 'bold'))
+        self.display_menu.place(x=300,y=400)
+        self.display_burgar = Label(self.frame_bill, text="", font=("times new roman", 15, 'bold'))
+        self.display_burgar.place(x=650, y=400)
         try:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -307,17 +314,114 @@ class MainPage:
                     if row[1]=="Hall:18":
                         self.room_total = 100000 + self.room_total
                         self.display.config(text=self.room_total)
-
-
-
-
                 con.close()
         except:
             print("sjkjfsd")
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='1235',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+            cur.execute("select * from menu where username=%s", (self.us_name,))
+            result1 = cur.fetchall()
+            print("abc")
+            print(result1)
+            self.food_total=0
+            if len(result1) != 0:
+                for row in result1:
+                    print(row[0])
+                    if row[1]!="0":
+                        self.food_total = 190*int(row[0])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[2]!="0":
+                        self.food_total = 150*int(row[1])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[3]!="0":
+                        self.food_total = 120*int(row[3])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[4]!="0":
+                        self.food_total = 450*int(row[4])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[5]!="0":
+                        self.food_total = 390*int(row[5])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[6]!="0":
+                        self.food_total = 350*int(row[6])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[7]!="0":
+                        self.food_total = 250*int(row[7])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[8]!="0":
+                        self.food_total = 290*int(row[8])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[9]!="0":
+                        self.food_total = 300*int(row[9])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[10]!="0":
+                        self.food_total = 300*int(row[10])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[11]!="0":
+                        self.food_total = 350*int(row[11])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[12]!="0":
+                        self.food_total = 100*int(row[12])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[13]!="0":
+                        self.food_total = 200*int(row[13])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[14]!="0":
+                        self.food_total = 500*int(row[14])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[15]!="0":
+                        self.food_total = 600*int(row[15])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[16]!="0":
+                        self.food_total = 530*int(row[16])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[17]!="0":
+                        self.food_total = 200*int(row[7])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[18]!="0":
+                        self.food_total = 500*int(row[18])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[19]!="0":
+                        self.food_total = 600*int(row[19])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+                    if row[20]!="0":
+                        self.food_total = 530*int(row[20])+self.food_total
+                        self.display_menu.config(text=self.food_total)
+
+
+
+        except:
+            print('error')
             pass
-        print(self.room_total)
 
+        try:
+            con = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='1235',
+                port=3306,
+                database='login_registration1')
+            cur = con.cursor()
+            cur.execute("select * from burgar where username=%s", (self.us_name,))
+            result2 = cur.fetchall()
+            print(result2)
 
+            self.burgar_total = 0
+            if len(result2) != 0:
+                for row in result2:
+                    print(row[8])
+                    if row[8] != None:
+                        self.burgar_total = int(row[8]) + self.burgar_total
+                        self.display_burgar.config(text=self.burgar_total)
+        except:
+            print('error')
+            pass
 
         self.img_change()
 
@@ -390,7 +494,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -411,7 +515,7 @@ class MainPage:
             con5 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
             print(con5)
@@ -638,7 +742,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -664,7 +768,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
