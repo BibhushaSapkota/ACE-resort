@@ -25,15 +25,15 @@ class MainPage:
         self.result=self.convertTuple(self.row1)
         print(self.result)
         self.user_name=Label(self.root3,text=self.us_name,font=("Rockwell nova", 40,'bold'),fg="Green")
-        self.user_name.place(x=1100, y=10)
+        self.user_name.place(x=1000, y=10)
         if self.result=='Male':
             self.Mr = Label(self.root3, text='Mr', font=("Rockwell nova", 40, 'bold'), fg="Green")
-            self.Mr.place(x=980, y=10)
-            self.my_canvas.create_image(900, 10, image=self.male, anchor="nw")
+            self.Mr.place(x=880, y=10)
+            self.my_canvas.create_image(800, 10, image=self.male, anchor="nw")
         else:
             self.Mrs = Label(self.root3, text='Miss', font=("Rockwell nova", 40, 'bold'), fg="Green")
-            self.Mrs.place(x=980, y=10)
-            self.my_canvas.create_image(900, 10, image=self.female, anchor="nw")
+            self.Mrs.place(x=880, y=10)
+            self.my_canvas.create_image(800, 10, image=self.female, anchor="nw")
         self.root3.update()
         self.root3.mainloop()
 
@@ -110,6 +110,11 @@ class MainPage:
                                    cursor="hand2",borderwidth=0,
                                    border='0', overrelief="sunken",compound=CENTER,command=self.menu_main_frame)
         self.menu_btn.place(x=30,y=150)
+        self.logout_btn = Button(self.root3, text="Logout", fg="red",
+                               font=("Rockwell nova", 20, 'bold'),
+                               cursor="hand2",
+                               border='0', overrelief="sunken", compound=CENTER, command=self.logout_fn)
+        self.logout_btn.place(x=1200, y=30)
         self.bill_btn = Button(self.root3, text="   BILL", fg="white", image=self.bill_img,
                                font=("Rockwell nova", 20, 'bold'),
                                cursor="hand2", borderwidth=0,
@@ -135,7 +140,9 @@ class MainPage:
                                border='0', overrelief="sunken", compound=CENTER,command=self.fn_review)
         self.review_btn.place(x=30, y=550)
 
-
+    def logout_fn(self):
+        self.root3.destroy()
+        Login.Login(Toplevel())
     def menu_main_frame(self):
         self.menu_btn.config(image=self.menu_change_img, fg='green')
         self.bill_btn.config(image=self.bill_img, fg='white')
@@ -446,6 +453,13 @@ class MainPage:
                                             fill="white")
         self.my_canvas_about_in.create_text(500, 210, text="SPECIAL FEATURES", font=("Algerian", 40, 'bold'),
                                             fill="gold")
+        self.map_btn=Button(self.frame_about_in,text="Map",font=("Algerian", 20),bg="#c2c2f1",command=self.map_img,borderwidth=5)
+        self.map_btn.place(x=800,y=30)
+
+    def map_img(self):
+        self.map_btn.destroy()
+        self.mapp_img=ImageTk.PhotoImage(Image.open(f'map.png'), master=self.root3)
+        self.my_canvas_about_in.create_image(0, 0, image=self.mapp_img, anchor="nw")
 
     def fn_profile(self):
         self.frame_profile = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
@@ -806,7 +820,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='1235',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
