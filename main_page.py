@@ -11,7 +11,7 @@ class MainPage:
     def __init__(self,master):
         self.root3 = master
         self.root3.title("Main")
-        self.root3.state('zoomed')
+        self.root3.geometry("%dx%d+0+0" % (self.root3.winfo_screenwidth(), self.root3.winfo_screenheight()))
         self.my_canvas = Canvas(self.root3)
         self.my_canvas.pack(fill="both", expand=True)
         self.background = ImageTk.PhotoImage(Image.open('background.png'),master=self.root3)
@@ -47,7 +47,7 @@ class MainPage:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Leanstartup@1',
                 port=3306,
                 database='login_registration1')
 
@@ -153,6 +153,8 @@ class MainPage:
         self.frame_room.pack_propagate(False)
         self.my_canvas_room = Canvas(self.frame_room)
         self.my_canvas_room.pack(fill="both", expand=True)
+        self.room_bg_img = ImageTk.PhotoImage(Image.open(f'about_bg.png'), master=self.root3)
+        self.my_canvas_room.create_image(0, 0, image=self.room_bg_img, anchor="nw")
         self.room_close = ImageTk.PhotoImage(Image.open(f'room/room1.png'),master=self.root3)
         self.my_canvas_room.create_image(60, 300, image=self.room_close, anchor="nw")
         self.frame_room.bind("<Enter>", self.change_room)
@@ -173,6 +175,8 @@ class MainPage:
         self.frame_food.pack_propagate(False)
         self.my_canvas_food = Canvas(self.frame_food)
         self.my_canvas_food.pack(fill="both", expand=True)
+        self.food_bg_img = ImageTk.PhotoImage(Image.open(f'about_bg.png'), master=self.root3)
+        self.my_canvas_food.create_image(0, 0, image=self.food_bg_img, anchor="nw")
         self.food_close = ImageTk.PhotoImage(Image.open(f'food/food1.png'),master=self.root3)
         self.my_canvas_food.create_image(75, 320, image=self.food_close, anchor="nw")
         self.frame_food.bind("<Enter>", self.change_food)
@@ -192,6 +196,10 @@ class MainPage:
         self.frame_cab.pack_propagate(False)
         self.my_canvas_cab = Canvas(self.frame_cab)
         self.my_canvas_cab.pack(fill="both", expand=True)
+
+        self.cab_bg_img = ImageTk.PhotoImage(Image.open(f'about_bg.png'), master=self.root3)
+        self.my_canvas_cab.create_image(0, 0, image=self.cab_bg_img, anchor="nw")
+
         self.cab_close = ImageTk.PhotoImage(Image.open(f'cab/cab1.png'),master=self.root3)
         self.my_canvas_cab.create_image(75, 320, image=self.cab_close, anchor="nw")
         self.frame_cab.bind("<Enter>", self.change_cab)
@@ -230,29 +238,42 @@ class MainPage:
     def fn_bill(self):
         self.frame_bill = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
         self.frame_bill.place(x=300, y=130)
-        self.topic=Label(self.frame_bill,text='BILL',font=("Rockwell nova", 30,'bold'))
-        self.topic.place(x=420,y=30)
-        self.frame_bill.propagate(False)
+
+        self.frame_bill.pack_propagate(False)
+        self.my_canvas_bill = Canvas(self.frame_bill)
+        self.my_canvas_bill.pack(fill="both", expand=True)
+        self.bill_bg_img = ImageTk.PhotoImage(Image.open(f'profile_bg.png'), master=self.root3)
+        self.my_canvas_bill.create_image(0, 0, image=self.bill_bg_img, anchor="nw")
         self.name_fn = 'bill'
+        self.img_change()
+
+        self.my_canvas_bill.create_text(450, 100, text="Billing", font=("Algerian", 40),
+                                           fill="white")
+
+        self.my_canvas_bill.create_text(200, 200, text="Room Total Price :", font=("Algerian", 20),
+                                        fill="white")
+
+        self.my_canvas_bill.create_text(450, 200, text="Food Total Price :", font=("Algerian", 20),
+                                        fill="white")
+
+        self.my_canvas_bill.create_text(750, 200, text="Custom Burger Total Price :", font=("Algerian", 20),
+                                        fill="white")
+
         self.frame_main.place_forget()
-        self.room_name=Label(self.frame_bill,text="Room Total Price:",font=("times new roman", 15, 'bold'))
-        self.room_name.place(x=50,y=300)
-        self.food_bill = Label(self.frame_bill, text="Food Total Price:", font=("times new roman", 15, 'bold'))
-        self.food_bill.place(x=300, y=300)
-        self.burgar_bill = Label(self.frame_bill, text="Custom Burger Total Price:", font=("times new roman", 15, 'bold'))
-        self.burgar_bill.place(x=600, y=300)
+
+
         self.room_total=0
         self.display=Label(self.frame_bill,text="",font=("times new roman", 15, 'bold'))
-        self.display.place(x=100,y=400)
+        self.display.place(x=120,y=250)
         self.display_menu=Label(self.frame_bill,text="",font=("times new roman", 15, 'bold'))
-        self.display_menu.place(x=300,y=400)
+        self.display_menu.place(x=380,y=250)
         self.display_burgar = Label(self.frame_bill, text="", font=("times new roman", 15, 'bold'))
-        self.display_burgar.place(x=650, y=400)
+        self.display_burgar.place(x=640, y=250)
         try:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Leanstartup@1',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -321,7 +342,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Leanstartup@1',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -404,7 +425,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Leanstartup@1',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -459,7 +480,7 @@ class MainPage:
         self.name_fn = 'profile'
         self.img_change()
 
-        self.my_canvas_profile.create_text(450, 100, text="Personal and Account Information", font=("Algerian", 40),
+        self.my_canvas_profile.create_text(450, 100, text="Personal and Account Settings", font=("Algerian", 40),
                                            fill="white")
 
         self.my_canvas_profile.create_text(185, 150, text="First Name", font=("times new roman", 15), fill="white")
@@ -505,7 +526,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Leanstartup@1',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -526,7 +547,7 @@ class MainPage:
             con5 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Leanstartup@1',
                 port=3306,
                 database='login_registration1')
             cursor = con5.cursor()
@@ -542,20 +563,27 @@ class MainPage:
     def fn_review(self):
         self.frame_review = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
         self.frame_review.place(x=300, y=130)
-        self.topic = Label(self.frame_review, text='REVIEW', font=("Rockwell nova", 30, 'bold'))
-        self.topic.place(x=420, y=30)
+
+        self.frame_review.pack_propagate(False)
+        self.my_canvas_review = Canvas(self.frame_review)
+        self.my_canvas_review.pack(fill="both", expand=True)
+        self.review_bg_img = ImageTk.PhotoImage(Image.open(f'review_bg.png'), master=self.root3)
+        self.my_canvas_review.create_image(0, 0, image=self.review_bg_img, anchor="nw")
+        self.my_canvas_review.create_text(430, 25, text="WRITE A REVIEW", font=("Algerian", 50),
+                                           fill="black")
         self.name_fn = 'review'
         self.img_change()
 
-        self.review_entry1 = Text(self.frame_review, height=10, font=("Times new roman", 15, 'bold'))
-        self.review_entry1.place(x=100, y=100)
-        self.submit_btn = Button(self.frame_review, text="Submit", font=("Times new roman", 25, 'bold'),command=self.review)
-        self.submit_btn.place(x=300, y=350)
+        self.review_entry1 = Text(self.frame_review, height=10, width=48, font=("Times new roman", 15, 'bold'), border=5)
+        self.review_entry1.place(x=175, y=100)
+        self.submit_btn = Button(self.frame_review, text=" Submit ", bg="#BA7AD1", fg="#350345",
+                               font=("Times new roman", 25, 'bold'), command=self.review)
+        self.submit_btn.place(x=320, y=295)
 
 
 
     def img_change(self):
-        
+
         if self.name_fn=='menu':
             self.menu_btn.config(image=self.menu_change_img, fg='green')
             self.bill_btn.config(image=self.bill_img, fg='white')
@@ -773,7 +801,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='Leanstartup@1',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -806,7 +834,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='@!2002bisesh',
+                password='Leanstartup@1',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -819,3 +847,4 @@ class MainPage:
 
         except:
             print("error")
+
