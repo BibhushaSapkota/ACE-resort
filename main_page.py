@@ -47,7 +47,7 @@ class MainPage:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
 
@@ -153,8 +153,6 @@ class MainPage:
         self.frame_room.pack_propagate(False)
         self.my_canvas_room = Canvas(self.frame_room)
         self.my_canvas_room.pack(fill="both", expand=True)
-        self.room_bg_img = ImageTk.PhotoImage(Image.open(f'about_bg.png'), master=self.root3)
-        self.my_canvas_room.create_image(0, 0, image=self.room_bg_img, anchor="nw")
         self.room_close = ImageTk.PhotoImage(Image.open(f'room/room1.png'),master=self.root3)
         self.my_canvas_room.create_image(60, 300, image=self.room_close, anchor="nw")
         self.frame_room.bind("<Enter>", self.change_room)
@@ -175,8 +173,6 @@ class MainPage:
         self.frame_food.pack_propagate(False)
         self.my_canvas_food = Canvas(self.frame_food)
         self.my_canvas_food.pack(fill="both", expand=True)
-        self.food_bg_img = ImageTk.PhotoImage(Image.open(f'about_bg.png'), master=self.root3)
-        self.my_canvas_food.create_image(0, 0, image=self.food_bg_img, anchor="nw")
         self.food_close = ImageTk.PhotoImage(Image.open(f'food/food1.png'),master=self.root3)
         self.my_canvas_food.create_image(75, 320, image=self.food_close, anchor="nw")
         self.frame_food.bind("<Enter>", self.change_food)
@@ -197,8 +193,7 @@ class MainPage:
         self.my_canvas_cab = Canvas(self.frame_cab)
         self.my_canvas_cab.pack(fill="both", expand=True)
 
-        self.cab_bg_img = ImageTk.PhotoImage(Image.open(f'about_bg.png'), master=self.root3)
-        self.my_canvas_cab.create_image(0, 0, image=self.cab_bg_img, anchor="nw")
+
 
         self.cab_close = ImageTk.PhotoImage(Image.open(f'cab/cab1.png'),master=self.root3)
         self.my_canvas_cab.create_image(75, 320, image=self.cab_close, anchor="nw")
@@ -250,13 +245,13 @@ class MainPage:
         self.my_canvas_bill.create_text(450, 100, text="Billing", font=("Algerian", 40),
                                            fill="white")
 
-        self.my_canvas_bill.create_text(200, 200, text="Room Total Price :", font=("Algerian", 20),
+        self.my_canvas_bill.create_text(200, 200, text="Room Total Price :", font=("Arial", 18),
                                         fill="white")
 
-        self.my_canvas_bill.create_text(450, 200, text="Food Total Price :", font=("Algerian", 20),
+        self.my_canvas_bill.create_text(450, 200, text="Food Total Price :", font=("Arial", 18),
                                         fill="white")
 
-        self.my_canvas_bill.create_text(750, 200, text="Custom Burger Total Price :", font=("Algerian", 20),
+        self.my_canvas_bill.create_text(750, 200, text="Custom Burger Total Price :", font=("Arial", 18),
                                         fill="white")
 
         self.frame_main.place_forget()
@@ -273,7 +268,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -342,7 +337,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -425,7 +420,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -480,7 +475,7 @@ class MainPage:
         self.name_fn = 'profile'
         self.img_change()
 
-        self.my_canvas_profile.create_text(450, 100, text="Personal and Account Settings", font=("Algerian", 40),
+        self.my_canvas_profile.create_text(480, 100, text="Personal and Account Settings", font=("Arial", 35),
                                            fill="white")
 
         self.my_canvas_profile.create_text(185, 150, text="First Name", font=("times new roman", 15), fill="white")
@@ -520,13 +515,13 @@ class MainPage:
 
         self.update_profile = Button(self.frame_profile, text=" Update ", command=self.update, bg="#BA7AD1",
                                      fg="#350345",
-                                     font=("Times new roman", 25, 'bold'))
-        self.update_profile.place(x=300, y=420, width=250)
+                                     font=("Times new roman", 20, 'bold'))
+        self.update_profile.place(x=300, y=380, width=200)
         try:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -547,7 +542,7 @@ class MainPage:
             con5 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cursor = con5.cursor()
@@ -574,11 +569,11 @@ class MainPage:
         self.name_fn = 'review'
         self.img_change()
 
-        self.review_entry1 = Text(self.frame_review, height=10, width=48, font=("Times new roman", 15, 'bold'), border=5)
-        self.review_entry1.place(x=175, y=100)
-        self.submit_btn = Button(self.frame_review, text=" Submit ", bg="#BA7AD1", fg="#350345",
-                               font=("Times new roman", 25, 'bold'), command=self.review)
-        self.submit_btn.place(x=320, y=295)
+        self.review_entry1 = Text(self.frame_review, height=11, width=51, font=("Times new roman", 12, 'bold'), border=5)
+        self.review_entry1.place(x=165, y=70)
+        self.submit_btn = Button(self.frame_review, text="  Submit  ", bg="#BA7AD1", fg="#350345",
+                               font=("Times new roman", 14, 'bold'), command=self.review)
+        self.submit_btn.place(x=325, y=294)
 
 
 
@@ -774,7 +769,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -801,7 +796,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -834,7 +829,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
