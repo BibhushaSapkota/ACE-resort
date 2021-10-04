@@ -47,7 +47,7 @@ class MainPage:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
 
@@ -282,7 +282,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -351,7 +351,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -359,7 +359,7 @@ class MainPage:
             result1 = cur.fetchall()
             print("abc")
             print(result1)
-            self.food_total = 0
+            self.food_total=0
             if len(result1) != 0:
                 for row in result1:
                     print(row[0])
@@ -433,7 +433,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -451,8 +451,7 @@ class MainPage:
         except:
             print('error')
             pass
-        self.pay = Button(self.frame_bill, bg="green", fg="white", text="PAY", command=self.pay_fn,
-                          font=("times new roman", 20, 'bold'))
+        self.pay = Button(self.frame_bill,bg="green",fg="white", text="PAY",command=self.pay_fn, font=("times new roman", 20, 'bold'))
         self.pay.place(x=450, y=350)
         self.img_change()
 
@@ -483,9 +482,7 @@ class MainPage:
 
         # Text
         self.my_canvas_about_in.create_text(450, 40, text="ABOUT US", font=("Algerian", 45), fill="white")
-        self.my_canvas_about_in.create_text(530, 120,
-                                            text="Located in the Pokhara, Ace Resort is a perfect weekend getaway for families looking for  a place \n to relax away from the hustle and bustle  of the cities. The place provides a refreshing break from the\n crowd of the city giving you a place to relax and spend some quality time with your family.",
-                                            font=("Times new roman", 17),
+        self.my_canvas_about_in.create_text(530, 120, text="Located in the Pokhara, Ace Resort is a perfect weekend getaway for families looking for  a place \n to relax away from the hustle and bustle  of the cities. The place provides a refreshing break from the\n crowd of the city giving you a place to relax and spend some quality time with your family.", font=("Times new roman", 17),
                                             fill="white")
         self.my_canvas_about_in.create_text(500, 210, text="SPECIAL FEATURES", font=("Algerian", 40, 'bold'),
                                             fill="gold")
@@ -539,6 +536,7 @@ class MainPage:
         self.txt_password = Entry(self.frame_profile, font=("times new roman", 15), bg='#bcb5c0', show="*")
         self.txt_password.place(x=550, y=330, width=250)
 
+
         self.update_profile = Button(self.frame_profile, text=" Update ", command=self.update, bg="#BA7AD1",
                                      fg="#350345",
                                      font=("Times new roman", 20, 'bold'))
@@ -547,7 +545,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -568,21 +566,19 @@ class MainPage:
             con5 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cursor = con5.cursor()
             print(cursor)
             sql_update = "update registration set fname=%s,lname=%s,contact_number=%s,gender=%s,age=%s,password=%s where username=%s"
             val = (
-                self.txt_fname.get(), self.txt_lname.get(), self.txt_contact.get(), self.gender.get(),
-                self.txt_age.get(),
-                self.txt_password.get(), self.us_name,)
+            self.txt_fname.get(), self.txt_lname.get(), self.txt_contact.get(), self.gender.get(), self.txt_age.get(),
+            self.txt_password.get(), self.us_name,)
             cursor.execute(sql_update, val)
             con5.commit()
         except:
             pass
-
     def fn_review(self):
         self.frame_review = LabelFrame(self.root3, height=550, width=1050, borderwidth=10)
         self.frame_review.place(x=300, y=130)
@@ -593,20 +589,21 @@ class MainPage:
         self.review_bg_img = ImageTk.PhotoImage(Image.open(f'review_bg.png'), master=self.root3)
         self.my_canvas_review.create_image(0, 0, image=self.review_bg_img, anchor="nw")
         self.my_canvas_review.create_text(430, 25, text="WRITE A REVIEW", font=("Algerian", 50),
-                                          fill="black")
+                                           fill="black")
         self.name_fn = 'review'
         self.img_change()
 
-        self.review_entry1 = Text(self.frame_review, height=11, width=51, font=("Times new roman", 12, 'bold'),
-                                  border=5)
+        self.review_entry1 = Text(self.frame_review, height=11, width=51, font=("Times new roman", 12, 'bold'), border=5)
         self.review_entry1.place(x=165, y=70)
         self.submit_btn = Button(self.frame_review, text="  Submit  ", bg="#BA7AD1", fg="#350345",
-                                 font=("Times new roman", 14, 'bold'), command=self.review)
+                               font=("Times new roman", 14, 'bold'), command=self.review)
         self.submit_btn.place(x=325, y=294)
+
+
 
     def img_change(self):
 
-        if self.name_fn == 'menu':
+        if self.name_fn=='menu':
             self.menu_btn.config(image=self.menu_change_img, fg='green')
             self.bill_btn.config(image=self.bill_img, fg='white')
             self.about_btn.config(image=self.about_img, fg='white')
@@ -614,25 +611,25 @@ class MainPage:
             self.review_btn.config(image=self.review_img, fg='white')
 
 
-        elif self.name_fn == 'bill':
+        elif self.name_fn=='bill':
             self.menu_btn.config(image=self.menu_img, fg='white')
-            self.bill_btn.config(image=self.bill_change_img, fg='green')
+            self.bill_btn.config(image=self.bill_change_img,fg='green')
             self.about_btn.config(image=self.about_img, fg='white')
             self.profile_btn.config(image=self.profile_img, fg='white')
             self.review_btn.config(image=self.review_img, fg='white')
 
 
-        elif self.name_fn == 'about':
+        elif self.name_fn=='about':
             self.menu_btn.config(image=self.menu_img, fg='white')
-            self.bill_btn.config(image=self.bill_img, fg='white')
+            self.bill_btn.config(image=self.bill_img,fg='white')
             self.about_btn.config(image=self.about_change_img, fg='green')
             self.profile_btn.config(image=self.profile_img, fg='white')
             self.review_btn.config(image=self.review_img, fg='white')
 
             self.frame_main.place_forget()
-        elif self.name_fn == 'profile':
+        elif self.name_fn=='profile':
             self.menu_btn.config(image=self.menu_img, fg='white')
-            self.bill_btn.config(image=self.bill_img, fg='white')
+            self.bill_btn.config(image=self.bill_img,fg='white')
             self.about_btn.config(image=self.about_img, fg='white')
             self.profile_btn.config(image=self.profile_change_img, fg='green')
             self.review_btn.config(image=self.review_img, fg='white')
@@ -647,9 +644,9 @@ class MainPage:
 
             self.frame_main.place_forget()
 
-    def animation(self, name, type, x, y, any):
+    def animation(self,name,type,x,y,any):
         for i in range(1, 5):
-            self.room_img = ImageTk.PhotoImage(Image.open(f'{name}/{type}{i}.png'), master=self.root3)
+            self.room_img = ImageTk.PhotoImage(Image.open(f'{name}/{type}{i}.png'),master=self.root3)
             any.create_image(x, y, image=self.room_img, anchor="nw")
             sleep(0.1)
             self.root3.update_idletasks()
@@ -677,13 +674,13 @@ class MainPage:
         self.pick_ent = Entry(self.frame_cab_in, bg="#05035b", fg="white", font=("Times new roman", 20), width=20)
         self.pick_ent.place(x=350, y=130)
         self.pick_btn = Button(self.frame_cab_in, text=" Book pick up ", bg="#BA7AD1", fg="#350345",
-                               font=("Times new roman", 16, 'bold'), command=self.pickup)
+                               font=("Times new roman", 16, 'bold'),command=self.pickup)
         self.pick_btn.place(x=300, y=230)
 
         self.drop_ent = Entry(self.frame_cab_in, bg="#05035b", fg="white", font=("Times new roman", 20), width=20)
         self.drop_ent.place(x=350, y=280)
         self.drop_btn = Button(self.frame_cab_in, text=" Book drop off ", bg="#BA7AD1", fg="#350345",
-                               font=("Times new roman", 16, 'bold'), command=self.dropoff)
+                               font=("Times new roman", 16, 'bold'),command=self.dropoff)
         self.drop_btn.place(x=300, y=380)
 
         # dropdowns
@@ -781,8 +778,8 @@ class MainPage:
         self.dropmonthd3.place(x=350, y=340)
 
     def clearpickup(self):
-        self.pick_ent.delete(0, END)
-        self.drop_ent.delete(0, END)
+        self.pick_ent.delete(0,END)
+        self.drop_ent.delete(0,END)
         self.clickeddated2.set("1")
         self.clickedd1.set("Sunday")
         self.clickedmonthd3.set("January")
@@ -796,17 +793,18 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
 
-            username = self.us_name
-            pickup_address = self.pick_ent.get()
-            month = self.clickedmonth.get()
-            day = self.clicked.get()
-            date = self.clickeddate.get()
-            sql = "insert into pickup(username,pickup_address,month,day,date)" "values ('" + username + "','" + pickup_address + "','" + month + "','" + day + "','" + date + "')"
+
+            username= self.us_name
+            pickup_address= self.pick_ent.get()
+            month=self.clickedmonth.get()
+            day=self.clicked.get()
+            date=self.clickeddate.get()
+            sql = "insert into pickup(username,pickup_address,month,day,date)" "values ('" + username + "','" +pickup_address+ "','" +month+ "','" +day+ "','" +date+"')"
             values = cur.execute(sql)
             con.commit()
             con.close()
@@ -822,18 +820,19 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
 
-            username = self.us_name
-            dropoff_address = self.drop_ent.get()
-            month = self.clickedmonthd3.get()
-            day = self.clickedd1.get()
-            date = self.clickeddated2.get()
 
-            sql = "insert into dropoff(username,dropoff_address,month,day,date)" "values ('" + username + "','" + dropoff_address + "','" + month + "','" + day + "','" + date + "')"
+            username= self.us_name
+            dropoff_address= self.drop_ent.get()
+            month= self.clickedmonthd3.get()
+            day=self.clickedd1.get()
+            date=self.clickeddated2 .get()
+
+            sql = "insert into dropoff(username,dropoff_address,month,day,date)" "values ('" + username + "','" +dropoff_address+ "','" +month+ "','" +day+ "','" +date+"')"
             values = cur.execute(sql)
             con.commit()
             con.close()
@@ -843,17 +842,18 @@ class MainPage:
         except:
             print("error")
 
+
     def review(self):
         self.us_name = Login.gett()
         try:
 
             username = self.us_name
-            review1 = self.review_entry1.get("1.0", "end-1c")
+            review1 = self.review_entry1.get("1.0","end-1c")
 
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='9869167415',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -862,7 +862,8 @@ class MainPage:
             con.commit()
             con.close()
             messagebox.showinfo("success", "Your review has been submitted", parent=self.root3)
-            self.review_entry1.delete("1.0", "end-1c")
+            self.review_entry1.delete("1.0","end-1c")
 
         except:
             print("error")
+
