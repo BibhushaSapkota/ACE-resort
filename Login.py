@@ -75,7 +75,7 @@ class Login:
                 con = mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='1235',
+                    password='@!2002bisesh',
                     port=3306,
                     database='login_registration1')
                 cur = con.cursor()
@@ -107,7 +107,7 @@ class Login:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='1235',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -145,7 +145,7 @@ class Login:
                 con5 = mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='1235',
+                    password='@!2002bisesh',
                     port=3306,
                     database='login_registration1')
                 print(con5)
@@ -171,7 +171,7 @@ class Login:
                 con = mysql.connector.connect(
                     host='127.0.0.1',
                     user='root',
-                    password='1235',
+                    password='@!2002bisesh',
                     port=3306,
                     database='login_registration1')
                 cur = con.cursor()
@@ -242,7 +242,7 @@ def show_login_result(username, password):
     con = mysql.connector.connect(
         host='127.0.0.1',
         user='root',
-        password='1235',
+        password='@!2002bisesh',
         port=3306,
         database='login_registration1')
     cur = con.cursor()

@@ -636,3 +636,20 @@ class Roompage:
             print("error")
 
         self.room_check()
+
+def show_insert(room_no):
+    con = mysql.connector.connect(
+        host='127.0.0.1',
+        user='root',
+        password='@!2002bisesh',
+        port=3306,
+        database='login_registration1')
+    cur = con.cursor()
+    cur.execute("select * from room_book where room_no=%s",(room_no,))
+    result = cur.fetchall()
+
+    if result:
+        return "Pass"
+    else:
+        return "Fail"
+

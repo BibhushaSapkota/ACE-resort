@@ -26,6 +26,9 @@ class MainPage:
         print(self.result)
         self.user_name=Label(self.root3,text=self.us_name,font=("Rockwell nova", 40,'bold'),fg="Green")
         self.user_name.place(x=1100, y=10)
+        self.logout = Button(self.root3, text="Logout", font=("Rockwell nova", 20, 'bold'), fg="red",
+                             command=self.logout_fn)
+        self.logout.place(x=600, y=10)
         if self.result=='Male':
             self.Mr = Label(self.root3, text='Mr', font=("Rockwell nova", 40, 'bold'), fg="Green")
             self.Mr.place(x=980, y=10)
@@ -47,7 +50,7 @@ class MainPage:
             con1 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
 
@@ -273,7 +276,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -342,7 +345,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -355,10 +358,10 @@ class MainPage:
                 for row in result1:
                     print(row[0])
                     if row[1]!="0":
-                        self.food_total = 190*int(row[0])+self.food_total
+                        self.food_total = 190*int(row[1])+self.food_total
                         self.display_menu.config(text=self.food_total)
                     if row[2]!="0":
-                        self.food_total = 150*int(row[1])+self.food_total
+                        self.food_total = 150*int(row[2])+self.food_total
                         self.display_menu.config(text=self.food_total)
                     if row[3]!="0":
                         self.food_total = 120*int(row[3])+self.food_total
@@ -425,7 +428,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -526,7 +529,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -547,7 +550,7 @@ class MainPage:
             con5 = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cursor = con5.cursor()
@@ -770,58 +773,65 @@ class MainPage:
 
     def pickup(self):
         self.us_name = Login.gett()
-        try:
-            con = mysql.connector.connect(
-                host='127.0.0.1',
-                user='root',
-                password='1235',
-                port=3306,
-                database='login_registration1')
-            cur = con.cursor()
+        if self.drop_ent.get()=="":
+            messagebox.showwarning("warning","address should be inserted")
+        else:
+            try:
+                con = mysql.connector.connect(
+                    host='127.0.0.1',
+                    user='root',
+                    password='@!2002bisesh',
+                    port=3306,
+                    database='login_registration1')
+                cur = con.cursor()
 
 
-            username= self.us_name
-            pickup_address= self.pick_ent.get()
-            month=self.clickedmonth.get()
-            day=self.clicked.get()
-            date=self.clickeddate.get()
-            sql = "insert into pickup(username,pickup_address,month,day,date)" "values ('" + username + "','" +pickup_address+ "','" +month+ "','" +day+ "','" +date+"')"
-            values = cur.execute(sql)
-            con.commit()
-            con.close()
-            messagebox.showinfo("success", "Your cab has been  booked", parent=self.root3)
-            self.clearpickup()
+                username= self.us_name
+                pickup_address= self.pick_ent.get()
+                month=self.clickedmonth.get()
+                day=self.clicked.get()
+                date=self.clickeddate.get()
+                sql = "insert into pickup(username,pickup_address,month,day,date)" "values ('" + username + "','" +pickup_address+ "','" +month+ "','" +day+ "','" +date+"')"
+                values = cur.execute(sql)
+                con.commit()
+                con.close()
+                messagebox.showinfo("success", "Your cab has been  booked", parent=self.root3)
+                self.clearpickup()
 
-        except:
-            print("error")
+            except:
+                print("error")
 
     def dropoff(self):
         self.us_name = Login.gett()
-        try:
-            con = mysql.connector.connect(
-                host='127.0.0.1',
-                user='root',
-                password='Leanstartup@1',
-                port=3306,
-                database='login_registration1')
-            cur = con.cursor()
+        if self.drop_ent.get()=="":
+            messagebox.showwarning("warning","address should be inserted")
+
+        else:
+            try:
+                con = mysql.connector.connect(
+                    host='127.0.0.1',
+                    user='root',
+                    password='@!2002bisesh',
+                    port=3306,
+                    database='login_registration1')
+                cur = con.cursor()
 
 
-            username= self.us_name
-            dropoff_address= self.drop_ent.get()
-            month= self.clickedmonthd3.get()
-            day=self.clickedd1.get()
-            date=self.clickeddated2 .get()
+                username= self.us_name
+                dropoff_address= self.drop_ent.get()
+                month= self.clickedmonthd3.get()
+                day=self.clickedd1.get()
+                date=self.clickeddated2 .get()
 
-            sql = "insert into dropoff(username,dropoff_address,month,day,date)" "values ('" + username + "','" +dropoff_address+ "','" +month+ "','" +day+ "','" +date+"')"
-            values = cur.execute(sql)
-            con.commit()
-            con.close()
-            messagebox.showinfo("success", "Your cab has been  booked", parent=self.root3)
-            self.clearpickup()
+                sql = "insert into dropoff(username,dropoff_address,month,day,date)" "values ('" + username + "','" +dropoff_address+ "','" +month+ "','" +day+ "','" +date+"')"
+                values = cur.execute(sql)
+                con.commit()
+                con.close()
+                messagebox.showinfo("success", "Your cab has been  booked", parent=self.root3)
+                self.clearpickup()
 
-        except:
-            print("error")
+            except:
+                print("error")
 
 
     def review(self):
@@ -834,7 +844,7 @@ class MainPage:
             con = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
-                password='Leanstartup@1',
+                password='@!2002bisesh',
                 port=3306,
                 database='login_registration1')
             cur = con.cursor()
@@ -848,3 +858,11 @@ class MainPage:
         except:
             print("error")
 
+    def logout_fn(self):
+        MsgBox = messagebox.askquestion('Logout', 'Are you sure you want to logout',
+                                        icon='warning')
+        if MsgBox == 'yes':
+            self.root3.withdraw()
+            Login.Login(Toplevel())
+        else:
+            pass

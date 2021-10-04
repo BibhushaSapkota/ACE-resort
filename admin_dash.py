@@ -4,6 +4,9 @@ from tkinter import ttk, messagebox
 import mysql.connector
 from PIL import Image, ImageTk
 
+import Login
+
+
 class admin:
     def __init__(self, master):
         self.root5 = master
@@ -13,6 +16,9 @@ class admin:
         self.my_canvas.pack(fill="both", expand=True)
         self.background = ImageTk.PhotoImage(Image.open('background.png'), master=self.root5)
         self.my_canvas.create_image(0, 0, image=self.background, anchor="nw")
+        self.logout = Button(self.root5, text="Logout", font=("Rockwell nova", 20, 'bold'), fg="red",
+                             command=self.logout_fn)
+        self.logout.place(x=1100, y=10)
 
         self.ace_images()
         self.buttons()
@@ -777,4 +783,11 @@ class admin:
         self.main_frame()
         self.userentry.delete(0,END)
 
-
+    def logout_fn(self):
+        MsgBox = messagebox.askquestion('Logout', 'Are you sure you want to logout',
+                                        icon='warning')
+        if MsgBox == 'yes':
+            self.root5.withdraw()
+            Login.Login(Toplevel())
+        else:
+            pass
